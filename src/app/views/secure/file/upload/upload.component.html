@@ -1,0 +1,72 @@
+<c-container class="d-flex justify-content-center">
+  <c-card class="w-100 rounded-3">
+    <c-card-body>
+      <c-container class="tag-card-body mb-5">
+        <h3 class="text-center mb-5">Please upload your document</h3>
+        <label cLabel for="file">Select your file</label>
+        <input
+          cFormControl
+          class="mb-4"
+          id="file"
+          sizing="md"
+          type="file"
+          accept=".doc,.docx,.pdf,.pptx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+          (change)="onFileSelected($event)"
+          [(ngModel)]="SelectedFile"
+        />
+
+        <div [class.d-none]="!fileToUpload">
+          <h5 class="mb-4">Files added</h5>
+          <div
+            class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between mb-3"
+          >
+            <p class="w-75">{{ fileToUpload?.name }}</p>
+            <div class="d-flex align-items-sm-start gap-1">
+              <div class="curser-pointer" (click)="onDeleteSelectedFile()">
+                <svg cIcon name="cilTrash"></svg>
+              </div>
+              <p class="mb-0" *ngIf="fileToUpload">
+                {{ fileToUpload.size | fileSize }}
+              </p>
+            </div>
+          </div>
+          <label cLabel for="file">Select your Tags</label>
+          <app-tag (tagChange)="onTagChange($event)"></app-tag>
+
+          <c-progress class="my-3" [height]="10" *ngIf="fileUploadProgress">
+            <c-progress-bar
+              color="info"
+              variant="striped"
+              [animated]="true"
+              [value]="fileUploadProgress"
+              >{{ fileUploadProgress }}%</c-progress-bar
+            >
+          </c-progress>
+        </div>
+      </c-container>
+    </c-card-body>
+    <c-card-footer class="text-end py-3">
+      <button
+        cButton
+        color="dark"
+        variant="ghost"
+        class="me-1"
+        [disabled]="isUploading"
+        (click)="onGoBack()"
+      >
+        Cancel
+      </button>
+      <button
+        cButton
+        color="info"
+        variant="outline"
+        [disabled]="!isFileSelected || isUploading"
+        (click)="onUploadFile()"
+      >
+        Upload<span *ngIf="isUploading"
+          >ing <c-spinner color="info" size="sm"></c-spinner
+        ></span>
+      </button>
+    </c-card-footer>
+  </c-card>
+</c-container>

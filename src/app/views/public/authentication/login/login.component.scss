@@ -1,0 +1,38 @@
+.login-cont {
+  h1 {
+    font-size: 40px;
+    font-weight: 500;
+  }
+  button {
+    border: none;
+    border-radius: 29px;
+    padding: 2% 0;
+    font-size: 18px;
+  }
+  a {
+    color: #000;
+  }
+  .carousel-cont {
+    background-color: #e2f1ff;
+  }
+  .form-cont {
+    width: 60%;
+    margin-left: 4%;
+  }
+  .carousel-cont {
+    width: 40%;
+    color: #666666e5;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .form-cont,
+  .carousel-cont {
+    min-width: 100%;
+  }
+}
+
+.alert-message-list {
+  list-style-type: none;
+  padding: 0;
+}
