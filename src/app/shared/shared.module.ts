@@ -7,6 +7,7 @@ import { TagComponent } from './components/tag/tag.component';
 import { FileSizePipe } from './pipes/file-size.pipe';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { ModelComponent } from './components/model/model.component';
+import { LoadingButtonComponent } from './components/loading-button/loading-button.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { ModelComponent } from './components/model/model.component';
     FileSizePipe,
     PaginationComponent,
     ModelComponent,
+    LoadingButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -23,6 +25,11 @@ import { ModelComponent } from './components/model/model.component';
     ButtonModule,
     ModalModule,
   ],
-  exports: [TagComponent, FileSizePipe, PaginationComponent],
+  exports: [
+    TagComponent,
+    FileSizePipe,
+    PaginationComponent,
+    LoadingButtonComponent,
+  ],
 })
 export class SharedModule {}
