@@ -31,6 +31,12 @@
         <h6 cDropdownHeader class="bg-light fw-semibold py-2">Account</h6>
       </li>
       <li>
+        <a cDropdownItem routerLink="/change_password" class="drop-down-item">
+          <svg cIcon class="me-2" name="cilLockLocked"></svg>
+          Change Password
+        </a>
+      </li>
+      <li>
         <a cDropdownItem (click)="onSignOut()" class="drop-down-item">
           <svg cIcon class="me-2" name="cilLockLocked"></svg>
           Sign out
