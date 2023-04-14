@@ -7,7 +7,8 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
   styleUrls: ['./model.component.scss'],
 })
 export class ModelComponent {
-  fileName: string | undefined;
+  name: string | undefined;
+  text: string | undefined;
   public confirm = new EventEmitter();
   constructor(public bsModalRef: BsModalRef) {}
 

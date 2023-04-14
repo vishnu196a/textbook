@@ -1,6 +1,6 @@
 <div class="mb-4">
-  <button cButton variant="outline" color="info" routerLink="/add">
-    Upload PO
+  <button cButton variant="outline" color="info" (click)="onAddUser()">
+    Add User
   </button>
 </div>
 <div class="table-responsive">
@@ -12,13 +12,13 @@
           <i class="text-info bi"></i>
         </th>
         <th scope="col" class="curser-pointer">
-          Email<i class="text-info bi"></i>
-        </th>
-        <th scope="col" class="curser-pointer">
           First Name
           <i class="text-info bi"></i>
         </th>
         <th scope="col">Last Name</th>
+        <th scope="col" class="curser-pointer">
+          Email<i class="text-info bi"></i>
+        </th>
         <th scope="col" class="curser-pointer">
           Role<i class="text-info bi"></i>
         </th>
@@ -39,24 +39,10 @@
     </thead>
     <tbody>
       <tr class="bg-white" *ngFor="let user of users">
-        <!-- <td>
-          <div class="d-flex gap-2"> -->
         <td>{{ user.id }}</td>
-        <td>{{ user.email }}</td>
         <td>{{ user.first_name }}</td>
-        <!-- <ng-container *ngFor="let tag of user.tags; index as tagIndex">
-              <div
-                class="rounded-pill px-2"
-                [style.background-color]="backRoundColors[tagIndex]"
-                [style.color]="textColors[tagIndex]"
-                *ngIf="tagIndex < 3"
-              >
-                {{ tag }}
-              </div>
-            </ng-container> -->
-        <!-- </div>
-        </td> -->
-        <td>{{ user.last_name }}</td>
+        <td>{{user.last_name ? user.last_name : '-'}} </td>
+        <td>{{ user.email }}</td>
         <td>{{ user.role }}</td>
         <td>{{ user.branch_id }}</td>
         <td>{{ user.branch_name }}</td>
@@ -64,12 +50,12 @@
         <td>{{ user.updated_at | date : "short" }}</td>
         <td>
           <div class="d-flex gap-3">
-            <div
+            <!-- <div
               class="btn-view opacity-75 rounded-circle px-2 py-1 text-white fw-bolder curser-pointer"
               (click)="onView(user.email)"
             >
               <i class="bi bi-eye-fill"></i>
-            </div>
+            </div> -->
             <div
               class="bg-edit opacity-75 rounded-circle px-2 py-1 text-white fw-bolder curser-pointer"
               (click)="onEdit(user.id)"

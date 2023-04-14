@@ -38,9 +38,6 @@ export class UsersListComponent implements OnInit {
       });
     this.subscription = subscription;
   }
-  public onView(fileId: any): void {
-    this.router.navigate(['file', fileId]);
-  }
 
   ngOnInit(): void {
     this.userService.getAllFiles().subscribe((res) => {
@@ -48,8 +45,8 @@ export class UsersListComponent implements OnInit {
     });
   }
 
-  public onEdit(id: any): void {
-    this.router.navigate(['edit', id]);
+  public onEdit(id: number): void {
+    this.router.navigate(['user_edit', id]);
   }
 
   public onPageChange(page: number) {
@@ -59,7 +56,8 @@ export class UsersListComponent implements OnInit {
   public onDelete(user: Users): void {
     const initialState: ModalOptions = {
       initialState: {
-        fileName: user.first_name,
+        text: `Do you really want to remove user ${user.first_name} ${user.last_name ? user.last_name : ''}`
+        
       },
     };
     const modal = this.modalService.show(ModelComponent, initialState);
@@ -76,5 +74,10 @@ export class UsersListComponent implements OnInit {
         });
       },
     });
+  }
+
+
+  onAddUser(): void{
+    this.router.navigate(['users/add'])
   }
 }

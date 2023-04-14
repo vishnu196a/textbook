@@ -6,17 +6,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-// import { REGEX_PATTERNS, USER_ROLES } from '@shared/constants/constants';
-// import { ErrorResponse, NamesAndIds } from '@shared/models/shared.model';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
-import { NamesAndIds } from 'src/app/shared/models/shared.model';
 import { UserService } from '../users.service';
-import { UserForm } from '../users.model';
+import { BranchesList, UserForm } from '../users.model';
 import { REGEX_PATTERNS } from 'src/app/shared/constants/constants';
-
-// import { UserForm } from '../user.model';
-// import { UserService } from '../user.service';
+import { ErrorResponse } from 'src/app/shared/interceptors/error.interceptor';
 
 @Component({
   templateUrl: './users-add.component.html',
@@ -26,8 +21,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
   isLoading!: boolean;
   hasValidationError!: boolean;
   validationErrors!: string[];
-  organizationList: NamesAndIds[] = [];
-  //   readonly roles = USER_ROLES;
+  branchesList: BranchesList[] = [];
   private subscriptions = new Subscription();
 
   constructor(
@@ -39,7 +33,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initializeForm();
-    this.getOrganizationNamesAndIds();
+    this.getBranchNames();
   }
 
   ngOnDestroy(): void {
@@ -68,31 +62,23 @@ export class AddUserComponent implements OnInit, OnDestroy {
         null,
         [Validators.required, Validators.pattern(REGEX_PATTERNS.email)],
       ],
-      vendor: [null, [Validators.required]],
+      branch: [null, [Validators.required]],
     });
   }
 
   get formControls(): { [key: string]: AbstractControl } {
     return this.addUserForm.controls;
   }
-  getOrganizationNamesAndIds(): void {
-    const observer = this.userService.getOrganizationNamesAndIds().subscribe(
-      (orgList: NamesAndIds[]) => {
-        this.organizationList = orgList;
+
+  getBranchNames(): void {
+    this.userService.getBranchNames().subscribe(
+      (response) => {
+        this.branchesList = response;
+      },
+      (error: ErrorResponse) => {
+        this.toasterService.error(error.errors[0]);
       }
-      //   (error: ErrorResponse) => {
-      //     if (error.hasValidationError) {
-      //       this.hasValidationError = true;
-      //       this.validationErrors = error.errorList;
-      //       window.scrollTo({ top: 0 });
-      //     } else {
-      //       this.hasValidationError = false;
-      //       this.toasterService.error(error.message);
-      //     }
-      //     this.isLoading = false;
-      //   }
     );
-    this.subscriptions.add(observer);
   }
 
   onFormSubmit(): void {
@@ -102,24 +88,17 @@ export class AddUserComponent implements OnInit, OnDestroy {
         first_name: this.addUserForm.value.firstName,
         last_name: this.addUserForm.value.lastName,
         email: this.addUserForm.value.email,
-        branch_id: this.addUserForm.value.branch_id,
+        branch_id: this.addUserForm.value.branch,
       };
       const observer = this.userService.addUser(user).subscribe(
         () => {
-          this.toasterService.success('branch added successfully');
-          this.router.navigate(['branches']);
+          this.toasterService.success('User added successfully');
+          this.router.navigate(['/users']);
+        },
+        (error) => {
+          this.toasterService.error(error.errors[0]);
+          this.isLoading = false;
         }
-        // (error: ErrorResponse) => {
-        //   if (error.hasValidationError) {
-        //     this.hasValidationError = true;
-        //     this.validationErrors = error.errorList;
-        //     window.scrollTo({ top: 0 });
-        //   } else {
-        //     this.hasValidationError = false;
-        //     this.toasterService.error(error.message);
-        //   }
-        //   this.isLoading = false;
-        // }
       );
       this.subscriptions.add(observer);
     }

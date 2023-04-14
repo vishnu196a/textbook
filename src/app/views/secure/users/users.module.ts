@@ -8,6 +8,7 @@ import { EditUserComponent } from './users-edit/users-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AddUserComponent } from './users-add/users-add.component';
+import { ButtonModule } from '@coreui/angular';
 
 @NgModule({
   declarations: [UsersListComponent, EditUserComponent, AddUserComponent],
@@ -19,6 +20,7 @@ import { AddUserComponent } from './users-add/users-add.component';
     ReactiveFormsModule,
     FormsModule,
     NgSelectModule,
+    ButtonModule
   ],
 })
 export class UsersModule {}

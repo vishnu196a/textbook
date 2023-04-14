@@ -6,7 +6,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { NamesAndIds } from 'src/app/shared/models/shared.model';
@@ -89,7 +88,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
         this.formState.isFormPristine(this.editUserForm);
       },
       (error: ErrorResponse) => {
-        // this.toasterService.error(error.message);
+        this.toasterService.error(error.errors[0]);
         this.hasUser = false;
         this.initialLoading = false;
       }
@@ -111,19 +110,11 @@ export class EditUserComponent implements OnInit, OnDestroy {
       const observer = this.userService.updateUser(user, this.userId).subscribe(
         () => {
           this.toasterService.success('User has been updated successfully');
-          this.router.navigate(['users']);
+          this.router.navigate(['/users']);
+        },
+        (error: ErrorResponse) => {
+          this.toasterService.error(error.errors[0]);
         }
-        // (error: ErrorResponse) => {
-        //   if (error.hasValidationError) {
-        //     this.hasValidationError = true;
-        //     this.validationErrors = error.errorList;
-        //   } else {
-        //     this.hasValidationError = false;
-        //     window.scrollTo({ top: 0 });
-        //     this.toasterService.error(error.message);
-        //   }
-        //   this.isLoading = false;
-        // }
       );
       this.subscriptions.add(observer);
     }

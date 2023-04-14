@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {
+  BranchesList,
   GetUserResponse,
   UserForm,
   UserFormEdit,
@@ -42,8 +43,10 @@ export class UserService {
     );
   }
 
-  getOrganizationNamesAndIds(): Observable<NamesAndIds[]> {
-    return this.httpClient.get<NamesAndIds[]>(`${this.apiUrl}/v1/users`);
+  getBranchNames():Observable<BranchesList[]> {
+    return this.httpClient.get<BranchesList[]>(
+       `${this.apiUrl}/v1/branches/ids_and_names`
+     )
   }
 
   deleteUser(id: number) {

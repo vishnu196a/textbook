@@ -7,10 +7,13 @@ import { SuccessMessage } from 'src/app/shared/models/shared.model';
 import { environment } from 'src/environments/environment';
 import {
   AuthenticationState,
+  ForgotPwdRequestParams,
+  ForgotPwdResponse,
   UserCredentials,
   UserResponse,
 } from './authentication.model';
 import { setLoggedInUser } from './store/authentication.action';
+import { ChangePwdRequestParams } from './authentication.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -29,7 +32,7 @@ export class AuthenticationService {
           const token = httpResponse.headers.get('Authorization');
           if (httpResponse.body && token) {
             const userDetails: AuthenticationState = {
-              name: httpResponse.body.name,
+              name: httpResponse.body.first_name,
               email: httpResponse.body.email,
               token: token,
             };
@@ -42,5 +45,18 @@ export class AuthenticationService {
 
   public logout(): Observable<SuccessMessage> {
     return this.http.delete<SuccessMessage>(`${this.apiUrl}/v1/logout`);
+  }
+
+  public forgotPassword(
+    params: ForgotPwdRequestParams
+  ): Observable<ForgotPwdResponse> {
+    return this.http.put<ForgotPwdResponse>(
+      `${this.apiUrl}/v1/passwords/reset`,
+      params
+    );
+  }
+
+  public changePassword(params: ChangePwdRequestParams): Observable<SuccessMessage> {
+    return this.http.put<SuccessMessage>(`${this.apiUrl}/v1/passwords/change`, params);
   }
 }

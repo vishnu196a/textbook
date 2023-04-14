@@ -80,3 +80,8 @@ export interface UserForm {
   email: string;
   branch_id: number;
 }
+
+export interface BranchesList {
+  id: number,
+  name: string
+}
