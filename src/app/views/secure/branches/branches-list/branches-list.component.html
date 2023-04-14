@@ -9,7 +9,7 @@
     <thead>
       <tr>
         <th scope="col" class="curser-pointer">
-          id
+          S.Io
           <i class="text-info bi"></i>
         </th>
         <th scope="col" class="curser-pointer">
@@ -17,31 +17,31 @@
           <i class="text-info bi"></i>
         </th>
         <th scope="col" class="curser-pointer">
-          address
+          Address
           <i class="text-info bi"></i>
         </th>
         <th scope="col" class="curser-pointer">
-          dl_type
+          DLtype
+          <i class="text-info bi"></i>
+        </th>
+        <!-- <th scope="col" class="curser-pointer">
+          DistrictId
+          <i class="text-info bi"></i>
+        </th> -->
+        <th scope="col" class="curser-pointer">
+          DistrictName
+          <i class="text-info bi"></i>
+        </th>
+        <!-- <th scope="col" class="curser-pointer">
+          CreatedAt
           <i class="text-info bi"></i>
         </th>
         <th scope="col" class="curser-pointer">
-          district_id
+          UpdatedAt
           <i class="text-info bi"></i>
-        </th>
+        </th> -->
         <th scope="col" class="curser-pointer">
-          district_name
-          <i class="text-info bi"></i>
-        </th>
-        <th scope="col" class="curser-pointer">
-          createdAt
-          <i class="text-info bi"></i>
-        </th>
-        <th scope="col" class="curser-pointer">
-          updatedAt
-          <i class="text-info bi"></i>
-        </th>
-        <th scope="col" class="curser-pointer">
-          actions
+          Actions
           <i class="text-info bi"></i>
         </th>
       </tr>
@@ -56,10 +56,10 @@
         <td>{{ branch.name }}</td>
         <td>{{ branch.address }}</td>
         <td>{{ branch.dl_type }}</td>
-        <td>{{ branch.district_id }}</td>
+        <!-- <td>{{ branch.district_id }}</td> -->
         <td>{{ branch.district_name }}</td>
-        <td>{{ branch.created_at }}</td>
-        <td>{{ branch.updated_at }}</td>
+        <!-- <td>{{ branch.created_at }}</td>
+        <td>{{ branch.updated_at }}</td> -->
         <td>
           <div class="d-flex gap-3">
             <div
@@ -70,6 +70,7 @@
             </div>
             <div
               class="bg-delete opacity-75 rounded-circle px-2 py-1 text-white fw-bolder curser-pointer"
+              (click)="onDelete(branch)"
             >
               <svg cIcon name="cilTrash" size="md" title="Delete Icon"></svg>
             </div>

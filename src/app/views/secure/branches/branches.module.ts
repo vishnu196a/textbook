@@ -8,9 +8,14 @@ import { ButtonModule } from '@coreui/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddBranchComponent } from './branches-add/branches-add.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { EditBranchComponent } from './branches-edit/branch-edit.component';
 
 @NgModule({
-  declarations: [BranchesListComponent, AddBranchComponent],
+  declarations: [
+    BranchesListComponent,
+    AddBranchComponent,
+    EditBranchComponent,
+  ],
   providers: [BranchService],
   imports: [
     CommonModule,

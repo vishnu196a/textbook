@@ -4,8 +4,8 @@
     <button cButtonClose (click)="onClose()"></button>
   </c-modal-header>
   <c-modal-body>
-    <p>Are you sure want to delete the file?</p>
-    <p>{{ fileName }}</p>
+    <p>{{ text }}</p>
+    <p>{{ name }}</p>
   </c-modal-body>
   <c-modal-footer>
     <button cButton color="success" variant="outline" (click)="onClose()">

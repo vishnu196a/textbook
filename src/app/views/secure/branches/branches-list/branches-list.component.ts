@@ -11,6 +11,8 @@ import { Pagination } from 'src/app/shared/models/shared.model';
 import { ErrorResponse } from 'src/app/shared/interceptors/error.interceptor';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { ModelComponent } from 'src/app/shared/components/model/model.component';
 
 @Component({
   selector: 'app-branches-list',
@@ -20,7 +22,6 @@ import { Subscription } from 'rxjs';
 export class BranchesListComponent implements OnInit {
   pagination: Pagination | undefined;
   branches: Branches[] | undefined;
-  orderClassExpression: any;
   branchListSortColumns = BranchListSortColumns;
   subscriptions = new Subscription();
   sortedColumn: BranchListSortColumn | undefined;
@@ -28,7 +29,8 @@ export class BranchesListComponent implements OnInit {
   constructor(
     private router: Router,
     private branchService: BranchService,
-    private toasterService: ToastrService
+    private toasterService: ToastrService,
+    private modalService: BsModalService
   ) {}
 
   ngOnInit(): void {
@@ -48,7 +50,29 @@ export class BranchesListComponent implements OnInit {
     this.subscriptions.add(observer);
   }
 
-  public onEdit(fileId: number): void {
-    this.router.navigate(['', fileId]);
+  public onEdit(branchId: number): void {
+    this.router.navigate(['/edit', branchId]);
+  }
+
+  public onDelete(branch: Branches): void {
+    const initialState: ModalOptions = {
+      initialState: {
+        text: `Do you really want to remove branch ${branch.name}`,
+      },
+    };
+    const modal = this.modalService.show(ModelComponent, initialState);
+    modal.content?.confirm.subscribe({
+      next: () => {
+        this.branchService.deleteUser(branch.id).subscribe({
+          next: () => {
+            // this.onPageChange(1);
+            this.toasterService.success('Branch has been deleted');
+          },
+          error: () => {
+            this.toasterService.error('Oops! Something went wrong');
+          },
+        });
+      },
+    });
   }
 }
