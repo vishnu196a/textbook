@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -9,7 +9,7 @@ import {
   UserFormEdit,
   UserResponse,
 } from './users.model';
-import { NamesAndIds } from 'src/app/shared/models/shared.model';
+import { SuccessMessage } from 'src/app/shared/models/shared.model';
 
 @Injectable({
   providedIn: 'root',
@@ -19,15 +19,12 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getAllFiles(): Observable<GetUserResponse> {
-    // let params = new HttpParams();
-    // params = params.append('page', state.pagination.current_page);
-    // params = params.append('q', state.search);
-    // params = params.append('type', state.searchType);
-    // if (state.sort.key && state.sort.type) {
-    //   params = params.append(state.sort.key, state.sort.type);
-    // }
-    return this.httpClient.get<GetUserResponse>(`${this.apiUrl}/v1/users`, {});
+  getAllUsers(page: number): Observable<GetUserResponse> {
+    let params = new HttpParams();
+    params = params.append('page', page);
+    return this.httpClient.get<GetUserResponse>(`${this.apiUrl}/v1/users`, {
+      params,
+    });
   }
 
   getUserDetails(userId: number): Observable<UserResponse> {
@@ -43,14 +40,14 @@ export class UserService {
     );
   }
 
-  getBranchNames():Observable<BranchesList[]> {
+  getBranchNames(): Observable<BranchesList[]> {
     return this.httpClient.get<BranchesList[]>(
-       `${this.apiUrl}/v1/branches/ids_and_names`
-     )
+      `${this.apiUrl}/v1/branches/ids_and_names`
+    );
   }
 
   deleteUser(id: number) {
-    return this.httpClient.delete<UserResponse>(
+    return this.httpClient.delete<SuccessMessage>(
       `${this.apiUrl}/v1/users/${id}`
     );
   }

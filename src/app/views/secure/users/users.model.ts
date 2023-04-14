@@ -47,11 +47,11 @@ export interface GetUserResponse {
   pagination: Pagination;
 }
 
-export interface UserState extends GetUserResponse {
-  search: string;
-  searchType: SearchType;
-  sort: UserSorting;
-}
+// export interface UserState extends GetUserResponse {
+//   search: string;
+//   searchType: SearchType;
+//   sort: UserSorting;
+// }
 
 export interface UserResponse {
   id: number;
@@ -82,6 +82,10 @@ export interface UserForm {
 }
 
 export interface BranchesList {
-  id: number,
-  name: string
+  id: number;
+  name: string;
+}
+
+export interface UserState {
+  pagination: Pagination;
 }

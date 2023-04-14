@@ -28,12 +28,12 @@
         <th scope="col" class="curser-pointer">
           Branch Name<i class="text-info bi"></i>
         </th>
-        <th scope="col" class="curser-pointer">
+        <!-- <th scope="col" class="curser-pointer">
           Created At<i class="text-info bi"></i>
         </th>
         <th scope="col" class="curser-pointer">
           Updated At<i class="text-info bi"></i>
-        </th>
+        </th> -->
         <th scope="col">Actions</th>
       </tr>
     </thead>
@@ -41,13 +41,13 @@
       <tr class="bg-white" *ngFor="let user of users">
         <td>{{ user.id }}</td>
         <td>{{ user.first_name }}</td>
-        <td>{{user.last_name ? user.last_name : '-'}} </td>
+        <td>{{ user.last_name ? user.last_name : "-" }}</td>
         <td>{{ user.email }}</td>
         <td>{{ user.role }}</td>
         <td>{{ user.branch_id }}</td>
         <td>{{ user.branch_name }}</td>
-        <td>{{ user.created_at | date : "short" }}</td>
-        <td>{{ user.updated_at | date : "short" }}</td>
+        <!-- <td>{{ user.created_at | date : "short" }}</td>
+        <td>{{ user.updated_at | date : "short" }}</td> -->
         <td>
           <div class="d-flex gap-3">
             <!-- <div
