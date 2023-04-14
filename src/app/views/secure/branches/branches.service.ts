@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   AddBranch,
@@ -24,8 +24,15 @@ export class BranchService {
     );
   }
 
-  getBranch(): Observable<GetBranchResponse> {
-    return this.httpClient.get<GetBranchResponse>(`${this.apiUrl}/v1/branches`);
+  getBranch(page: number): Observable<GetBranchResponse> {
+    let params = new HttpParams();
+    params = params.append('page', page);
+    return this.httpClient.get<GetBranchResponse>(
+      `${this.apiUrl}/v1/branches`,
+      {
+        params,
+      }
+    );
   }
 
   addBranch(branches: BranchForm): Observable<AddBranch> {

@@ -53,3 +53,7 @@ export enum BranchListSortColumns {
   createdAt = 'o_created_at',
   updatedAt = 'o_updated_at',
 }
+
+export interface BranchState {
+  pagination: Pagination;
+}

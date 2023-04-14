@@ -1,5 +1,5 @@
 <div class="mb-4">
-  <button cButton variant="outline" color="info" routerLink="/add">
+  <button cButton variant="outline" color="info" routerLink="/branch/add">
     Add Branch
   </button>
 </div>
@@ -81,6 +81,11 @@
   </table>
 </div>
 
-<div class="d-flex justify-content-around">
-  <app-pagination [pagination]="pagination"> </app-pagination>
+<div class="d-flex justify-content-around" *ngIf="branches?.length">
+  <app-pagination
+    class="mx-auto my-3"
+    [pagination]="pagination"
+    (pageChange)="onPageChange($event)"
+  >
+  </app-pagination>
 </div>
