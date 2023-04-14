@@ -4,11 +4,13 @@ import { BranchesListComponent } from './branches-list/branches-list.component';
 import { BranchesRoutingModule } from './branches.routing.module';
 import { BranchService } from './branches.service';
 import { IconModule } from '@coreui/icons-angular';
-import { SharedModule } from '../../../shared/shared.module';
 import { ButtonModule } from '@coreui/angular';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddBranchComponent } from './branches-add/branches-add.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
-  declarations: [BranchesListComponent],
+  declarations: [BranchesListComponent, AddBranchComponent],
   providers: [BranchService],
   imports: [
     CommonModule,
@@ -16,6 +18,8 @@ import { ButtonModule } from '@coreui/angular';
     IconModule,
     SharedModule,
     ButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
 })
 export class BranchesModule {}

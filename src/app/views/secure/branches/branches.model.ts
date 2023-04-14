@@ -16,6 +16,23 @@ export interface Branches {
   updated_at: string;
 }
 
+export interface AddBranch {
+  id: 0;
+  name: string;
+  dl_type: string;
+  address: string;
+  district_id: 0;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface BranchForm {
+  name: string;
+  district_id: 0;
+  address: string;
+  dl_type: string;
+}
+
 export type BranchListSortColumn =
   | BranchListSortColumns.id
   | BranchListSortColumns.name

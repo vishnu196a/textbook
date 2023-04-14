@@ -42,7 +42,7 @@ export class BranchesListComponent implements OnInit {
         this.branches = response.branches;
       },
       (error: ErrorResponse) => {
-        this.toasterService.error('Oops! Something went wrong');
+        this.toasterService.error(error.errors[0]);
       }
     );
     this.subscriptions.add(observer);

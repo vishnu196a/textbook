@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { GetBranchResponse } from './branches.model';
+import { AddBranch, BranchForm, GetBranchResponse } from './branches.model';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class BranchService {
   readonly apiUrl = environment.apiUrl;
 
@@ -12,5 +14,12 @@ export class BranchService {
 
   getBranch(): Observable<GetBranchResponse> {
     return this.httpClient.get<GetBranchResponse>(`${this.apiUrl}/v1/branches`);
+  }
+
+  addBranch(branches: BranchForm): Observable<AddBranch> {
+    return this.httpClient.post<AddBranch>(
+      `${this.apiUrl}/v1/branches`,
+      branches
+    );
   }
 }
