@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://dms.api.codingtown.com',
+  apiUrl: 'https://tbc-api.codingtown.com',
 };
