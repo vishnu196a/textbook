@@ -30,3 +30,7 @@ export enum OrderTypes {
   ascending = 'asc',
   descending = 'desc',
 }
+
+export interface DefaultState {
+  pagination: Pagination;
+}

@@ -1,1 +1,85 @@
-<p>branches-list works!</p>
+<div class="mb-4">
+  <button cButton variant="outline" color="info" routerLink="/add">
+    Add Branch
+  </button>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col" class="curser-pointer">
+          id
+          <i class="text-info bi"></i>
+        </th>
+        <th scope="col" class="curser-pointer">
+          Name
+          <i class="text-info bi"></i>
+        </th>
+        <th scope="col" class="curser-pointer">
+          address
+          <i class="text-info bi"></i>
+        </th>
+        <th scope="col" class="curser-pointer">
+          dl_type
+          <i class="text-info bi"></i>
+        </th>
+        <th scope="col" class="curser-pointer">
+          district_id
+          <i class="text-info bi"></i>
+        </th>
+        <th scope="col" class="curser-pointer">
+          district_name
+          <i class="text-info bi"></i>
+        </th>
+        <th scope="col" class="curser-pointer">
+          createdAt
+          <i class="text-info bi"></i>
+        </th>
+        <th scope="col" class="curser-pointer">
+          updatedAt
+          <i class="text-info bi"></i>
+        </th>
+        <th scope="col" class="curser-pointer">
+          actions
+          <i class="text-info bi"></i>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="bg-white" *ngFor="let branch of branches">
+        <td>
+          <div class="d-flex gap-2">
+            <td>{{ branch.id }}</td>
+          </div>
+        </td>
+        <td>{{ branch.name }}</td>
+        <td>{{ branch.address }}</td>
+        <td>{{ branch.dl_type }}</td>
+        <td>{{ branch.district_id }}</td>
+        <td>{{ branch.district_name }}</td>
+        <td>{{ branch.created_at }}</td>
+        <td>{{ branch.updated_at }}</td>
+        <td>
+          <div class="d-flex gap-3">
+            <div
+              class="bg-edit opacity-75 rounded-circle px-2 py-1 text-white fw-bolder curser-pointer"
+              (click)="onEdit(branch.id)"
+            >
+              <svg cIcon name="cilPencil" size="md" title="Edit Icon"></svg>
+            </div>
+            <div
+              class="bg-delete opacity-75 rounded-circle px-2 py-1 text-white fw-bolder curser-pointer"
+            >
+              <svg cIcon name="cilTrash" size="md" title="Delete Icon"></svg>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="d-flex justify-content-around">
+  <app-pagination [pagination]="pagination"> </app-pagination>
+</div>

@@ -21,7 +21,7 @@ export class AuthenticationService {
     userCredentials: UserCredentials
   ): Observable<HttpResponse<UserResponse>> {
     return this.http
-      .post<UserResponse>(`${this.apiUrl}/v1/login`, userCredentials, {
+      .post<UserResponse>(`${this.apiUrl}/v1/admins/login`, userCredentials, {
         observe: 'response',
       })
       .pipe(
