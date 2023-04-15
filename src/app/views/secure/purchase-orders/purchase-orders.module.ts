@@ -6,10 +6,11 @@ import { IconModule } from '@coreui/icons-angular';
 import { ButtonModule } from '@coreui/angular';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { SharedModule } from "../../../shared/shared.module";
+import { POViewComponent } from './purchase-order-view/po-view.component';
 
 @NgModule({
     declarations: [
-        PurchaseOrdersListComponent
+        PurchaseOrdersListComponent, POViewComponent
     ],
     imports: [
         CommonModule,

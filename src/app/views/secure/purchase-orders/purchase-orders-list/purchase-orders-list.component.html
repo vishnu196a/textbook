@@ -1,6 +1,6 @@
 <div class="table-responsive">
     <table class="table table-hover">
-      <thead>
+      <thead class="bg-secondary">
         <tr>
           <th scope="col">
              PO No
@@ -31,9 +31,6 @@
             PO days<i class="text-info bi"></i>
           </th>
           <th scope="col">
-            PO date<i class="text-info bi"></i>
-          </th>
-          <th scope="col">
             Order Year<i class="text-info bi"></i>
           </th>
 
@@ -46,28 +43,23 @@
       <tbody>
         <tr class="bg-white" *ngFor="let po of poList">
             <td>{{ po.po_no }}</td>
-            <td>{{ po.po_date }}</td>
+            <td>{{  po.po_date  | date : "short"}}</td>
             <td>{{ po.status }}</td>
             <td>{{ po.godown ? po.godown:'-' }}</td>
             <td>{{ po.region ? po.region: '-' }}</td>
             <td>{{ po.vendor_name }}</td>
             <td>{{ po.vendor_address ?po.vendor_address :'-'  }}</td>
             <td>{{  po.po_days }}</td>
-            <td>{{  po.po_date }}</td>
             <td>{{  po.order_year }}</td>
-            <td>{{  po.target_date }}</td>
-
-
-          <!-- <td>{{ user.created_at | date : "short" }}</td>
-          <td>{{ user.updated_at | date : "short" }}</td> -->
+            <td>{{  po.target_date | date: "short"}}</td>
           <td>
             <div class="d-flex gap-3">
-              <!-- <div
+              <div
                 class="btn-view opacity-75 rounded-circle px-2 py-1 text-white fw-bolder curser-pointer"
-                (click)="onView(user.email)"
+                (click)="onView(po.id)"
               >
                 <i class="bi bi-eye-fill"></i>
-              </div> -->
+              </div>
               <!-- <div
                 class="bg-edit opacity-75 rounded-circle px-2 py-1 text-white fw-bolder curser-pointer"
                 (click)="onEdit(user.id)"

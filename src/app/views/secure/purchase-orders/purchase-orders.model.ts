@@ -31,6 +31,26 @@ export interface Material {
     size: string;
     mode_of_printing: string;
     type_of_copies: string;
+    MaterialDistribution?: MaterialDistribution[];
+}
+
+export interface MaterialDistribution {
+        id: number,
+        po_id: number,
+        material_id: number,
+        branch_id: number,
+        branch: {
+          id: number,
+          name: string,
+          address: string,
+          dl_type: string,
+          district_id: number,
+          district_name: string,
+          created_at: string,
+          updated_at: string
+        },
+        net_copies: number,
+        delivery_status: string   
 }
 
 

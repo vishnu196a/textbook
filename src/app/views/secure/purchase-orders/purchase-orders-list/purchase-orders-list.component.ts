@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { PurchaseOrdersService } from '../purchase-orders.service';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorResponse } from 'src/app/shared/interceptors/error.interceptor';
-import { PurchaseOrder } from '../purchase-orders.model';
+import {  PurchaseOrder } from '../purchase-orders.model';
 import { Pagination } from 'src/app/shared/models/shared.model';
 import { Store } from '@ngrx/store';
 import { selectPOState } from '../store/po.selector';
 import { AppState } from 'src/app/app.reducer';
 import { actionSetPoPagination } from '../store/po.action';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-purchase-orders-list',
@@ -20,7 +21,8 @@ export class PurchaseOrdersListComponent implements OnInit {
   constructor(
     private poService: PurchaseOrdersService,
     private toastrService: ToastrService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router: Router
   ) {
     this.store.select(selectPOState).subscribe(
       (res) => {
@@ -37,7 +39,6 @@ export class PurchaseOrdersListComponent implements OnInit {
   getAllPO(page:number): void {
     this.poService.getAllPO(page).subscribe(
       (res) => {
-        console.log(res);
         this.poList = res.purchase_orders
         this.store.dispatch(actionSetPoPagination({pagination: res.pagination}))
       },
@@ -49,5 +50,9 @@ export class PurchaseOrdersListComponent implements OnInit {
 
   onPageChange(page: number): void {
     this.getAllPO(page);
+  }
+
+  onView(id: number) {
+    this.router.navigateByUrl(`purchase_order/view/${id}`)
   }
 }
