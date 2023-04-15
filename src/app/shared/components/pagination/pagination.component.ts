@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Pagination } from '../../models/shared.model';
+import { log } from 'console';
 
 @Component({
   selector: 'app-pagination',

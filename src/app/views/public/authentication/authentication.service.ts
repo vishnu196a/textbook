@@ -13,6 +13,7 @@ import {
   UserResponse,
 } from './authentication.model';
 import { setLoggedInUser } from './store/authentication.action';
+import { ChangePwdRequestParams } from './authentication.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -55,7 +56,7 @@ export class AuthenticationService {
     );
   }
 
-  public changePassword(params: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/v1/passwords/change`, params);
+  public changePassword(params: ChangePwdRequestParams): Observable<SuccessMessage> {
+    return this.http.put<SuccessMessage>(`${this.apiUrl}/v1/passwords/change`, params);
   }
 }

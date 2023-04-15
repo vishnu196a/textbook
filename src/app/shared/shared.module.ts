@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule, FormModule, ModalModule } from '@coreui/angular';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TagComponent } from './components/tag/tag.component';
@@ -21,6 +21,7 @@ import { LoadingButtonComponent } from './components/loading-button/loading-butt
     CommonModule,
     NgSelectModule,
     FormsModule,
+    ReactiveFormsModule,
     FormModule,
     ButtonModule,
     ModalModule,
@@ -29,6 +30,8 @@ import { LoadingButtonComponent } from './components/loading-button/loading-butt
     TagComponent,
     FileSizePipe,
     PaginationComponent,
+    ReactiveFormsModule,
+    FormsModule,
     LoadingButtonComponent,
   ],
 })

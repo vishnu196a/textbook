@@ -30,3 +30,8 @@ export enum OrderTypes {
   ascending = 'asc',
   descending = 'desc',
 }
+
+export interface NamesAndIds {
+  id: number;
+  name: string;
+}
