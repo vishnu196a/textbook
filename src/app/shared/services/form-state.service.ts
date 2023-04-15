@@ -6,6 +6,8 @@ import { debounceTime } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class FormStateService {
+  constructor() {}
+
   isFormPristine(formName: FormGroup): void {
     const defaultValue = formName.value;
     formName.valueChanges.pipe(debounceTime(200)).subscribe((value) => {

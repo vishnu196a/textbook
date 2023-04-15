@@ -34,3 +34,7 @@ export enum OrderTypes {
 export interface DefaultState {
   pagination: Pagination;
 }
+export interface NamesAndIds {
+  id: number;
+  name: string;
+}

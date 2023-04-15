@@ -5,15 +5,19 @@ import { FileState } from './views/secure/file/file.model';
 import { fileReducer } from './views/secure/file/store/file.reducer';
 import { BranchState } from './views/secure/branches/branches.model';
 import { branchReducer } from './views/secure/branches/store/branch-reducer';
+import { UserState } from './views/secure/users/users.model';
+import { userReducer } from './views/secure/users/store/users.reducer';
 
 export interface AppState {
   authenticationState: AuthenticationState;
   fileState: FileState;
   branchState: BranchState;
+  userState: UserState;
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
   authenticationState: authenticationReducer,
   fileState: fileReducer,
   branchState: branchReducer,
+  userState: userReducer,
 };

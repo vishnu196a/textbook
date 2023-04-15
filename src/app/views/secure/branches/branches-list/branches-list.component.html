@@ -9,7 +9,7 @@
     <thead>
       <tr>
         <th scope="col" class="curser-pointer">
-          S.Io
+          S.No
           <i class="text-info bi"></i>
         </th>
         <th scope="col" class="curser-pointer">
@@ -21,7 +21,7 @@
           <i class="text-info bi"></i>
         </th>
         <th scope="col" class="curser-pointer">
-          DLtype
+          DL Type
           <i class="text-info bi"></i>
         </th>
         <!-- <th scope="col" class="curser-pointer">
@@ -29,7 +29,7 @@
           <i class="text-info bi"></i>
         </th> -->
         <th scope="col" class="curser-pointer">
-          DistrictName
+          District Name
           <i class="text-info bi"></i>
         </th>
         <!-- <th scope="col" class="curser-pointer">
@@ -54,7 +54,7 @@
           </div>
         </td>
         <td>{{ branch.name }}</td>
-        <td>{{ branch.address }}</td>
+        <td>{{ branch.address ? branch.address : '-'}}</td>
         <td>{{ branch.dl_type }}</td>
         <!-- <td>{{ branch.district_id }}</td> -->
         <td>{{ branch.district_name }}</td>
