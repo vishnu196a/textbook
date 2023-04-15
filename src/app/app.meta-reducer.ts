@@ -3,7 +3,7 @@ import { localStorageSync } from 'ngrx-store-localstorage';
 import { AppState } from './app.reducer';
 import { removeLoggedInUser } from './views/public/authentication/store/authentication.action';
 
-const STORE_KEYS_TO_PERSIST = ['authenticationState', 'userState', 'branchState'];
+const STORE_KEYS_TO_PERSIST = ['authenticationState', 'userState', 'branchState', 'poState'];
 
 function localStorageSyncReducer(
   reducer: ActionReducer<AppState>
