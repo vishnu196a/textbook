@@ -1,0 +1,168 @@
+<div class="d-flex justify-content-center">
+  <form
+    [formGroup]="editUserForm"
+    (submit)="onFormSubmit()"
+    class="mt-3 w-75"
+    autocomplete="off"
+  >
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col order-1 order-sm-0">
+            <button
+              class="btn btn-primary d-flex align-items-center"
+              type="button"
+              title="Back"
+              [disabled]="isLoading"
+              routerLink="/branches"
+            >
+              <span class="min-width-18px">
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+              </span>
+              <span class="text ml-1 ml-sm-o d-none d-sm-block">Back</span>
+            </button>
+          </div>
+          <div class="col-12 col-sm-auto order-0 order-sm-1">
+            <h2 class="text-center">Add User</h2>
+          </div>
+          <div class="col order-2 text-end">
+            <app-loading-button
+              [disabled]="editUserForm.invalid"
+              [buttonText]="'Edit Branch'"
+              [title]="'Click to edit branch'"
+              [isLoading]="isLoading"
+              [loadingText]="'Adding branch..'"
+              [buttonIconClass]="'fas fa-check'"
+            ></app-loading-button>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="alert alert-warning" *ngIf="hasValidationError">
+          <p>Please fix the following</p>
+          <ul>
+            <li *ngFor="let validationError of validationErrors">
+              {{ validationError }}
+            </li>
+          </ul>
+        </div>
+        <div class="row">
+          <div class="form-group col-12 col-md-6">
+            <label for="name"> Name <span class="text-danger">*</span></label>
+            <input
+              type="text"
+              id="name"
+              formControlName="name"
+              class="form-control"
+              maxlength="100"
+              placeholder="Enter Name"
+              onkeypress="return /[a-zA-Z]/i.test(event.key)"
+            />
+            <div
+              *ngIf="
+                formControls['name'].touched && formControls['name'].invalid
+              "
+            >
+              <small
+                class="text-danger"
+                *ngIf="formControls['name'].errors?.['required']"
+                >name is required</small
+              >
+              <small
+                class="text-danger"
+                *ngIf="formControls['name'].errors?.['minlength']"
+                >Minimum length required is
+                {{ formControls['name'].errors?.['minlength'].requiredLength }}</small
+              >
+              <small
+                class="text-danger"
+                *ngIf="formControls['name'].errors?.['maxlength']"
+                >Maximum length is
+                {{ formControls['name'].errors?.['maxlength'].requiredLength }}</small
+              >
+            </div>
+          </div>
+          <div class="form-group col-12 col-md-6">
+            <label for="address">
+              Address <span class="text-danger">*</span></label
+            >
+            <input
+              type="text"
+              id="address"
+              formControlName="address"
+              class="form-control"
+              maxlength="100"
+              placeholder="Enter address"
+            />
+            <div
+              *ngIf="
+                formControls['address'].touched &&
+                formControls['address'].invalid
+              "
+            >
+              <small
+                class="text-danger"
+                *ngIf="formControls['address'].errors?.['required']"
+                >address is required</small
+              >
+              <small
+                class="text-danger"
+                *ngIf="formControls['address'].errors?.['minlength']"
+                >Minimum length required is
+                {{ formControls['address'].errors?.['minlength'].requiredLength }}</small
+              >
+            </div>
+          </div>
+          <div class="form-group col-12 col-md-6 mt-4">
+            <label for="dl_type"
+              >DLtype <span class="text-danger">*</span></label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="dl_type"
+              placeholder="Enter DLtype"
+              formControlName="dl_type"
+            />
+            <div
+              *ngIf="
+                formControls['dl_type'].touched &&
+                formControls['dl_type'].invalid
+              "
+            >
+              <small
+                class="text-danger"
+                *ngIf="formControls['dl_type'].errors?.['required']"
+                >DLtype is required</small
+              >
+            </div>
+          </div>
+          <div class="form-group col-12 col-md-6 mt-4">
+            <label for="district_id"
+              >DistrictId <span class="text-danger">*</span></label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="district_id"
+              placeholder="Enter DistrictId"
+              formControlName="district_id"
+            />
+            <div
+              *ngIf="
+                formControls['district_id'].touched &&
+                formControls['district_id'].invalid
+              "
+            >
+              <small
+                class="text-danger"
+                *ngIf="formControls['district_id'].errors?.['required']"
+                >DistrictId is required</small
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

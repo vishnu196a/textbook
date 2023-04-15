@@ -12,10 +12,9 @@
           <i class="text-info bi"></i>
         </th>
         <th scope="col" class="curser-pointer">
-          First Name
+           Name
           <i class="text-info bi"></i>
         </th>
-        <th scope="col">Last Name</th>
         <th scope="col" class="curser-pointer">
           Email<i class="text-info bi"></i>
         </th>
@@ -40,8 +39,7 @@
     <tbody>
       <tr class="bg-white" *ngFor="let user of users">
         <td>{{ user.id }}</td>
-        <td>{{ user.first_name }}</td>
-        <td>{{ user.last_name ? user.last_name : "-" }}</td>
+        <td>{{ user.first_name }} {{user.last_name ? user.last_name : ''}}</td>
         <td>{{ user.email }}</td>
         <td>{{ user.role }}</td>
         <td>{{ user.branch_id }}</td>

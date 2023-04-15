@@ -31,6 +31,9 @@ export enum OrderTypes {
   descending = 'desc',
 }
 
+export interface DefaultState {
+  pagination: Pagination;
+}
 export interface NamesAndIds {
   id: number;
   name: string;
