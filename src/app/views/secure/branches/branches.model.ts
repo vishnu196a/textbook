@@ -6,29 +6,29 @@ export interface GetBranchResponse {
 }
 
 export interface Branches {
-  id: 0;
+  id: number;
   name: string;
   address: string;
   dl_type: string;
-  district_id: 0;
+  district_id: number;
   district_name: string;
   created_at: string;
   updated_at: string;
 }
 
 export interface AddBranch {
-  id: 0;
+  id: number;
   name: string;
   dl_type: string;
   address: string;
-  district_id: 0;
+  district_id: number;
   created_at: string;
   updated_at: string;
 }
 
 export interface BranchForm {
   name: string;
-  district_id: 0;
+  district_id: number;
   address: string;
   dl_type: string;
 }
