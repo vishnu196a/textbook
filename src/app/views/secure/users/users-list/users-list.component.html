@@ -5,14 +5,14 @@
 </div>
 <div class="table-responsive">
   <table class="table table-hover">
-    <thead>
+    <thead class="bg-secondary">
       <tr>
         <th scope="col" class="curser-pointer">
           Id
           <i class="text-info bi"></i>
         </th>
         <th scope="col" class="curser-pointer">
-           Name
+          Name
           <i class="text-info bi"></i>
         </th>
         <th scope="col" class="curser-pointer">
@@ -39,7 +39,9 @@
     <tbody>
       <tr class="bg-white" *ngFor="let user of users">
         <td>{{ user.id }}</td>
-        <td>{{ user.first_name }} {{user.last_name ? user.last_name : ''}}</td>
+        <td>
+          {{ user.first_name }} {{ user.last_name ? user.last_name : "" }}
+        </td>
         <td>{{ user.email }}</td>
         <td>{{ user.role }}</td>
         <td>{{ user.branch_id }}</td>
