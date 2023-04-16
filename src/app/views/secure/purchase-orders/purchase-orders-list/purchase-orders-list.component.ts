@@ -18,6 +18,7 @@ import { Router } from '@angular/router';
 export class PurchaseOrdersListComponent implements OnInit {
   poList: PurchaseOrder[] = []
   pagination!: Pagination;
+  isLoading: boolean = false;
   constructor(
     private poService: PurchaseOrdersService,
     private toastrService: ToastrService,
@@ -36,13 +37,16 @@ export class PurchaseOrdersListComponent implements OnInit {
     this.getAllPO(this.pagination.current_page);
   }
   
-  getAllPO(page:number): void {
+  getAllPO(page: number): void {
+    this.isLoading = true;
     this.poService.getAllPO(page).subscribe(
       (res) => {
+        this.isLoading = false;
         this.poList = res.purchase_orders
         this.store.dispatch(actionSetPoPagination({pagination: res.pagination}))
       },
       (error: ErrorResponse) => {
+        this.isLoading = false;
         this.toastrService.error(error.errors[0]);
       }
     );
