@@ -6,12 +6,11 @@ import { Pagination } from 'src/app/shared/models/shared.model';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducer';
 import { actionSetPagination } from '../store/users.action';
-import { selectFileState } from '../../file/store/file.selector';
-import { Subscription } from 'rxjs';
 import { BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { ModelComponent } from 'src/app/shared/components/model/model.component';
 import { ToastrService } from 'ngx-toastr';
 import { selectUserState } from '../store/users.selector';
+import { ErrorResponse } from 'src/app/shared/interceptors/error.interceptor';
 
 @Component({
   selector: 'app-users-list',
@@ -20,8 +19,8 @@ import { selectUserState } from '../store/users.selector';
 })
 export class UsersListComponent implements OnInit {
   pagination!: Pagination;
-  users: Users[] | undefined;
-  private subscription: Subscription;
+  isLoading: boolean = false;
+  users: Users[] =[];
 
   constructor(
     private router: Router,
@@ -30,12 +29,6 @@ export class UsersListComponent implements OnInit {
     private modalService: BsModalService,
     private toasterService: ToastrService
   ) {
-    const subscription = store
-      .select(selectFileState)
-      .subscribe((fileState) => {
-        this.pagination = fileState.pagination;
-      });
-    this.subscription = subscription;
     this.store.select(selectUserState).subscribe((res) => {
       this.pagination = res.pagination;
     });
@@ -46,11 +39,18 @@ export class UsersListComponent implements OnInit {
   }
 
   getAllUsers(page: number) {
-    this.userService.getAllUsers(page).subscribe((res) => {
+    this.isLoading = true;
+    const observer = this.userService.getAllUsers(page).subscribe((res) => {
+      this.isLoading = false;
       this.users = res.users;
       this.store.dispatch(actionSetPagination({ pagination: res.pagination }));
-    });
-  }
+    },
+      (error: ErrorResponse) => {
+        this.toasterService.error(error.errors[0]);
+        this.isLoading = false;
+      }
+    );
+    }
 
   public onEdit(id: number): void {
     this.router.navigate(['user_edit', id]);

@@ -31,6 +31,7 @@ export class BranchesListComponent implements OnInit, OnDestroy {
   subscriptions = new Subscription();
   sortedColumn: BranchListSortColumn | undefined;
   private subscription: Subscription;
+  isLoading: boolean = false;
 
   constructor(
     private router: Router,
@@ -59,14 +60,17 @@ export class BranchesListComponent implements OnInit, OnDestroy {
   }
 
   loadBranches(page: number): void {
+    this.isLoading = true;
     const observer = this.branchService.getBranch(page).subscribe(
       (response: GetBranchResponse) => {
+        this.isLoading = false;
         this.branches = response.branches;
         this.store.dispatch(
           actionSetPagination({ pagination: response.pagination })
         );
       },
       (error: ErrorResponse) => {
+        this.isLoading = false;
         this.toasterService.error(error.errors[0]);
       }
     );

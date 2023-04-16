@@ -6,7 +6,7 @@ import { AuthGuard } from './shared/guards/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'purchase_orders',
     pathMatch: 'full',
   },
   {
@@ -23,8 +23,8 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () =>
-          import('./views/secure/file/file.module').then(
-            (module) => module.FileModule
+          import('./views/secure/purchase-orders/purchase-orders.module').then(
+            (module) => module.PurchaseOrdersModule
           ),
         canActivate: [AuthGuard],
       },

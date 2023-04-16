@@ -1,0 +1,98 @@
+<div class="table-responsive" *ngIf="!isLoading && poList.length">
+    <table class="table table-hover">
+      <thead class="bg-secondary">
+        <tr>
+          <th scope="col">
+             PO No
+            <i class="text-info bi"></i>
+          </th>
+          <th scope="col">
+             PO Date
+            <i class="text-info bi"></i>
+          </th>
+          <th scope="col">
+            Status
+           <i class="text-info bi"></i>
+         </th>
+          <th scope="col">
+            Godown
+           <i class="text-info bi"></i>
+         </th>
+          <th scope="col">
+            Region<i class="text-info bi"></i>
+          </th>
+          <th scope="col">
+            Vendor Name<i class="text-info bi"></i>
+          </th>
+          <th scope="col">
+            Vendor Address<i class="text-info bi"></i>
+          </th>
+          <th scope="col">
+            PO days<i class="text-info bi"></i>
+          </th>
+          <th scope="col">
+            Order Year<i class="text-info bi"></i>
+          </th>
+
+          <th scope="col">
+            Target date<i class="text-info bi"></i>
+          </th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-white" *ngFor="let po of poList">
+            <td>{{ po.po_no }}</td>
+            <td>{{  po.po_date  | date : "short"}}</td>
+            <td>{{ po.status }}</td>
+            <td>{{ po.godown ? po.godown:'-' }}</td>
+            <td>{{ po.region ? po.region: '-' }}</td>
+            <td>{{ po.vendor_name }}</td>
+            <td>{{ po.vendor_address ?po.vendor_address :'-'  }}</td>
+            <td>{{  po.po_days }}</td>
+            <td>{{  po.order_year }}</td>
+            <td>{{  po.target_date | date: "short"}}</td>
+          <td>
+            <div class="d-flex gap-3">
+              <div
+                class="btn-view opacity-75 rounded-circle px-2 py-1 text-white fw-bolder curser-pointer"
+                (click)="onView(po.id)"
+              >
+                <i class="bi bi-eye-fill"></i>
+              </div>
+              <!-- <div
+                class="bg-edit opacity-75 rounded-circle px-2 py-1 text-white fw-bolder curser-pointer"
+                (click)="onEdit(user.id)"
+              >
+                <svg cIcon name="cilPencil" size="md" title="Edit Icon"></svg>
+              </div>
+              <div
+                class="bg-delete opacity-75 rounded-circle px-2 py-1 text-white fw-bolder curser-pointer"
+                (click)="onDelete(user)"
+              >
+                <svg cIcon name="cilTrash" size="md" title="Delete Icon"></svg>
+              </div> -->
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+
+<div class="d-flex justify-content-center mt-5">
+  <div class="spinner-border" role="status" *ngIf="isLoading">
+  </div>
+  <h5 class="text-center mt-5" *ngIf="!isLoading && !poList.length">
+    No list found
+  </h5>
+</div> 
+
+  <div class="d-flex" *ngIf="poList?.length">
+    <app-pagination
+      class="mx-auto my-3"
+      [pagination]="pagination"
+      (pageChange)="onPageChange($event)"
+    ></app-pagination>
+  </div>
+
+  

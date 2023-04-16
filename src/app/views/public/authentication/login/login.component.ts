@@ -50,7 +50,7 @@ export class LoginComponent implements OnDestroy {
         .subscribe(
           (user: HttpResponse<UserResponse>) => {
             this.isLoading = false;
-            this.router.navigateByUrl('/dashboard');
+            this.router.navigateByUrl('purchase_orders');
           },
           (error: ErrorResponse) => {
             this.isLoading = false;
