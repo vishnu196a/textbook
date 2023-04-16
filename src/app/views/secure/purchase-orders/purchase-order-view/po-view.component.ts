@@ -35,7 +35,6 @@ export class POViewComponent implements OnInit {
         this.isLoading = false;
         this.purchaseOrder = res;
         this.materialList = res.Material;
-        console.log(this.purchaseOrder);
       },
       (error: ErrorResponse) => {
         this.isLoading = false;
@@ -46,5 +45,9 @@ export class POViewComponent implements OnInit {
 
   onBack(): void{
     this.router.navigate(['purchase_orders']);
+  }
+
+  onViewMaterialDistribution(poId: number, materialId: number): void {
+    this.router.navigate(['purchase_order/view', poId, materialId]);  
   }
 }

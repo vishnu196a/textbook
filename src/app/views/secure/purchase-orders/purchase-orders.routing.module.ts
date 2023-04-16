@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PurchaseOrdersListComponent } from './purchase-orders-list/purchase-orders-list.component';
 import { POViewComponent } from './purchase-order-view/po-view.component';
+import { POMaterialViewComponent } from './po-material-view/po-material-view.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'purchase_order/view/:id',
     component:POViewComponent,
+  },
+  {
+    path: 'purchase_order/view/:po_id/:material_id',
+    component:POMaterialViewComponent
   }
 ];
 

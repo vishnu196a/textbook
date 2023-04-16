@@ -27,7 +27,7 @@ export class PurchaseOrdersListComponent implements OnInit {
   ) {
     this.store.select(selectPOState).subscribe(
       (res) => {
-        this.pagination = res.pagination;  
+        this.pagination = res.pagination;
       }
     )
 

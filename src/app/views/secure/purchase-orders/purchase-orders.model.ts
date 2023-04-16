@@ -57,3 +57,15 @@ export interface MaterialDistribution {
 export interface POState{
     pagination: Pagination;
 }
+
+
+type PO = Omit<PurchaseOrder, 'Material'>
+
+type POMaterial = Omit<Material, 'MaterialDistribution'>
+
+
+export interface POMaterialDistribution{
+    purchaseOrder: PO;
+    material: POMaterial;
+    materialDistribution: MaterialDistribution[];    
+}
