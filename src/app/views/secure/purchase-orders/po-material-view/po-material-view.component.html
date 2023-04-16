@@ -1,0 +1,254 @@
+<div class="mb-3">
+  <button cButton variant="outline" color="info" (click)="onBackToPOView()">
+    Back
+  </button>
+</div>
+
+<div *ngIf="!isLoading && materialDistributionList">
+  <h3 class="mb-3">Purchase Order Details</h3>
+  <div
+    class="mb-3 gap-3 row d-flex align-items-center"
+    *ngIf="!isLoading && materialDistributionList"
+  >
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        PO No:
+        <span class="text-primary col-3">{{
+          materialDistributionList.purchaseOrder.id
+        }}</span>
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Status:
+        <span class="text-primary col-3">{{
+          materialDistributionList.purchaseOrder.status
+        }}</span>
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        PO Date:
+        <span class="text-primary">{{
+          materialDistributionList.purchaseOrder.po_date | date : "short"
+        }}</span>
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Region:
+        <span class="text-primary">{{
+          materialDistributionList.purchaseOrder.region
+            ? materialDistributionList.purchaseOrder.region
+            : "-"
+        }}</span>
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Godown:
+        <span class="text-primary">{{
+          materialDistributionList.purchaseOrder.godown
+            ? materialDistributionList.purchaseOrder.godown
+            : "-"
+        }}</span>
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Vendor Name:
+        <span class="text-primary">{{
+          materialDistributionList.purchaseOrder.vendor_name
+        }}</span>
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Vendor Address:<span class="text-primary">
+          {{
+            materialDistributionList.purchaseOrder.vendor_address
+              ? materialDistributionList.purchaseOrder.vendor_address
+              : "-"
+          }}</span
+        >
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        PO Days:<span class="text-primary">
+          {{ materialDistributionList.purchaseOrder.po_days }}</span
+        >
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Order Year:<span class="text-primary">
+          {{ materialDistributionList.purchaseOrder.order_year }}</span
+        >
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Target Date:<span class="text-primary">
+          {{
+            materialDistributionList.purchaseOrder.target_date | date : "short"
+          }}</span
+        >
+      </h6>
+    </div>
+  </div>
+  <hr />
+
+  <h3 class="mb-3 mt-4">Material Details</h3>
+
+  <div
+    class="mb-3 gap-3 row d-flex align-items-center"
+    *ngIf="!isLoading && materialDistributionList"
+  >
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Title:
+        <span class="text-primary col-3">{{
+          materialDistributionList.material.title
+        }}</span>
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Standard:
+        <span class="text-primary col-3">{{
+          materialDistributionList.material.standard
+        }}</span>
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Medium:
+        <span class="text-primary">{{
+          materialDistributionList.material.medium
+        }}</span>
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Net copies:
+        <span class="text-primary">{{
+          materialDistributionList.material.net_copies
+        }}</span>
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Size:
+        <span class="text-primary">{{
+          materialDistributionList.material.size
+        }}</span>
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Mode of printing:
+        <span class="text-primary">{{
+          materialDistributionList.material.mode_of_printing
+        }}</span>
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Type of copies:<span class="text-primary">
+          {{ materialDistributionList.material.type_of_copies }}</span
+        >
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        PO Days:<span class="text-primary">
+          {{ materialDistributionList.purchaseOrder.po_days }}</span
+        >
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Order Year:<span class="text-primary">
+          {{ materialDistributionList.purchaseOrder.order_year }}</span
+        >
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Target Date:<span class="text-primary">
+          {{
+            materialDistributionList.purchaseOrder.target_date | date : "short"
+          }}</span
+        >
+      </h6>
+    </div>
+  </div>
+  <hr />
+  <h3 class="mb-3 mt-4">Material Distributions</h3>
+
+  <div
+    class="table-responsive"
+    *ngIf="!isLoading && materialDistributionList.materialDistribution.length"
+  >
+    <table class="table table-hover">
+      <thead class="bg-secondary">
+        <tr>
+          <th scope="col">
+            Branch Name
+            <i class="text-info bi"></i>
+          </th>
+          <th scope="col">
+            Net Copies
+            <i class="text-info bi"></i>
+          </th>
+          <th scope="col">
+            Delivery status
+            <i class="text-info bi"></i>
+          </th>
+          <th scope="col">
+            Branch Address
+            <i class="text-info bi"></i>
+          </th>
+          <th scope="col">Dl Type<i class="text-info bi"></i></th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          class="bg-white"
+          *ngFor="let material of materialDistributionList.materialDistribution"
+        >
+          <td>{{ material.branch.name }}</td>
+          <td>{{ material.net_copies }}</td>
+          <td>{{ material.delivery_status }}</td>
+          <td>{{ material.branch.address ? material.branch.address : "-" }}</td>
+          <td>{{ material.branch.dl_type }}</td>
+          <td>
+            <div class="d-flex gap-3">
+              <div
+                class="btn-view opacity-75 rounded-circle px-2 py-1 text-white fw-bolder curser-pointer"
+                (click)="onViewMaterialDistributionDetails(material.id)"
+              >
+                <i class="bi bi-eye-fill"></i>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center mt-5">
+  <div class="spinner-border" role="status" *ngIf="isLoading"></div>
+  <h5 class="text-center mt-5" *ngIf="!isLoading && !materialDistributionList">
+    No Details found
+  </h5>
+</div>
+<h5
+  *ngIf="!isLoading && !materialDistributionList.materialDistribution.length"
+  class="text-center mb-5"
+>
+  No Distributions to show
+</h5>

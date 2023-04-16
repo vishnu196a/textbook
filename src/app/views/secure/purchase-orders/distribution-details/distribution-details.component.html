@@ -1,0 +1,222 @@
+<div class="mb-3">
+  <button
+    cButton
+    variant="outline"
+    color="info"
+    (click)="onBackToMaterialDistributionsView()"
+  >
+    Back
+  </button>
+</div>
+
+<div class="d-flex justify-content-center mt-5">
+  <div class="spinner-border" role="status" *ngIf="isLoading"></div>
+  <h5
+    class="text-center mt-5"
+    *ngIf="!isLoading && !materialDistributionDetails.material_delivery.id"
+  >
+    No Details found
+  </h5>
+</div>
+
+<div *ngIf="materialDistributionDetails.material_delivery.id && !isLoading">
+  <h3 class="mt-2 mb-2">Material Delivery Details</h3>
+  <div
+    class="table-responsive mt-3"
+    *ngIf="!isLoading && materialDistributionDetails"
+  >
+    <table class="table table-hover">
+      <thead class="bg-secondary">
+        <tr>
+          <th scope="col">
+            Delivery Status
+            <i class="text-info bi"></i>
+          </th>
+          <th scope="col">
+            Recieved Copies
+            <i class="text-info bi"></i>
+          </th>
+          <th scope="col">
+            Recieved Bundles
+            <i class="text-info bi"></i>
+          </th>
+          <th scope="col">
+            Defectives count
+            <i class="text-info bi"></i>
+          </th>
+          <th scope="col">Defective Reason<i class="text-info bi"></i></th>
+          <th scope="col">Recieved Loose Copies<i class="text-info bi"></i></th>
+          <th scope="col">Weights<i class="text-info bi"></i></th>
+          <th scope="col">Remarks<i class="text-info bi"></i></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-white">
+          <td>
+            {{ materialDistributionDetails.material_delivery.delivery_status }}
+          </td>
+          <td>
+            {{ materialDistributionDetails.material_delivery.received_copies }}
+          </td>
+          <td>
+            {{ materialDistributionDetails.material_delivery.received_bundles }}
+          </td>
+          <td>
+            {{ materialDistributionDetails.material_delivery.defectives_count }}
+          </td>
+          <td>
+            {{
+              materialDistributionDetails.material_delivery.defective_reason
+                ? materialDistributionDetails.material_delivery.defective_reason
+                : "-"
+            }}
+          </td>
+          <td>
+            {{
+              materialDistributionDetails.material_delivery
+                .received_loose_copies
+            }}
+          </td>
+          <td>
+            {{
+              materialDistributionDetails.material_delivery.weights
+                ? materialDistributionDetails.material_delivery.weights
+                : "-"
+            }}
+          </td>
+          <td>
+            {{
+              materialDistributionDetails.material_delivery.remarks
+                ? materialDistributionDetails.material_delivery.remarks
+                : "-"
+            }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <hr />
+  <h3 class="mb-2">Book Receipt Voucher</h3>
+  <div
+    class="table-responsive mt-3"
+    *ngIf="!isLoading && materialDistributionDetails"
+  >
+    <table class="table table-hover">
+      <thead class="bg-secondary">
+        <tr>
+          <th scope="col">
+            BRV No
+            <i class="text-info bi"></i>
+          </th>
+          <th scope="col">
+            BRV Date
+            <i class="text-info bi"></i>
+          </th>
+          <th scope="col">
+            BRV Series
+            <i class="text-info bi"></i>
+          </th>
+          <th scope="col">
+            Carrier
+            <i class="text-info bi"></i>
+          </th>
+          <th scope="col">Carrier No<i class="text-info bi"></i></th>
+          <th scope="col">Delivery Note No<i class="text-info bi"></i></th>
+          <th scope="col">Delivery Date<i class="text-info bi"></i></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-white">
+          <td>
+            {{
+              materialDistributionDetails.book_receipt_voucher.brv_no
+                ? materialDistributionDetails.book_receipt_voucher.brv_no
+                : "-"
+            }}
+          </td>
+          <td>
+            {{
+              materialDistributionDetails.book_receipt_voucher.brv_date
+                | date : "short"
+            }}
+          </td>
+          <td>
+            {{ materialDistributionDetails.book_receipt_voucher.brv_series }}
+          </td>
+          <td>
+            {{
+              materialDistributionDetails.book_receipt_voucher.carrier
+                ? materialDistributionDetails.book_receipt_voucher.carrier
+                : "-"
+            }}
+          </td>
+          <td>
+            {{
+              materialDistributionDetails.book_receipt_voucher.carrier_no
+                ? materialDistributionDetails.book_receipt_voucher.carrier_no
+                : "-"
+            }}
+          </td>
+          <td>
+            {{
+              materialDistributionDetails.book_receipt_voucher.delivery_note_no
+                ? materialDistributionDetails.book_receipt_voucher
+                    .delivery_note_no
+                : "-"
+            }}
+          </td>
+          <td>
+            {{
+              materialDistributionDetails.book_receipt_voucher.delivery_date
+                ? materialDistributionDetails.book_receipt_voucher.delivery_date
+                : "-"
+            }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <hr />
+  <h3 class="mb-3">Voucher Image</h3>
+  <div
+    class="voucher-img-cont"
+    *ngIf="materialDistributionDetails.material_delivery.voucher_image_url"
+  >
+    <img
+      [src]="materialDistributionDetails.material_delivery.voucher_image_url"
+      alt="voucher-image"
+      class="voucher-image"
+    />
+  </div>
+  <h5
+    class="text-center mb-5"
+    *ngIf="!materialDistributionDetails.material_delivery.voucher_image_url"
+  >
+    No images Found
+  </h5>
+  <hr class="mt-5" />
+  <h3 class="mb-3 mt-3">Material Images</h3>
+  <div
+    *ngFor="
+      let imageUrl of materialDistributionDetails.material_delivery
+        .material_image_url
+    "
+  >
+    <img
+      [src]="imageUrl"
+      alt="material-image"
+      class="voucher-image"
+      *ngIf="materialDistributionDetails.material_delivery.material_image_url"
+    />
+  </div>
+  <h5
+    class="text-center mb-5"
+    *ngIf="
+      !materialDistributionDetails.material_delivery.material_image_url
+        .length ||
+      !materialDistributionDetails.material_delivery.material_image_url
+    "
+  >
+    No images Found
+  </h5>
+</div>
