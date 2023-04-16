@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
+  MaterialDistributionDetails,
   POMaterialDistribution,
   PurchaseOrder,
   PurchaseOrders,
@@ -36,6 +37,14 @@ export class PurchaseOrdersService {
   ): Observable<POMaterialDistribution> {
     return this.http.get<POMaterialDistribution>(
       `${this.apiUrl}/v1/purchase_orders/${poId}/materials/${materialId}/material_distributions`
+    );
+  }
+
+  getMaterialDistributionDetails(
+    materialId: number
+  ): Observable<MaterialDistributionDetails> {
+    return this.http.get<MaterialDistributionDetails>(
+      `${this.apiUrl}/v1/material_distributions/${materialId}`
     );
   }
 }

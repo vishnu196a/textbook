@@ -97,7 +97,7 @@
       </h6>
     </div>
   </div>
-  <hr>
+  <hr />
 
   <h3 class="mb-3 mt-4">Material Details</h3>
 
@@ -184,7 +184,7 @@
       </h6>
     </div>
   </div>
-    <hr>
+  <hr />
   <h3 class="mb-3 mt-4">Material Distributions</h3>
 
   <div
@@ -195,6 +195,10 @@
       <thead class="bg-secondary">
         <tr>
           <th scope="col">
+            Branch Name
+            <i class="text-info bi"></i>
+          </th>
+          <th scope="col">
             Net Copies
             <i class="text-info bi"></i>
           </th>
@@ -203,16 +207,11 @@
             <i class="text-info bi"></i>
           </th>
           <th scope="col">
-            Branch Name
-            <i class="text-info bi"></i>
-          </th>
-          <th scope="col">
             Branch Address
             <i class="text-info bi"></i>
           </th>
           <th scope="col">Dl Type<i class="text-info bi"></i></th>
-          <th scope="col">District ID<i class="text-info bi"></i></th>
-          <!-- <th scope="col">Actions</th> -->
+          <th scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -220,34 +219,21 @@
           class="bg-white"
           *ngFor="let material of materialDistributionList.materialDistribution"
         >
+          <td>{{ material.branch.name }}</td>
           <td>{{ material.net_copies }}</td>
           <td>{{ material.delivery_status }}</td>
-          <td>{{ material.branch.name }}</td>
           <td>{{ material.branch.address ? material.branch.address : "-" }}</td>
           <td>{{ material.branch.dl_type }}</td>
-          <td>{{ material.branch.district_id }}</td>
-          <!-- <td>
-                <div class="d-flex gap-3">
-                  <div
-                    class="btn-view opacity-75 rounded-circle px-2 py-1 text-white fw-bolder curser-pointer"
-                    (click)="onView(po.id)"
-                  >
-                    <i class="bi bi-eye-fill"></i>
-                  </div>
-                  <div
-                    class="bg-edit opacity-75 rounded-circle px-2 py-1 text-white fw-bolder curser-pointer"
-                    (click)="onEdit(user.id)"
-                  >
-                    <svg cIcon name="cilPencil" size="md" title="Edit Icon"></svg>
-                  </div>
-                  <div
-                    class="bg-delete opacity-75 rounded-circle px-2 py-1 text-white fw-bolder curser-pointer"
-                    (click)="onDelete(user)"
-                  >
-                    <svg cIcon name="cilTrash" size="md" title="Delete Icon"></svg>
-                  </div>
-                </div>
-              </td> -->
+          <td>
+            <div class="d-flex gap-3">
+              <div
+                class="btn-view opacity-75 rounded-circle px-2 py-1 text-white fw-bolder curser-pointer"
+                (click)="onViewMaterialDistributionDetails(material.id)"
+              >
+                <i class="bi bi-eye-fill"></i>
+              </div>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -255,11 +241,11 @@
 </div>
 
 <div class="d-flex justify-content-center mt-5">
-    <div class="spinner-border" role="status" *ngIf="isLoading"></div>
-    <h5 class="text-center mt-5" *ngIf="!isLoading && !materialDistributionList">
-      No Details found
-    </h5>
-  </div>
+  <div class="spinner-border" role="status" *ngIf="isLoading"></div>
+  <h5 class="text-center mt-5" *ngIf="!isLoading && !materialDistributionList">
+    No Details found
+  </h5>
+</div>
 <h5
   *ngIf="!isLoading && !materialDistributionList.materialDistribution.length"
   class="text-center mb-5"
