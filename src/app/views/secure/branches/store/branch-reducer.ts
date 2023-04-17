@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { BranchState } from '../branches.model';
-import { actionSetPagination } from './branch-action';
+import { actionSetBranchesPagination } from './branch-action';
 
 const initialState: BranchState = {
   pagination: {
@@ -19,7 +19,7 @@ const initialState: BranchState = {
 
 export const branchReducer = createReducer(
   initialState,
-  on(actionSetPagination, (state, props) => ({
+  on(actionSetBranchesPagination, (state, props) => ({
     ...state,
     pagination: props.pagination,
   }))
