@@ -1,8 +1,13 @@
+<h3 class="mb-3">Purchase Orders</h3>
 <div class="table-responsive" *ngIf="!isLoading && poList.length">
   <table class="table table-hover">
     <thead class="bg-secondary">
-      <tr class="text-center">
-        <th scope="col">S.No</th>
+      <tr>
+        <th scope="col">
+          S No
+          <i class="text-info bi"></i>
+        </th>
+
         <th scope="col">
           PO No
           <i class="text-info bi"></i>
@@ -21,7 +26,6 @@
         </th>
         <th scope="col">Region<i class="text-info bi"></i></th>
         <th scope="col">Vendor Name<i class="text-info bi"></i></th>
-        <th scope="col">Vendor Address<i class="text-info bi"></i></th>
         <th scope="col">PO days<i class="text-info bi"></i></th>
         <th scope="col">Order Year<i class="text-info bi"></i></th>
 
@@ -33,23 +37,23 @@
       <tr class="bg-white text-center" *ngFor="let po of poList; let i = index">
         <td>{{ i + index }}</td>
         <td>{{ po.po_no }}</td>
+        <td>{{ po.id }}</td>
         <td>{{ po.po_date | date : "short" }}</td>
         <td>{{ po.status }}</td>
         <td>{{ po.godown ? po.godown : "-" }}</td>
         <td>{{ po.region ? po.region : "-" }}</td>
         <td>{{ po.vendor_name }}</td>
-        <td>{{ po.vendor_address ? po.vendor_address : "-" }}</td>
         <td>{{ po.po_days }}</td>
         <td>{{ po.order_year }}</td>
         <td>{{ po.target_date | date : "short" }}</td>
         <td>
-          <div class="d-flex gap-3 justify-content-center">
-            <div
-              class="btn-view opacity-75 rounded-circle px-2 py-1 text-white fw-bolder curser-pointer"
+          <div class="d-flex gap-3">
+            <button
+              class="btn-view opacity-75 rounded-circle px-2 py-1 text-white fw-bolder curser-pointer view-button"
               (click)="onView(po.id)"
             >
               <i class="bi bi-eye-fill"></i>
-            </div>
+            </button>
             <!-- <div
                 class="bg-edit opacity-75 rounded-circle px-2 py-1 text-white fw-bolder curser-pointer"
                 (click)="onEdit(user.id)"

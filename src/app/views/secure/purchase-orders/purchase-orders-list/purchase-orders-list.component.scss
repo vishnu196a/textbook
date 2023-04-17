@@ -1,21 +1,24 @@
-    .btn-view {
-    background: #89f3b3;
-    i {
-      color: #078439;
-    }
+.btn-view {
+  background: #89f3b3;
+  i {
+    color: #078439;
   }
-  
-  .bg-edit {
-    background: #bcbaf7;
-    svg {
-      color: #230b34;
-    }
+}
+
+.bg-edit {
+  background: #bcbaf7;
+  svg {
+    color: #230b34;
   }
-  
-  .bg-delete {
-    background: #f795a0;
-    svg {
-      color: #830000;
-    }
+}
+
+.bg-delete {
+  background: #f795a0;
+  svg {
+    color: #830000;
   }
-  
+}
+
+.view-button {
+  border: none;
+}

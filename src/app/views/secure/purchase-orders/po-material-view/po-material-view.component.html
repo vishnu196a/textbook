@@ -206,11 +206,7 @@
             Delivery status
             <i class="text-info bi"></i>
           </th>
-          <th scope="col">
-            Branch Address
-            <i class="text-info bi"></i>
-          </th>
-          <th scope="col">Dl Type<i class="text-info bi"></i></th>
+          <th scope="col">DL Type<i class="text-info bi"></i></th>
           <th scope="col">Actions</th>
         </tr>
       </thead>
@@ -222,7 +218,6 @@
           <td>{{ material.branch.name }}</td>
           <td>{{ material.net_copies }}</td>
           <td>{{ material.delivery_status }}</td>
-          <td>{{ material.branch.address ? material.branch.address : "-" }}</td>
           <td>{{ material.branch.dl_type }}</td>
           <td>
             <div class="d-flex gap-3">

@@ -5,7 +5,7 @@ import { UserService } from '../users.service';
 import { Pagination } from 'src/app/shared/models/shared.model';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducer';
-import { actionSetPagination } from '../store/users.action';
+import { actionSetUsersPagination } from '../store/users.action';
 import { BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { ModelComponent } from 'src/app/shared/components/model/model.component';
 import { ToastrService } from 'ngx-toastr';
@@ -45,9 +45,8 @@ export class UsersListComponent implements OnInit {
       (res) => {
         this.isLoading = false;
         this.users = res.users;
-        this.index = res.pagination.start_at;
         this.store.dispatch(
-          actionSetPagination({ pagination: res.pagination })
+          actionSetUsersPagination({ pagination: res.pagination })
         );
       },
       (error: ErrorResponse) => {

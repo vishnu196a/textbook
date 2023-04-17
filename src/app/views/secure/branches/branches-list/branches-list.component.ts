@@ -17,7 +17,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducer';
 import { selectFileState } from '../../file/store/file.selector';
 import { selectBranchState } from '../store/branch-selector';
-import { actionSetPagination } from '../store/branch-action';
+import { actionSetBranchesPagination } from '../store/branch-action';
 
 @Component({
   selector: 'app-branches-list',
@@ -67,7 +67,7 @@ export class BranchesListComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         this.branches = response.branches;
         this.store.dispatch(
-          actionSetPagination({ pagination: response.pagination })
+          actionSetBranchesPagination({ pagination: response.pagination })
         );
         this.index = response.pagination.start_at;
       },
