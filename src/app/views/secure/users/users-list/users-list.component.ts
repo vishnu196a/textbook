@@ -5,7 +5,7 @@ import { UserService } from '../users.service';
 import { Pagination } from 'src/app/shared/models/shared.model';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducer';
-import { actionSetPagination } from '../store/users.action';
+import { actionSetUsersPagination } from '../store/users.action';
 import { BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { ModelComponent } from 'src/app/shared/components/model/model.component';
 import { ToastrService } from 'ngx-toastr';
@@ -19,8 +19,8 @@ import { ErrorResponse } from 'src/app/shared/interceptors/error.interceptor';
 })
 export class UsersListComponent implements OnInit {
   pagination!: Pagination;
-  isLoading: boolean = false;
-  users: Users[] =[];
+  isLoading = false;
+  users: Users[] = [];
 
   constructor(
     private router: Router,
@@ -40,17 +40,20 @@ export class UsersListComponent implements OnInit {
 
   getAllUsers(page: number) {
     this.isLoading = true;
-    const observer = this.userService.getAllUsers(page).subscribe((res) => {
-      this.isLoading = false;
-      this.users = res.users;
-      this.store.dispatch(actionSetPagination({ pagination: res.pagination }));
-    },
+    const observer = this.userService.getAllUsers(page).subscribe(
+      (res) => {
+        this.isLoading = false;
+        this.users = res.users;
+        this.store.dispatch(
+          actionSetUsersPagination({ pagination: res.pagination })
+        );
+      },
       (error: ErrorResponse) => {
         this.toasterService.error(error.errors[0]);
         this.isLoading = false;
       }
     );
-    }
+  }
 
   public onEdit(id: number): void {
     this.router.navigate(['user_edit', id]);

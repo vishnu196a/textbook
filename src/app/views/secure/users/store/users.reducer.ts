@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { UserState } from '../users.model';
-import { actionSetPagination } from './users.action';
+import { actionSetUsersPagination } from './users.action';
 
 const initialState: UserState = {
   pagination: {
@@ -19,7 +19,7 @@ const initialState: UserState = {
 
 export const userReducer = createReducer(
   initialState,
-  on(actionSetPagination, (state, props) => ({
+  on(actionSetUsersPagination, (state, props) => ({
     ...state,
     pagination: props.pagination,
   }))
