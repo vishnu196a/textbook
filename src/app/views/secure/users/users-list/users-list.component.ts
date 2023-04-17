@@ -45,6 +45,7 @@ export class UsersListComponent implements OnInit {
       (res) => {
         this.isLoading = false;
         this.users = res.users;
+        this.index = res.pagination.start_at;
         this.store.dispatch(
           actionSetUsersPagination({ pagination: res.pagination })
         );
