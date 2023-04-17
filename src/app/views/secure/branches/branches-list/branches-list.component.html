@@ -7,7 +7,7 @@
 <div class="table-responsive" *ngIf="!isLoading && branches?.length">
   <table class="table table-hover">
     <thead class="bg-secondary">
-      <tr>
+      <tr class="text-center">
         <th scope="col" class="curser-pointer">
           S.No
           <i class="text-info bi"></i>
@@ -16,10 +16,10 @@
           Name
           <i class="text-info bi"></i>
         </th>
-        <th scope="col" class="curser-pointer">
+        <!-- <th scope="col" class="curser-pointer">
           Address
           <i class="text-info bi"></i>
-        </th>
+        </th> -->
         <th scope="col" class="curser-pointer">
           DL Type
           <i class="text-info bi"></i>
@@ -47,21 +47,20 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="bg-white" *ngFor="let branch of branches">
-        <td>
-          <div class="d-flex gap-2">
-            <td>{{ branch.id }}</td>
-          </div>
-        </td>
+      <tr
+        class="bg-white text-center"
+        *ngFor="let branch of branches; let i = index"
+      >
+        <td>{{ i + index }}</td>
         <td>{{ branch.name }}</td>
-        <td>{{ branch.address ? branch.address : "-" }}</td>
+        <!-- <td>{{ branch.address ? branch.address : "-" }}</td> -->
         <td>{{ branch.dl_type }}</td>
         <!-- <td>{{ branch.district_id }}</td> -->
         <td>{{ branch.district_name }}</td>
         <!-- <td>{{ branch.created_at }}</td>
         <td>{{ branch.updated_at }}</td> -->
         <td>
-          <div class="d-flex gap-3">
+          <div class="d-flex gap-3 justify-content-center">
             <div
               class="bg-edit opacity-75 rounded-circle px-2 py-1 text-white fw-bolder curser-pointer"
               (click)="onEdit(branch.id)"
@@ -82,12 +81,11 @@
 </div>
 
 <div class="d-flex justify-content-center mt-5">
-  <div class="spinner-border" role="status" *ngIf="isLoading">
-  </div>
+  <div class="spinner-border" role="status" *ngIf="isLoading"></div>
   <h5 class="text-center mt-5" *ngIf="!isLoading && !branches?.length">
     No list found
   </h5>
-</div> 
+</div>
 
 <div class="d-flex justify-content-around" *ngIf="branches?.length">
   <app-pagination

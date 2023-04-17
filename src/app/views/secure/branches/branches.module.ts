@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddBranchComponent } from './branches-add/branches-add.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { EditBranchComponent } from './branches-edit/branch-edit.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { EditBranchComponent } from './branches-edit/branch-edit.component';
     ButtonModule,
     FormsModule,
     ReactiveFormsModule,
+    NgSelectModule,
   ],
 })
 export class BranchesModule {}

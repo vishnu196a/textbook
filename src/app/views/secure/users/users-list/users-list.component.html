@@ -6,7 +6,11 @@
 <div class="table-responsive" *ngIf="!isLoading && users?.length">
   <table class="table table-hover">
     <thead class="bg-secondary">
-      <tr>
+      <tr class="text-center">
+        <th scope="col" class="curser-pointer">
+          S.No
+          <i class="text-info bi"></i>
+        </th>
         <th scope="col" class="curser-pointer">
           Id
           <i class="text-info bi"></i>
@@ -37,7 +41,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="bg-white" *ngFor="let user of users">
+      <tr
+        class="bg-white text-center"
+        *ngFor="let user of users; let i = index"
+      >
+        <td>{{ i + index }}</td>
         <td>{{ user.id }}</td>
         <td>
           {{ user.first_name }} {{ user.last_name ? user.last_name : "" }}
@@ -49,7 +57,7 @@
         <!-- <td>{{ user.created_at | date : "short" }}</td>
         <td>{{ user.updated_at | date : "short" }}</td> -->
         <td>
-          <div class="d-flex gap-3">
+          <div class="d-flex gap-3 justify-content-center">
             <!-- <div
               class="btn-view opacity-75 rounded-circle px-2 py-1 text-white fw-bolder curser-pointer"
               (click)="onView(user.email)"
@@ -76,12 +84,11 @@
 </div>
 
 <div class="d-flex justify-content-center mt-5">
-  <div class="spinner-border" role="status" *ngIf="isLoading">
-  </div>
+  <div class="spinner-border" role="status" *ngIf="isLoading"></div>
   <h5 class="text-center mt-5" *ngIf="!isLoading && !users?.length">
     No list found
   </h5>
-</div> 
+</div>
 
 <div class="d-flex" *ngIf="users?.length">
   <app-pagination

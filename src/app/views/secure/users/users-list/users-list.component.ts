@@ -19,8 +19,9 @@ import { ErrorResponse } from 'src/app/shared/interceptors/error.interceptor';
 })
 export class UsersListComponent implements OnInit {
   pagination!: Pagination;
-  isLoading: boolean = false;
-  users: Users[] =[];
+  isLoading = false;
+  users: Users[] = [];
+  index!: number;
 
   constructor(
     private router: Router,
@@ -40,17 +41,21 @@ export class UsersListComponent implements OnInit {
 
   getAllUsers(page: number) {
     this.isLoading = true;
-    const observer = this.userService.getAllUsers(page).subscribe((res) => {
-      this.isLoading = false;
-      this.users = res.users;
-      this.store.dispatch(actionSetPagination({ pagination: res.pagination }));
-    },
+    const observer = this.userService.getAllUsers(page).subscribe(
+      (res) => {
+        this.isLoading = false;
+        this.users = res.users;
+        this.index = res.pagination.start_at;
+        this.store.dispatch(
+          actionSetPagination({ pagination: res.pagination })
+        );
+      },
       (error: ErrorResponse) => {
         this.toasterService.error(error.errors[0]);
         this.isLoading = false;
       }
     );
-    }
+  }
 
   public onEdit(id: number): void {
     this.router.navigate(['user_edit', id]);

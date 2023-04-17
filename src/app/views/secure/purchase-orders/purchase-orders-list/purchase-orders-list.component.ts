@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PurchaseOrdersService } from '../purchase-orders.service';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorResponse } from 'src/app/shared/interceptors/error.interceptor';
-import {  PurchaseOrder } from '../purchase-orders.model';
+import { PurchaseOrder } from '../purchase-orders.model';
 import { Pagination } from 'src/app/shared/models/shared.model';
 import { Store } from '@ngrx/store';
 import { selectPOState } from '../store/po.selector';
@@ -16,34 +16,35 @@ import { Router } from '@angular/router';
   styleUrls: ['./purchase-orders-list.component.scss'],
 })
 export class PurchaseOrdersListComponent implements OnInit {
-  poList: PurchaseOrder[] = []
+  poList: PurchaseOrder[] = [];
   pagination!: Pagination;
-  isLoading: boolean = false;
+  isLoading = false;
+  index!: number;
   constructor(
     private poService: PurchaseOrdersService,
     private toastrService: ToastrService,
     private store: Store<AppState>,
     private router: Router
   ) {
-    this.store.select(selectPOState).subscribe(
-      (res) => {
-        this.pagination = res.pagination;
-      }
-    )
-
+    this.store.select(selectPOState).subscribe((res) => {
+      this.pagination = res.pagination;
+    });
   }
 
   ngOnInit(): void {
     this.getAllPO(this.pagination.current_page);
   }
-  
+
   getAllPO(page: number): void {
     this.isLoading = true;
     this.poService.getAllPO(page).subscribe(
       (res) => {
         this.isLoading = false;
-        this.poList = res.purchase_orders
-        this.store.dispatch(actionSetPoPagination({pagination: res.pagination}))
+        this.poList = res.purchase_orders;
+        this.index = res.pagination.start_at;
+        this.store.dispatch(
+          actionSetPoPagination({ pagination: res.pagination })
+        );
       },
       (error: ErrorResponse) => {
         this.isLoading = false;
@@ -57,6 +58,6 @@ export class PurchaseOrdersListComponent implements OnInit {
   }
 
   onView(id: number) {
-    this.router.navigateByUrl(`purchase_order/view/${id}`)
+    this.router.navigateByUrl(`purchase_order/view/${id}`);
   }
 }
