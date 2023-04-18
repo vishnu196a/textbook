@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { actionSetPoPagination } from './po.action';
+import { actionSetPoListSearchTerm, actionSetPoPagination, actionSetPoStatus } from './po.action';
 import { POState } from '../purchase-orders.model';
 
 const initialState: POState = {
@@ -15,6 +15,8 @@ const initialState: POState = {
     is_last_page: true,
     is_first_page: true,
   },
+  searchTerm: '',
+  poStatus:'All'
 };
 
 export const poReducer = createReducer(
@@ -22,5 +24,20 @@ export const poReducer = createReducer(
   on(actionSetPoPagination, (state, props) => ({
     ...state,
     pagination: props.pagination,
-  }))
+  })),
+  on(actionSetPoListSearchTerm, (state, props) => {
+    // console.log(state, props)
+    return ({
+      ...state,
+      searchTerm: props.searchTerm
+    })
+  }),
+  on(actionSetPoStatus, (state, props) => {
+    console.log(state, props)
+    return ({
+      ...state,
+      poStatus: props.poStatus
+    })
+  }),
+
 );

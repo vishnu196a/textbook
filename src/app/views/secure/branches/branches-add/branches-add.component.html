@@ -139,15 +139,19 @@
           </div>
           <div class="form-group col-12 col-md-6 mt-4">
             <label for="district_id"
-              >District Id <span class="text-danger">*</span></label
+              >District Name<span class="text-danger">*</span></label
             >
-            <input
-              type="number"
-              class="form-control"
-              id="district_id"
-              placeholder="Enter DistrictId"
-              formControlName="district_id"
-            />
+            <ng-select
+            [items]="branchesList"
+            [clearable]="false"
+            [searchable]="true"
+            bindValue="id"
+            bindLabel="name"
+            placeholder="Select District"
+            formControlName="district_id"
+            notFoundText="No branches found"
+          >
+          </ng-select>
             <div
               *ngIf="
                 formControls['district_id'].touched &&
@@ -157,7 +161,7 @@
               <small
                 class="text-danger"
                 *ngIf="formControls['district_id'].errors?.['required']"
-                >DistrictId is required</small
+                >District name is required</small
               >
             </div>
           </div>

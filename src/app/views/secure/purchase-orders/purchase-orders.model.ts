@@ -54,6 +54,8 @@ export interface MaterialDistribution {
 
 export interface POState {
   pagination: Pagination;
+  searchTerm: string;
+  poStatus: string;
 }
 
 type PO = Omit<PurchaseOrder, 'Material'>;

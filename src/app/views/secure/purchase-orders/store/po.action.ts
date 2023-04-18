@@ -5,3 +5,13 @@ export const actionSetPoPagination = createAction(
   '[PO] Purchase Orders State',
   props<{ pagination: Pagination }>()
 );
+
+export const actionSetPoListSearchTerm = createAction(
+  '[PO] Set PO List SearchTerm',
+  props<{searchTerm: string}>()
+)
+
+export const actionSetPoStatus = createAction(
+  '[PO] Set PO List Search Status',
+  props<{poStatus: string}>()
+)

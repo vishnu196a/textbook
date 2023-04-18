@@ -9,6 +9,7 @@ import {
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { SuccessMessage } from 'src/app/shared/models/shared.model';
+import { BranchesList } from '../users/users.model';
 
 @Injectable({
   providedIn: 'root',
@@ -46,6 +47,12 @@ export class BranchService {
     return this.httpClient.put<AddBranch>(
       `${this.apiUrl}/v1/branches/${branchId}`,
       branch
+    );
+  }
+
+  getDistrictNames(): Observable<BranchesList[]> {
+    return this.httpClient.get<BranchesList[]>(
+      `${this.apiUrl}/v1/districts/ids_and_names`
     );
   }
 

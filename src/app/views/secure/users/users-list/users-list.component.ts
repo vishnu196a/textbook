@@ -21,6 +21,7 @@ export class UsersListComponent implements OnInit {
   pagination!: Pagination;
   isLoading = false;
   users: Users[] = [];
+  serialNo!: number;
 
   constructor(
     private router: Router,
@@ -47,6 +48,7 @@ export class UsersListComponent implements OnInit {
         this.store.dispatch(
           actionSetUsersPagination({ pagination: res.pagination })
         );
+        this.serialNo = this.pagination.start_at;
       },
       (error: ErrorResponse) => {
         this.toasterService.error(error.errors[0]);
