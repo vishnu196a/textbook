@@ -15,6 +15,7 @@ import { Subscription } from 'rxjs';
 import { ChangePwdRequestParams } from '../authentication.model';
 import { ErrorResponse } from 'src/app/shared/interceptors/error.interceptor';
 import { AuthenticationService } from '../authentication.service';
+import { passwordValidator } from 'src/app/shared/components/validators/password-validators';
 
 @Component({
   templateUrl: './change-password.component.html',
@@ -40,8 +41,15 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.changePwdForm = this.formBuilder.group(
       {
-        currentPassword: ['', [Validators.required, Validators.minLength(6)]],
-        newPassword: ['', [Validators.required, Validators.minLength(6)]],
+        currentPassword: ['', [Validators.required]],
+        newPassword: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(6),
+            passwordValidator.bind(this),
+          ],
+        ],
         confirmPassword: ['', Validators.required],
       },
       {
