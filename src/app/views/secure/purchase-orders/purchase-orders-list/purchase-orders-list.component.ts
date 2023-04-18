@@ -36,13 +36,12 @@ export class PurchaseOrdersListComponent implements OnInit {
     private router: Router
   ) {
     this.store.select(selectPOState).subscribe((res) => {
-      console.log('poStatus', res.poStatus, 'searchTerm', res.searchTerm);
       this.pagination = res.pagination;
       this.searchKeyWord = res.searchTerm;
       this.selectedPOStatus = res.poStatus;
     });
 
-    this.onSearchKeyWordChange
+    this.onSearchKeyWordChange 
       .pipe(debounceTime(1000), distinctUntilChanged())
       .subscribe((searchValue) => {
         this.store.dispatch(actionSetPoListSearchTerm({ searchTerm: searchValue }));
