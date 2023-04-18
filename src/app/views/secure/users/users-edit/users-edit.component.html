@@ -17,7 +17,7 @@
             </button>
           </div>
           <div class="col-12 col-sm-auto order-0 order-sm-1">
-            <h2 class="text-center">Update User Details</h2>
+            <h2 class="text-center">Update User</h2>
           </div>
           <div class="col order-2 text-end">
             <app-loading-button
@@ -69,6 +69,7 @@
               class="form-control"
               placeholder="Enter First Name"
               appAlphaOnly
+              onkeypress="return /[a-zA-Z]/i.test(event.key)"
             />
             <div
               *ngIf="
@@ -109,6 +110,7 @@
               class="form-control"
               placeholder="Enter Last Name"
               appAlphaOnly
+              onkeypress="return /[a-zA-Z]/i.test(event.key)"
             />
             <div
               *ngIf="
@@ -135,7 +137,7 @@
               >
             </div>
           </div>
-          <div class="form-group col-12 col-md-6 mt-4">
+          <div class="form-group col-12 col-md-6 mt-4 opacity-75">
             <label for="email"
               >Email Address <span class="text-danger">*</span></label
             >
@@ -145,9 +147,10 @@
               id="email"
               readonly
               formControlName="email"
+              name="email"
             />
           </div>
-          <div class="form-group col-12 col-md-6 mt-4">
+          <div class="form-group col-12 col-md-6 mt-4 opacity-75">
             <label for="vendor"
               >Branch Name <span class="text-danger">*</span></label
             >

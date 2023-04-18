@@ -23,14 +23,30 @@
 
 .bg-edit {
   background: #bcbaf7;
+  transition: all 0.2s ease-in-out;
   svg {
     color: #230b34;
   }
 }
+.bg-edit:hover {
+  background-color: #1e7bc6;
+  cursor: pointer;
+}
+.bg-edit:hover svg {
+  color: white;
+}
 
 .bg-delete {
   background: #f795a0;
+  transition: all 0.2s ease-in-out;
   svg {
     color: #830000;
   }
+}
+.bg-delete:hover {
+  background-color: red;
+  cursor: pointer;
+}
+.bg-delete:hover svg {
+  color: white;
 }
