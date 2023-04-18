@@ -14,7 +14,7 @@ import {
 } from '../store/po.action';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-purchase-orders-list',
@@ -24,8 +24,8 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 export class PurchaseOrdersListComponent implements OnInit {
   poList: PurchaseOrder[] = [];
   pagination!: Pagination;
-  isLoading: boolean = false;
-  searchKeyWord: string = '';
+  isLoading = false;
+  searchKeyWord = '';
   selectedPOStatus!: string;
   onSearchKeyWordChange = new Subject<string>();
   serialNo!: number;
@@ -41,17 +41,19 @@ export class PurchaseOrdersListComponent implements OnInit {
       this.selectedPOStatus = res.poStatus;
     });
 
-    this.onSearchKeyWordChange 
+    this.onSearchKeyWordChange
       .pipe(debounceTime(1000), distinctUntilChanged())
       .subscribe((searchValue) => {
-        this.store.dispatch(actionSetPoListSearchTerm({ searchTerm: searchValue }));
+        this.store.dispatch(
+          actionSetPoListSearchTerm({ searchTerm: searchValue })
+        );
         this.getAllPO(1, searchValue, this.selectedPOStatus);
       });
   }
 
   ngOnInit(): void {
     this.getAllPO(
-    this.pagination.current_page,
+      this.pagination.current_page,
       this.searchKeyWord,
       this.selectedPOStatus
     );
@@ -80,7 +82,7 @@ export class PurchaseOrdersListComponent implements OnInit {
   }
 
   onView(id: number) {
-    this.router.navigateByUrl(`purchase_order/view/${id}`);
+    this.router.navigateByUrl(`purchase_orders/view/${id}`);
   }
 
   onFilterPOStatus() {

@@ -181,7 +181,8 @@
       <h6>
         Target Date:<span class="text-primary">
           {{
-            materialDistributionList.purchaseOrder.target_date | date : "short"
+            materialDistributionList.purchaseOrder.target_date
+              | date : "dd/MM/yyyy"
           }}</span
         >
       </h6>

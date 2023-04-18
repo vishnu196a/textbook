@@ -58,7 +58,7 @@ export class UsersListComponent implements OnInit {
   }
 
   public onEdit(id: number): void {
-    this.router.navigate(['user_edit', id]);
+    this.router.navigate(['users', 'edit', id]);
   }
 
   public onPageChange(page: number) {

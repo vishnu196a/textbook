@@ -14,7 +14,7 @@ export class POViewComponent implements OnInit {
   purchaseOrder!: PurchaseOrder;
   materialList: Material[] = [];
   poId!: number;
-  isLoading: boolean = false;
+  isLoading = false;
   constructor(
     private poService: PurchaseOrdersService,
     private activatedRoute: ActivatedRoute,
@@ -43,11 +43,11 @@ export class POViewComponent implements OnInit {
     );
   }
 
-  onBack(): void{
+  onBack(): void {
     this.router.navigate(['purchase_orders']);
   }
 
   onViewMaterialDistribution(poId: number, materialId: number): void {
-    this.router.navigate(['purchase_order/view', poId, materialId]);  
+    this.router.navigate(['purchase_orders/view', poId, materialId]);
   }
 }
