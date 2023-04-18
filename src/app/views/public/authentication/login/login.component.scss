@@ -6,11 +6,18 @@
   button {
     border: none;
     border-radius: 29px;
-    padding: 2% 0;
+    background-color: #303f9f;
+    border-color: #303f9f;
+    color: #ffff;
     font-size: 18px;
+    max-width: 150px;
   }
   a {
     color: #000;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
   }
   .carousel-cont {
     background-color: #e2f1ff;
@@ -22,6 +29,14 @@
   .carousel-cont {
     width: 40%;
     color: #666666e5;
+  }
+  .icon-border-radius {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+  }
+  .input-border-radius {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
   }
 }
 

@@ -12,6 +12,7 @@ import { REGEX_PATTERN } from 'src/app/shared/constants/constants';
 import { ErrorResponse } from 'src/app/shared/interceptors/error.interceptor';
 import { UserResponse } from '../authentication.model';
 import { AuthenticationService } from '../authentication.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   templateUrl: './login.component.html',
@@ -22,10 +23,12 @@ export class LoginComponent implements OnDestroy {
   subscriptions = new Subscription();
   errors: string[] = [];
   isLoading = false;
+  isShowPassword = true;
 
   constructor(
     formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
+    private toasterService: ToastrService,
     private router: Router
   ) {
     this.loginForm = formBuilder.group({
@@ -41,6 +44,10 @@ export class LoginComponent implements OnDestroy {
     return this.loginForm.controls;
   }
 
+  passwordIconToggle(): void {
+    this.isShowPassword = !this.isShowPassword;
+  }
+
   login(): void {
     if (this.loginForm.valid) {
       this.isLoading = true;
@@ -51,10 +58,11 @@ export class LoginComponent implements OnDestroy {
           (user: HttpResponse<UserResponse>) => {
             this.isLoading = false;
             this.router.navigateByUrl('purchase_orders');
+            this.toasterService.success('Login Successful');
           },
           (error: ErrorResponse) => {
             this.isLoading = false;
-            this.errors = error.errors;
+            this.toasterService.error(error.errors[0]);
           }
         );
       this.subscriptions.add(observer);
