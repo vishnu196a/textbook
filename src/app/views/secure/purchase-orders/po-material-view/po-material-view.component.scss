@@ -1,6 +1,14 @@
 .btn-view {
   background: #89f3b3;
+  transition: all 0.2s ease-in-out;
   i {
     color: #078439;
   }
+}
+.curser-pointer:hover {
+  background-color: #078439;
+  cursor: pointer;
+}
+.curser-pointer:hover i {
+  color: white;
 }

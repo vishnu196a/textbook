@@ -56,15 +56,17 @@
           <div class="d-flex gap-3 justify-content-center">
             <div
               class="bg-edit opacity-75 rounded-circle px-2 py-1 text-white fw-bolder curser-pointer"
+              title="Edit"
               (click)="onEdit(branch.id)"
             >
-              <svg cIcon name="cilPencil" size="md" title="Edit Icon"></svg>
+              <svg cIcon name="cilPencil" size="md"></svg>
             </div>
             <div
               class="bg-delete opacity-75 rounded-circle px-2 py-1 text-white fw-bolder curser-pointer"
+              title="Delete"
               (click)="onDelete(branch)"
             >
-              <svg cIcon name="cilTrash" size="md" title="Delete Icon"></svg>
+              <svg cIcon name="cilTrash" size="md"></svg>
             </div>
           </div>
         </td>
