@@ -79,7 +79,7 @@ export class UsersListComponent implements OnInit {
         this.userService.deleteUser(user.id).subscribe({
           next: () => {
             this.onPageChange(1);
-            this.toasterService.success('User has been deleted');
+            this.toasterService.success('User deleted successfully');
           },
           error: () => {
             this.toasterService.error('Oops! Something went wrong');
