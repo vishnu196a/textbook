@@ -58,6 +58,7 @@ export class LoginComponent implements OnDestroy {
           (user: HttpResponse<UserResponse>) => {
             this.isLoading = false;
             this.router.navigateByUrl('purchase_orders');
+            this.toasterService.success('Login Successful');
           },
           (error: ErrorResponse) => {
             this.isLoading = false;

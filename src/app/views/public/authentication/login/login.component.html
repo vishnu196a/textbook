@@ -75,7 +75,8 @@
           class="col-7 col-lg-5"
           [disabled]="loginForm.invalid"
         >
-          Sign in
+          <span *ngIf="!isLoading">Sign in</span>
+          <span *ngIf="isLoading">Signing in</span>
           <c-spinner color="info" size="sm" *ngIf="isLoading"></c-spinner>
         </button>
         <a class="align-self-center" routerLink="/forgot_password"
