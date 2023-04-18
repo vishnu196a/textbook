@@ -14,6 +14,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { BranchService } from '../branches.service';
 import { BranchForm } from '../branches.model';
+import { BranchesList } from '../../users/users.model';
+import { ErrorResponse } from 'src/app/shared/interceptors/error.interceptor';
 
 @Component({
   templateUrl: './branches-add.component.html',
@@ -23,6 +25,7 @@ export class AddBranchComponent implements OnInit, OnDestroy {
   isLoading!: boolean;
   hasValidationError!: boolean;
   validationErrors!: string[];
+  branchesList: BranchesList[] = [];
   private subscriptions = new Subscription();
 
   constructor(
@@ -34,6 +37,7 @@ export class AddBranchComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initializeForm();
+    this.getDistrictNames();
   }
 
   ngOnDestroy(): void {
@@ -72,6 +76,17 @@ export class AddBranchComponent implements OnInit, OnDestroy {
 
   get formControls(): { [key: string]: AbstractControl } {
     return this.addUserForm.controls;
+  }
+
+  getDistrictNames(): void {
+    this.branchService.getDistrictNames().subscribe(
+      (response) => {
+        this.branchesList = response;
+      },
+      (error: ErrorResponse) => {
+        this.toasterService.error(error.errors[0]);
+      }
+    );
   }
 
   onFormSubmit(): void {

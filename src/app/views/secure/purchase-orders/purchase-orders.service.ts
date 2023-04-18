@@ -16,9 +16,19 @@ export class PurchaseOrdersService {
   constructor(private http: HttpClient) {}
   readonly apiUrl = environment.apiUrl;
 
-  getAllPO(page: number): Observable<PurchaseOrders> {
+  getAllPO(
+    page: number,
+    searchTerm?: string,
+    poStatus?: string
+  ): Observable<PurchaseOrders> {
     let params = new HttpParams();
     params = params.append('page', page);
+    if (searchTerm) {
+      params = params.append('q', searchTerm);
+    }
+    if (poStatus !== 'All' && poStatus) {
+      params = params.append('status', poStatus);
+    }
     return this.http.get<PurchaseOrders>(
       `${this.apiUrl}/v1/admins/purchase_orders`,
       { params }

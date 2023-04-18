@@ -32,6 +32,7 @@ export class BranchesListComponent implements OnInit, OnDestroy {
   sortedColumn: BranchListSortColumn | undefined;
   private subscription: Subscription;
   isLoading = false;
+  serialNo!: number;
 
   constructor(
     private router: Router,
@@ -68,6 +69,7 @@ export class BranchesListComponent implements OnInit, OnDestroy {
         this.store.dispatch(
           actionSetBranchesPagination({ pagination: response.pagination })
         );
+        this.serialNo = this.pagination.start_at;
       },
       (error: ErrorResponse) => {
         this.isLoading = false;
