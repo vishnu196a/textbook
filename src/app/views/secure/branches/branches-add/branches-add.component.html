@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
   <form
-    [formGroup]="addUserForm"
+    [formGroup]="addBranchForm"
     (submit)="onFormSubmit()"
     class="mt-3 w-75"
     autocomplete="off"
@@ -27,7 +27,7 @@
           </div>
           <div class="col order-2 text-end">
             <app-loading-button
-              [disabled]="addUserForm.invalid"
+              [disabled]="addBranchForm.invalid"
               [buttonText]="'Add Branch'"
               [title]="'Click to add branch'"
               [isLoading]="isLoading"
@@ -102,7 +102,7 @@
             >
               <small
                 class="text-danger"
-                *ngIf="formControls['address'].errors?.['required']"
+                *ngIf="formControls['address'].errors?.['required'] || formControls['address'].errors?.['pattern']"
                 >address is required</small
               >
               <small
@@ -132,7 +132,7 @@
             >
               <small
                 class="text-danger"
-                *ngIf="formControls['dl_type'].errors?.['required']"
+                *ngIf="formControls['dl_type'].errors?.['required'] || formControls['dl_type'].errors?.['pattern']"
                 >DLtype is required</small
               >
             </div>
@@ -142,16 +142,16 @@
               >District Name<span class="text-danger">*</span></label
             >
             <ng-select
-            [items]="branchesList"
-            [clearable]="false"
-            [searchable]="true"
-            bindValue="id"
-            bindLabel="name"
-            placeholder="Select District"
-            formControlName="district_id"
-            notFoundText="No branches found"
-          >
-          </ng-select>
+              [items]="branchesList"
+              [clearable]="false"
+              [searchable]="true"
+              bindValue="id"
+              bindLabel="name"
+              placeholder="Select District"
+              formControlName="district_id"
+              notFoundText="No branches found"
+            >
+            </ng-select>
             <div
               *ngIf="
                 formControls['district_id'].touched &&

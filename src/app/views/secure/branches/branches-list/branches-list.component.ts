@@ -95,7 +95,7 @@ export class BranchesListComponent implements OnInit, OnDestroy {
         this.branchService.deleteUser(branch.id).subscribe({
           next: () => {
             this.onPageChange(1);
-            this.toasterService.success('Branch has been deleted');
+            this.toasterService.success('Branch deleted successfully');
           },
           error: () => {
             this.toasterService.error('Oops! Something went wrong');

@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorResponse } from 'src/app/shared/interceptors/error.interceptor';
 import { AuthenticationService } from '../authentication.service';
-import { REGEX_PATTERN } from 'src/app/shared/constants/constants';
+import { REGEX_PATTERNS } from 'src/app/shared/constants/constants';
 
 @Component({
   selector: 'app-forgot-password',
@@ -34,7 +34,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     this.forgotPasswordForm = this.formBuilder.group({
       email: [
         null,
-        [Validators.required, Validators.pattern(REGEX_PATTERN.email)],
+        [Validators.required, Validators.pattern(REGEX_PATTERNS.email)],
       ],
     });
   }

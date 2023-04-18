@@ -1,32 +1,31 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-
 import {
   AbstractControl,
   FormBuilder,
   FormGroup,
   Validators,
 } from '@angular/forms';
-
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { ToastrService } from 'ngx-toastr';
-
 import { Subscription } from 'rxjs';
 import { BranchService } from '../branches.service';
 import { AddBranch, BranchForm } from '../branches.model';
 import { ErrorResponse } from 'src/app/shared/interceptors/error.interceptor';
 import { FormStateService } from 'src/app/shared/services/form-state.service';
+import { REGEX_PATTERNS } from 'src/app/shared/constants/constants';
+import { BranchesList } from '../../users/users.model';
 
 @Component({
   templateUrl: './branch-edit.component.html',
 })
 export class EditBranchComponent implements OnInit, OnDestroy {
-  editUserForm!: FormGroup;
+  editBranchForm!: FormGroup;
   isLoading!: boolean;
   hasValidationError!: boolean;
   validationErrors!: string[];
   hasBranch!: boolean;
   initialLoading!: boolean;
+  districtNamesList: BranchesList[] = [];
   private subscriptions = new Subscription();
   private branchId!: number;
 
@@ -43,6 +42,10 @@ export class EditBranchComponent implements OnInit, OnDestroy {
     this.initializeForm();
     this.branchId = this.route.snapshot.params['id'];
     this.getUserAndInitializeForm();
+    const observer = this.branchService.getDistrictNames().subscribe((res) => {
+      this.districtNamesList = res;
+    });
+    this.subscriptions.add(observer);
   }
 
   ngOnDestroy(): void {
@@ -50,7 +53,7 @@ export class EditBranchComponent implements OnInit, OnDestroy {
   }
 
   initializeForm(): void {
-    this.editUserForm = this.formBuilder.group({
+    this.editBranchForm = this.formBuilder.group({
       name: [
         null,
         [
@@ -59,13 +62,21 @@ export class EditBranchComponent implements OnInit, OnDestroy {
           Validators.maxLength(100),
         ],
       ],
-      address: [null, [Validators.required, Validators.minLength(1)]],
+      address: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(1),
+          Validators.pattern(REGEX_PATTERNS.whiteSpace),
+        ],
+      ],
       dl_type: [
         null,
         [
           Validators.required,
           Validators.minLength(1),
           Validators.maxLength(100),
+          Validators.pattern(REGEX_PATTERNS.whiteSpace),
         ],
       ],
       district_id: [null, [Validators.required]],
@@ -77,7 +88,7 @@ export class EditBranchComponent implements OnInit, OnDestroy {
       .getBranchDetails(this.branchId)
       .subscribe(
         (branch: AddBranch) => {
-          this.editUserForm.patchValue({
+          this.editBranchForm.patchValue({
             name: branch.name,
             address: branch.address,
             dl_type: branch.dl_type,
@@ -85,7 +96,7 @@ export class EditBranchComponent implements OnInit, OnDestroy {
           });
           this.hasBranch = true;
           this.initialLoading = false;
-          this.formState.isFormPristine(this.editUserForm);
+          this.formState.isFormPristine(this.editBranchForm);
         },
         (error: ErrorResponse) => {
           this.toasterService.error(error.errors[0]);
@@ -97,17 +108,17 @@ export class EditBranchComponent implements OnInit, OnDestroy {
   }
 
   get formControls(): { [key: string]: AbstractControl } {
-    return this.editUserForm.controls;
+    return this.editBranchForm.controls;
   }
 
   onFormSubmit(): void {
-    if (this.editUserForm.valid) {
+    if (this.editBranchForm.valid) {
       this.isLoading = true;
       const branches: BranchForm = {
-        name: this.editUserForm.value.name,
-        address: this.editUserForm.value.address,
-        dl_type: this.editUserForm.value.dl_type,
-        district_id: this.editUserForm.value.district_id,
+        name: this.editBranchForm.value.name,
+        address: this.editBranchForm.value.address.trim(),
+        dl_type: this.editBranchForm.value.dl_type.trim(),
+        district_id: this.editBranchForm.value.district_id,
       };
 
       const observer = this.branchService
