@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { REGEX_PATTERN } from 'src/app/shared/constants/constants';
+import { REGEX_PATTERNS } from 'src/app/shared/constants/constants';
 import { ErrorResponse } from 'src/app/shared/interceptors/error.interceptor';
 import { UserResponse } from '../authentication.model';
 import { AuthenticationService } from '../authentication.service';
@@ -34,7 +34,7 @@ export class LoginComponent implements OnDestroy {
     this.loginForm = formBuilder.group({
       email: [
         null,
-        [Validators.required, Validators.pattern(REGEX_PATTERN.email)],
+        [Validators.required, Validators.pattern(REGEX_PATTERNS.email)],
       ],
       password: [null, Validators.required],
     });

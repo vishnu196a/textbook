@@ -6,22 +6,20 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-
 import { Router } from '@angular/router';
-
 import { ToastrService } from 'ngx-toastr';
-
 import { Subscription } from 'rxjs';
 import { BranchService } from '../branches.service';
 import { BranchForm } from '../branches.model';
 import { BranchesList } from '../../users/users.model';
 import { ErrorResponse } from 'src/app/shared/interceptors/error.interceptor';
+import { REGEX_PATTERNS } from 'src/app/shared/constants/constants';
 
 @Component({
   templateUrl: './branches-add.component.html',
 })
 export class AddBranchComponent implements OnInit, OnDestroy {
-  addUserForm!: FormGroup;
+  addBranchForm!: FormGroup;
   isLoading!: boolean;
   hasValidationError!: boolean;
   validationErrors!: string[];
@@ -45,37 +43,38 @@ export class AddBranchComponent implements OnInit, OnDestroy {
   }
 
   initializeForm(): void {
-    this.addUserForm = this.formBuilder.group({
+    this.addBranchForm = this.formBuilder.group({
       name: [
         null,
-
         [
           Validators.required,
-
           Validators.minLength(1),
-
           Validators.maxLength(100),
         ],
       ],
-
-      address: [null, [Validators.required, Validators.minLength(1)]],
-
+      address: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(1),
+          Validators.pattern(REGEX_PATTERNS.whiteSpace),
+        ],
+      ],
       dl_type: [
         null,
-
         [
           Validators.required,
           Validators.minLength(1),
           Validators.maxLength(100),
+          Validators.pattern(REGEX_PATTERNS.whiteSpace),
         ],
       ],
-
       district_id: [null, [Validators.required]],
     });
   }
 
   get formControls(): { [key: string]: AbstractControl } {
-    return this.addUserForm.controls;
+    return this.addBranchForm.controls;
   }
 
   getDistrictNames(): void {
@@ -90,13 +89,13 @@ export class AddBranchComponent implements OnInit, OnDestroy {
   }
 
   onFormSubmit(): void {
-    if (this.addUserForm.valid) {
+    if (this.addBranchForm.valid) {
       this.isLoading = true;
       const branches: BranchForm = {
-        name: this.addUserForm.value.name,
-        address: this.addUserForm.value.address,
-        dl_type: this.addUserForm.value.dl_type,
-        district_id: this.addUserForm.value.district_id,
+        name: this.addBranchForm.value.name,
+        address: this.addBranchForm.value.address.trim(),
+        dl_type: this.addBranchForm.value.dl_type.trim(),
+        district_id: this.addBranchForm.value.district_id,
       };
 
       const observer = this.branchService.addBranch(branches).subscribe(
