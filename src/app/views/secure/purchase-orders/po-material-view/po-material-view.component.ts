@@ -55,7 +55,7 @@ export class POMaterialViewComponent implements OnInit {
 
   onViewMaterialDistributionDetails(distributionId: number) {
     this.router.navigate([
-      'purchase_order/view/',
+      'purchase_orders/view/',
       this.poId,
       this.materialId,
       distributionId,

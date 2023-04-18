@@ -10,11 +10,11 @@ const routes: Routes = [
     component: BranchesListComponent,
   },
   {
-    path: 'branch/add',
+    path: 'branches/add',
     component: AddBranchComponent,
   },
   {
-    path: 'branch/edit/:id',
+    path: 'branches/edit/:id',
     component: EditBranchComponent,
   },
 ];

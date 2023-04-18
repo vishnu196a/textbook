@@ -11,15 +11,15 @@ const routes: Routes = [
     component: PurchaseOrdersListComponent,
   },
   {
-    path: 'purchase_order/view/:id',
+    path: 'purchase_orders/view/:id',
     component: POViewComponent,
   },
   {
-    path: 'purchase_order/view/:po_id/:material_id',
+    path: 'purchase_orders/view/:po_id/:material_id',
     component: POMaterialViewComponent,
   },
   {
-    path: 'purchase_order/view/:po_id/:material_id/:distribution_id',
+    path: 'purchase_orders/view/:po_id/:material_id/:distribution_id',
     component: DistributionDetailsComponent,
   },
 ];

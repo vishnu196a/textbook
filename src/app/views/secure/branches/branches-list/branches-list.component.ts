@@ -80,7 +80,7 @@ export class BranchesListComponent implements OnInit, OnDestroy {
   }
 
   public onEdit(branchId: number): void {
-    this.router.navigate(['/branch/edit', branchId]);
+    this.router.navigate(['/branches/edit', branchId]);
   }
 
   public onDelete(branch: Branches): void {
@@ -106,7 +106,6 @@ export class BranchesListComponent implements OnInit, OnDestroy {
   }
 
   public onPageChange(page: number) {
-    // this.store.dispatch(actionUpdatePage({ page: page }));
     this.loadBranches(page);
   }
 }
