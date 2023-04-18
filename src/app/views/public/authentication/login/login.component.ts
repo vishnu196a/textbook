@@ -44,7 +44,7 @@ export class LoginComponent implements OnDestroy {
     return this.loginForm.controls;
   }
 
-  changePasswordInput(): void {
+  passwordIconToggle(): void {
     this.isShowPassword = !this.isShowPassword;
   }
 

@@ -41,7 +41,7 @@
             <i
               class="input-group-text fa h-100 d-flex justify-content-center align-items-center icon-border-radius"
               [ngClass]="isShowPassword ? 'fa-eye-slash' : 'fa-eye'"
-              (click)="changePasswordInput()"
+              (click)="passwordIconToggle()"
               aria-hidden="true"
               data-toggle="tooltip"
               [title]="isShowPassword ? 'Hide password' : 'Show password'"
