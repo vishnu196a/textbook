@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HeaderComponent } from '@coreui/angular';
 import { Store } from '@ngrx/store';
+import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { AppState } from 'src/app/app.reducer';
 import { UserDetails } from 'src/app/views/public/authentication/authentication.model';
@@ -24,6 +25,7 @@ export class DefaultHeaderComponent
   constructor(
     private authenticationService: AuthenticationService,
     private store: Store<AppState>,
+    private toasterService: ToastrService,
     private router: Router
   ) {
     super();
@@ -47,10 +49,12 @@ export class DefaultHeaderComponent
       () => {
         this.store.dispatch(removeLoggedInUser());
         this.router.navigate(['/login']);
+        this.toasterService.success('Logout Successful');
       },
       () => {
         this.store.dispatch(removeLoggedInUser());
         this.router.navigate(['/login']);
+        this.toasterService.success('Logout Successful');
       }
     );
     this.subscriptions?.add(observer);
