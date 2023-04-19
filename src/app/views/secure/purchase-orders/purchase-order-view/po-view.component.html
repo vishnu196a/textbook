@@ -1,5 +1,11 @@
 <div class="mb-4">
-  <button cButton variant="outline" color="info" (click)="onBack()">
+  <button
+    cButton
+    variant="outline"
+    color="info"
+    (click)="onBack()"
+    title="Click to go back"
+  >
     <span class="min-width-18px">
       <i class="fa fa-chevron-left" aria-hidden="true"></i>
     </span>
@@ -126,6 +132,7 @@
             variant="outline"
             color="info"
             (click)="onViewMaterialDistribution(purchaseOrder.id, material.id)"
+            title="View material distributions"
           >
             Material Distribution
           </button>
