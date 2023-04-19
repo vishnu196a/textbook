@@ -189,8 +189,26 @@
       [src]="materialDistributionDetails.material_delivery.voucher_image_url"
       alt="voucher-image"
       class="voucher-image"
+      (click)="openModal(template)"
     />
   </div>
+  <ng-template #template>
+    <div
+      class="voucher-img-cont text-center"
+      *ngIf="materialDistributionDetails.material_delivery.voucher_image_url"
+    >
+      <img
+        [src]="materialDistributionDetails.material_delivery.voucher_image_url"
+        alt="voucher-image"
+        class="voucher-image-model"
+      />
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="modalRef.hide()">
+        Close
+      </button>
+    </div>
+  </ng-template>
   <h5
     class="text-center mb-5"
     *ngIf="!materialDistributionDetails.material_delivery.voucher_image_url"
@@ -199,18 +217,39 @@
   </h5>
   <hr class="mt-5" />
   <h3 class="mb-3 mt-3">Material Images</h3>
-  <div
-    *ngFor="
-      let imageUrl of materialDistributionDetails.material_delivery
-        .material_image_url
-    "
-  >
-    <img
-      [src]="imageUrl"
-      alt="material-image"
-      class="voucher-image"
-      *ngIf="materialDistributionDetails.material_delivery.material_image_url"
-    />
+  <div class="d-flex justify-content-between">
+    <div
+      *ngFor="
+        let imageUrl of materialDistributionDetails.material_delivery
+          .material_image_url
+      "
+    >
+      <img
+        [src]="imageUrl"
+        alt="material-image"
+        class="voucher-image"
+        (click)="openModal(materialImage)"
+        *ngIf="materialDistributionDetails.material_delivery.material_image_url"
+      />
+      <ng-template #materialImage>
+        <div class="text-center">
+          <img
+            [src]="imageUrl"
+            alt="material-image"
+            class="voucher-image-model"
+          />
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="modalRef.hide()"
+          >
+            Close
+          </button>
+        </div>
+      </ng-template>
+    </div>
   </div>
   <h5
     class="text-center mb-5"
