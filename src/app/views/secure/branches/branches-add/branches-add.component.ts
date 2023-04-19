@@ -49,7 +49,7 @@ export class AddBranchComponent implements OnInit, OnDestroy {
         [
           Validators.required,
           Validators.minLength(1),
-          Validators.maxLength(100),
+          Validators.maxLength(40),
         ],
       ],
       address: [
@@ -57,6 +57,7 @@ export class AddBranchComponent implements OnInit, OnDestroy {
         [
           Validators.required,
           Validators.minLength(1),
+          Validators.maxLength(50),
           Validators.pattern(REGEX_PATTERNS.whiteSpace),
         ],
       ],
@@ -65,7 +66,7 @@ export class AddBranchComponent implements OnInit, OnDestroy {
         [
           Validators.required,
           Validators.minLength(1),
-          Validators.maxLength(100),
+          Validators.maxLength(30),
           Validators.pattern(REGEX_PATTERNS.whiteSpace),
         ],
       ],
