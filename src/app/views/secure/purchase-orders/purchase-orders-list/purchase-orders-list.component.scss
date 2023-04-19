@@ -41,3 +41,7 @@ select {
   color: #333;
   cursor: pointer;
 }
+
+::-webkit-search-cancel-button {
+  cursor: pointer;
+}
