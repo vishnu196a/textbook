@@ -71,33 +71,45 @@ export interface POMaterialDistribution {
 export interface MaterialDistributionDetails {
   material_delivery: {
     id: number;
+    copies_per_bundle: number;
+    qty_as_bundles: number;
     received_copies: number;
+    balanced_copies: number;
     received_bundles: number;
     defectives_count: number;
     defective_reason: string;
     received_loose_copies: number;
     weights: number;
+    material_images: string[];
+    voucher_images: string;
     remarks: string;
     delivery_status: string;
+    dv_qty: number;
+    dv_shortage_copies: number;
+    dv_date: string;
     brv_id: number;
     material_distribution_id: number;
     voucher_image_url: string;
     material_image_url: string[];
     created_at: string;
     updated_at: string;
+    deleted_at: string;
   };
   book_receipt_voucher: {
     id: number;
     brv_no: string;
     brv_date: string;
     brv_series: string;
+    e_brv_no: string;
+    e_brv_date: string;
     po_id: number;
     carrier: string;
     carrier_no: string;
     delivery_note_no: string;
     delivery_date: string;
-    material_distribution_id: string;
+    material_distribution_id: number;
     created_at: string;
     updated_at: string;
+    deleted_at: string;
   };
 }

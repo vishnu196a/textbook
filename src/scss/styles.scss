@@ -18,3 +18,10 @@ $enable-rtl: true;
 @import "node_modules/bootstrap-icons/font/bootstrap-icons.css";
 
 @import "ngx-toastr/toastr";
+
+table {
+  display: table;
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+}

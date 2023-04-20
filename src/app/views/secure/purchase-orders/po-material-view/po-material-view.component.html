@@ -229,13 +229,14 @@
           <td>{{ material.branch.dl_type }}</td>
           <td>
             <div class="d-flex gap-3">
-              <div
+              <button
                 class="btn-view opacity-75 rounded-circle px-2 py-1 text-white fw-bolder curser-pointer"
                 title="View"
                 (click)="onViewMaterialDistributionDetails(material.id)"
+                [disabled]="material.delivery_status === 'None'"
               >
                 <i class="bi bi-eye-fill"></i>
-              </div>
+              </button>
             </div>
           </td>
         </tr>

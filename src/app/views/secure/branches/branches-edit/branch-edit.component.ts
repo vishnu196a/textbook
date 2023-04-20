@@ -59,7 +59,7 @@ export class EditBranchComponent implements OnInit, OnDestroy {
         [
           Validators.required,
           Validators.minLength(1),
-          Validators.maxLength(40),
+          Validators.maxLength(100),
         ],
       ],
       address: [
@@ -67,7 +67,7 @@ export class EditBranchComponent implements OnInit, OnDestroy {
         [
           Validators.required,
           Validators.minLength(1),
-          Validators.maxLength(50),
+          Validators.maxLength(200),
           Validators.pattern(REGEX_PATTERNS.whiteSpace),
         ],
       ],
