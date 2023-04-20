@@ -20,7 +20,11 @@
         <th scope="col">PO Date</th>
         <th scope="col">
           Status:
-          <select [(ngModel)]="selectedPOStatus" (change)="onFilterPOStatus()">
+          <select
+            [(ngModel)]="selectedPOStatus"
+            (change)="onFilterPOStatus()"
+            class="p-0"
+          >
             <option value="All">All</option>
             <option value="none">None</option>
             <option value="partial">Partial</option>

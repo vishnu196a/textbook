@@ -108,12 +108,10 @@
     class="mb-3 gap-3 row d-flex align-items-center"
     *ngIf="!isLoading && materialDistributionList"
   >
-    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
-      <h6>
-        Title:
-        <span class="text-primary col-3">{{
-          materialDistributionList.material.title
-        }}</span>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5 d-flex gap-1">
+      <h6>Title:</h6>
+      <h6 class="text-primary w-auto">
+        {{ materialDistributionList.material.title }}
       </h6>
     </div>
     <div class="col-12 col-sm-8 col-md-6 col-lg-5">
