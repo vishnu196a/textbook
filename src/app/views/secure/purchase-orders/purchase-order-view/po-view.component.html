@@ -53,19 +53,14 @@
       }}</span>
     </h6>
   </div>
-  <div class="col-12 col-sm-8 col-md-6 col-lg-5 d-flex">
-    <h6>
-      Vendor Name:
-      <span class="text-primary">{{ purchaseOrder.vendor_name }}</span>
-    </h6>
+  <div class="col-12 col-sm-8 col-md-6 col-lg-5 d-flex gap-1">
+    <h6 class="text-nowrap">Vendor Name:</h6>
+    <h6 class="text-primary w-auto">{{ purchaseOrder.vendor_name }}</h6>
   </div>
-  <div class="col-12 col-sm-8 col-md-6 col-lg-5">
-    <h6>
-      Vendor Address:<span class="text-primary">
-        {{
-          purchaseOrder.vendor_address ? purchaseOrder.vendor_address : "-"
-        }}</span
-      >
+  <div class="col-12 col-sm-8 col-md-6 col-lg-5 d-flex gap-1">
+    <h6>Vendor Address:</h6>
+    <h6 class="text-primary w-auto">
+      {{ purchaseOrder.vendor_address ? purchaseOrder.vendor_address : "-" }}
     </h6>
   </div>
   <div class="col-12 col-sm-8 col-md-6 col-lg-5">
