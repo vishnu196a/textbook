@@ -1,7 +1,7 @@
 <h3 class="mb-3">Purchase Orders</h3>
 <div class="input-group w-25 mb-3">
   <input
-    type="text"
+    type="search"
     class="form-control"
     placeholder="Search"
     [(ngModel)]="searchKeyWord"
@@ -32,10 +32,9 @@
           </select>
         </th>
         <th scope="col">Vendor Name</th>
-        <th scope="col">PO days</th>
         <th scope="col">Order Year</th>
 
-        <th scope="col">Target date</th>
+        <th scope="col">Target Date</th>
         <th scope="col">Actions</th>
       </tr>
     </thead>
@@ -46,7 +45,6 @@
         <td>{{ po.po_date | date : "dd/MM/yyyy" }}</td>
         <td>{{ po.status }}</td>
         <td>{{ po.vendor_name }}</td>
-        <td>{{ po.po_days }}</td>
         <td>{{ po.order_year }}</td>
         <td>{{ po.target_date | date : "dd/MM/yyyy" }}</td>
         <td>

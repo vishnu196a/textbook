@@ -42,3 +42,7 @@ select {
   cursor: pointer;
   outline: none;
 }
+
+::-webkit-search-cancel-button {
+  cursor: pointer;
+}

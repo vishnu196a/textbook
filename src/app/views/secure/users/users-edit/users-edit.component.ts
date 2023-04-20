@@ -55,7 +55,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
         [
           Validators.required,
           Validators.minLength(1),
-          Validators.maxLength(100),
+          Validators.maxLength(20),
         ],
       ],
       lastName: [
@@ -63,7 +63,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
         [
           Validators.required,
           Validators.minLength(1),
-          Validators.maxLength(100),
+          Validators.maxLength(20),
         ],
       ],
       email: [
