@@ -1,20 +1,17 @@
-<div class="mb-3">
-  <button
-    cButton
-    variant="outline"
-    color="info"
-    (click)="onBackToMaterialDistributionsView()"
-    title="Click to go back"
-  >
-    <span class="min-width-18px">
-      <i class="fa fa-chevron-left" aria-hidden="true"></i>
-    </span>
-    Back
-  </button>
-</div>
-
-<div class="d-flex justify-content-center mt-5">
-  <div class="spinner-border" role="status" *ngIf="isLoading"></div>
+<button
+  cButton
+  variant="outline"
+  color="info"
+  (click)="onBackToMaterialDistributionsView()"
+  title="Click to go back"
+>
+  <span class="min-width-18px">
+    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+  </span>
+  Back
+</button>
+<div class="d-flex justify-content-center mt-5" *ngIf="isLoading">
+  <div class="spinner-border" role="status"></div>
   <h5
     class="text-center mt-5"
     *ngIf="!isLoading && !materialDistributionDetails.material_delivery.id"
@@ -24,164 +21,154 @@
 </div>
 
 <div *ngIf="materialDistributionDetails?.material_delivery?.id && !isLoading">
-  <h3 class="mt-2 mb-2">Material Delivery Details</h3>
+  <h3 class="mb-3 mt-4">Material Delivery Details</h3>
+
   <div
-    class="table-responsive mt-3"
+    class="mb-3 gap-3 row d-flex align-items-center"
     *ngIf="!isLoading && materialDistributionDetails"
   >
-    <table class="table table-hover">
-      <thead class="bg-secondary">
-        <tr>
-          <th scope="col">
-            Delivery Status
-            <i class="text-info bi"></i>
-          </th>
-          <th scope="col">
-            Recieved Copies
-            <i class="text-info bi"></i>
-          </th>
-          <th scope="col">
-            Recieved Bundles
-            <i class="text-info bi"></i>
-          </th>
-          <th scope="col">
-            Defectives count
-            <i class="text-info bi"></i>
-          </th>
-          <th scope="col">Defective Reason<i class="text-info bi"></i></th>
-          <th scope="col">Recieved Loose Copies<i class="text-info bi"></i></th>
-          <th scope="col">Weights<i class="text-info bi"></i></th>
-          <th scope="col">Remarks<i class="text-info bi"></i></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="bg-white">
-          <td>
-            {{ materialDistributionDetails.material_delivery.delivery_status }}
-          </td>
-          <td>
-            {{ materialDistributionDetails.material_delivery.received_copies }}
-          </td>
-          <td>
-            {{ materialDistributionDetails.material_delivery.received_bundles }}
-          </td>
-          <td>
-            {{ materialDistributionDetails.material_delivery.defectives_count }}
-          </td>
-          <td>
-            {{
-              materialDistributionDetails.material_delivery.defective_reason
-                ? materialDistributionDetails.material_delivery.defective_reason
-                : "-"
-            }}
-          </td>
-          <td>
-            {{
-              materialDistributionDetails.material_delivery
-                .received_loose_copies
-            }}
-          </td>
-          <td>
-            {{
-              materialDistributionDetails.material_delivery.weights
-                ? materialDistributionDetails.material_delivery.weights
-                : "-"
-            }}
-          </td>
-          <td>
-            {{
-              materialDistributionDetails.material_delivery.remarks
-                ? materialDistributionDetails.material_delivery.remarks
-                : "-"
-            }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Delivery Status:<span class="text-primary">
+          {{
+            materialDistributionDetails.material_delivery.delivery_status
+          }}</span
+        >
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Delivery Voucher Date:<span class="text-primary">
+          {{
+            materialDistributionDetails.material_delivery.dv_date
+              | date : "dd/MM/yyyy"
+          }}</span
+        >
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Delivered Date:<span class="text-primary">
+          {{
+            materialDistributionDetails.book_receipt_voucher.delivery_date
+              | date : "short"
+          }}</span
+        >
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Delivery Voucher Quantity:<span class="text-primary">
+          {{ materialDistributionDetails.material_delivery.dv_qty }}</span
+        >
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Received Quantity:
+        <span class="text-primary">{{
+          materialDistributionDetails.material_delivery.received_copies
+        }}</span>
+      </h6>
+    </div>
+
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Delivery Voucher Shortage Quantity:<span class="text-primary">
+          {{
+            materialDistributionDetails.material_delivery.dv_shortage_copies
+              ? materialDistributionDetails.material_delivery.dv_shortage_copies
+              : "-"
+          }}</span
+        >
+      </h6>
+    </div>
+
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Balance Quantity:
+        <span class="text-primary">{{
+          materialDistributionDetails.material_delivery.balanced_copies
+        }}</span>
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Defectives Count:
+        <span class="text-primary">{{
+          materialDistributionDetails.material_delivery.defectives_count
+        }}</span>
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5 d-flex gap-1">
+      <h6>Quantity / Bundle:</h6>
+      <h6 class="text-primary w-auto">
+        {{ materialDistributionDetails.material_delivery.copies_per_bundle }}
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Defectives Reason:<span class="text-primary">
+          {{
+            materialDistributionDetails.material_delivery.defective_reason
+              ? materialDistributionDetails.material_delivery.defective_reason
+              : "-"
+          }}</span
+        >
+      </h6>
+    </div>
+
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        No.of Bundles:
+        <span class="text-primary">{{
+          materialDistributionDetails.material_delivery.received_bundles
+        }}</span>
+      </h6>
+    </div>
+
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Weights:<span class="text-primary">
+          {{
+            materialDistributionDetails.material_delivery.weights
+              ? materialDistributionDetails.material_delivery.weights
+              : "-"
+          }}</span
+        >
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Quantity as bundle:
+        <span class="text-primary col-3">{{
+          materialDistributionDetails.material_delivery.qty_as_bundles
+        }}</span>
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Remarks:<span class="text-primary">
+          {{
+            materialDistributionDetails.material_delivery.remarks
+              ? materialDistributionDetails.material_delivery.remarks
+              : "-"
+          }}</span
+        >
+      </h6>
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+      <h6>
+        Loose Copies:<span class="text-primary">
+          {{
+            materialDistributionDetails.material_delivery.received_loose_copies
+          }}</span
+        >
+      </h6>
+    </div>
   </div>
   <hr />
-  <h3 class="mb-2">Book Receipt Voucher</h3>
-  <div
-    class="table-responsive mt-3"
-    *ngIf="!isLoading && materialDistributionDetails"
-  >
-    <table class="table table-hover">
-      <thead class="bg-secondary">
-        <tr>
-          <th scope="col">
-            BRV No
-            <i class="text-info bi"></i>
-          </th>
-          <th scope="col">
-            BRV Date
-            <i class="text-info bi"></i>
-          </th>
-          <th scope="col">
-            BRV Series
-            <i class="text-info bi"></i>
-          </th>
-          <th scope="col">
-            Carrier
-            <i class="text-info bi"></i>
-          </th>
-          <th scope="col">Carrier No<i class="text-info bi"></i></th>
-          <th scope="col">Delivery Note No<i class="text-info bi"></i></th>
-          <th scope="col">Delivery Date<i class="text-info bi"></i></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="bg-white">
-          <td>
-            {{
-              materialDistributionDetails.book_receipt_voucher.brv_no
-                ? materialDistributionDetails.book_receipt_voucher.brv_no
-                : "-"
-            }}
-          </td>
-          <td>
-            {{
-              materialDistributionDetails.book_receipt_voucher.brv_date
-                | date : "dd/MM/yyyy"
-            }}
-          </td>
-          <td>
-            {{ materialDistributionDetails.book_receipt_voucher.brv_series }}
-          </td>
-          <td>
-            {{
-              materialDistributionDetails.book_receipt_voucher.carrier
-                ? materialDistributionDetails.book_receipt_voucher.carrier
-                : "-"
-            }}
-          </td>
-          <td>
-            {{
-              materialDistributionDetails.book_receipt_voucher.carrier_no
-                ? materialDistributionDetails.book_receipt_voucher.carrier_no
-                : "-"
-            }}
-          </td>
-          <td>
-            {{
-              materialDistributionDetails.book_receipt_voucher.delivery_note_no
-                ? materialDistributionDetails.book_receipt_voucher
-                    .delivery_note_no
-                : "-"
-            }}
-          </td>
-          <td>
-            {{
-              materialDistributionDetails.book_receipt_voucher.delivery_date
-                ? materialDistributionDetails.book_receipt_voucher.delivery_date
-                : "-"
-            }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <hr />
-  <h3 class="mb-3">Voucher Image</h3>
+  <h3 class="mb-3 mt-5">Voucher Image</h3>
   <div
     class="voucher-img-cont"
     *ngIf="materialDistributionDetails.material_delivery.voucher_image_url"
