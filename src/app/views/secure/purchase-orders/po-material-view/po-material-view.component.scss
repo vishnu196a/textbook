@@ -6,14 +6,16 @@
     color: #078439;
   }
 }
-.curser-pointer:hover {
+
+.btn-view:hover:not(:disabled) {
   background-color: #078439;
   cursor: pointer;
 }
-.curser-pointer:hover i {
+
+.btn-view:hover:not(:disabled) i {
   color: white;
 }
 
-*:disabled {
+.btn-view:disabled {
   background: lightgray;
 }

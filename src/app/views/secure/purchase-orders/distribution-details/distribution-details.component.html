@@ -24,149 +24,196 @@
   <h3 class="mb-3 mt-4">Material Delivery Details</h3>
 
   <div
-    class="mb-3 gap-3 row d-flex align-items-center"
-    *ngIf="!isLoading && materialDistributionDetails"
+    class="row mt-4"
+    *ngIf="materialDistributionDetails.material_delivery.id"
   >
-    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
-      <h6>
-        Delivery Status:<span class="text-primary">
+    <div class="col-12 col-xl-5">
+      <div class="row mb-2">
+        <div class="d-flex justify-content-between col-5">
+          <h6>Delivery Status</h6>
+          <h6>&#10132;</h6>
+        </div>
+        <h6 class="col-7 text-break text-primary">
           {{
             materialDistributionDetails.material_delivery.delivery_status
-          }}</span
-        >
-      </h6>
+              ? materialDistributionDetails.material_delivery.delivery_status
+              : "-"
+          }}
+        </h6>
+      </div>
+
+      <div class="row mb-2">
+        <div class="d-flex justify-content-between col-5">
+          <h6>Delivered Date</h6>
+          <h6>&#10132;</h6>
+        </div>
+        <h6 class="col-7 text-break text-primary">
+          {{
+            materialDistributionDetails.book_receipt_voucher.delivery_date
+              | date : "dd/MM/yyy, h:mm a"
+          }}
+        </h6>
+      </div>
+
+      <div class="row mb-2">
+        <div class="d-flex justify-content-between col-5">
+          <h6>Received Quantity</h6>
+          <h6>&#10132;</h6>
+        </div>
+        <h6 class="col-7 text-break text-primary">
+          {{ materialDistributionDetails.material_delivery.received_copies }}
+        </h6>
+      </div>
+
+      <div class="row mb-2">
+        <div class="d-flex justify-content-between col-5">
+          <h6>Balance Quantity</h6>
+          <h6>&#10132;</h6>
+        </div>
+        <h6 class="col-7 text-break text-primary">
+          {{ materialDistributionDetails.material_delivery.balanced_copies }}
+        </h6>
+      </div>
+
+      <div class="row mb-2">
+        <div class="d-flex justify-content-between col-5">
+          <h6>Quantity / Bundle</h6>
+          <h6>&#10132;</h6>
+        </div>
+        <h6 class="col-7 text-break text-primary">
+          {{ materialDistributionDetails.material_delivery.copies_per_bundle }}
+        </h6>
+      </div>
+
+      <div class="row mb-2">
+        <div class="d-flex justify-content-between col-5">
+          <h6>No of Bundles</h6>
+          <h6>&#10132;</h6>
+        </div>
+        <h6 class="col-7 text-break text-primary">
+          {{ materialDistributionDetails.material_delivery.received_bundles }}
+        </h6>
+      </div>
+
+      <div class="row mb-2">
+        <div class="d-flex justify-content-between col-5">
+          <h6>Quantity as Bundle</h6>
+          <h6>&#10132;</h6>
+        </div>
+        <h6 class="col-7 text-break text-primary">
+          {{ materialDistributionDetails.material_delivery.qty_as_bundles }}
+        </h6>
+      </div>
+
+      <div class="row mb-2">
+        <div class="d-flex justify-content-between col-5">
+          <h6>Loose Copies</h6>
+          <h6>&#10132;</h6>
+        </div>
+        <h6 class="col-7 text-break text-primary">
+          {{
+            materialDistributionDetails.material_delivery.received_loose_copies
+          }}
+        </h6>
+      </div>
     </div>
-    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
-      <h6>
-        Delivery Voucher Date:<span class="text-primary">
+
+    <div class="col-12 col-xl-7">
+      <div class="row mb-2">
+        <div class="d-flex justify-content-between col-5">
+          <h6>Delivery Voucher Date</h6>
+          <h6>&#10132;</h6>
+        </div>
+        <h6 class="col-7 text-break text-primary">
           {{
             materialDistributionDetails.material_delivery.dv_date
               | date : "dd/MM/yyyy"
-          }}</span
-        >
-      </h6>
-    </div>
-    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
-      <h6>
-        Delivered Date:<span class="text-primary">
-          {{
-            materialDistributionDetails.book_receipt_voucher.delivery_date
-              | date : "short"
-          }}</span
-        >
-      </h6>
-    </div>
-    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
-      <h6>
-        Delivery Voucher Quantity:<span class="text-primary">
-          {{ materialDistributionDetails.material_delivery.dv_qty }}</span
-        >
-      </h6>
-    </div>
-    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
-      <h6>
-        Received Quantity:
-        <span class="text-primary">{{
-          materialDistributionDetails.material_delivery.received_copies
-        }}</span>
-      </h6>
-    </div>
+          }}
+        </h6>
+      </div>
 
-    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
-      <h6>
-        Delivery Voucher Shortage Quantity:<span class="text-primary">
+      <div class="row mb-2">
+        <div class="d-flex justify-content-between col-5">
+          <h6>Delivery Voucher Quantity</h6>
+          <h6>&#10132;</h6>
+        </div>
+        <h6 class="col-7 text-break text-primary">
+          {{
+            materialDistributionDetails.material_delivery.dv_qty
+              ? materialDistributionDetails.material_delivery.dv_qty
+              : "-"
+          }}
+        </h6>
+      </div>
+
+      <div class="row mb-2">
+        <div class="d-flex justify-content-between col-5">
+          <h6>Delivery Voucher Shortage Quantity</h6>
+          <h6>&#10132;</h6>
+        </div>
+        <h6 class="col-7 text-break text-primary">
           {{
             materialDistributionDetails.material_delivery.dv_shortage_copies
               ? materialDistributionDetails.material_delivery.dv_shortage_copies
               : "-"
-          }}</span
-        >
-      </h6>
-    </div>
+          }}
+        </h6>
+      </div>
 
-    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
-      <h6>
-        Balance Quantity:
-        <span class="text-primary">{{
-          materialDistributionDetails.material_delivery.balanced_copies
-        }}</span>
-      </h6>
-    </div>
-    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
-      <h6>
-        Defectives Count:
-        <span class="text-primary">{{
-          materialDistributionDetails.material_delivery.defectives_count
-        }}</span>
-      </h6>
-    </div>
-    <div class="col-12 col-sm-8 col-md-6 col-lg-5 d-flex gap-1">
-      <h6>Quantity / Bundle:</h6>
-      <h6 class="text-primary w-auto">
-        {{ materialDistributionDetails.material_delivery.copies_per_bundle }}
-      </h6>
-    </div>
-    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
-      <h6>
-        Defectives Reason:<span class="text-primary">
+      <div class="row mb-2">
+        <div class="d-flex justify-content-between col-5">
+          <h6>Defectives Count</h6>
+          <h6>&#10132;</h6>
+        </div>
+        <h6 class="col-7 text-break text-primary">
+          {{ materialDistributionDetails.material_delivery.defectives_count }}
+        </h6>
+      </div>
+
+      <div class="row mb-2">
+        <div class="d-flex justify-content-between col-5">
+          <h6>Defectives Reason</h6>
+          <h6>&#10132;</h6>
+        </div>
+        <h6 class="col-7 text-break text-primary">
           {{
             materialDistributionDetails.material_delivery.defective_reason
               ? materialDistributionDetails.material_delivery.defective_reason
               : "-"
-          }}</span
-        >
-      </h6>
-    </div>
+          }}
+        </h6>
+      </div>
 
-    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
-      <h6>
-        No.of Bundles:
-        <span class="text-primary">{{
-          materialDistributionDetails.material_delivery.received_bundles
-        }}</span>
-      </h6>
-    </div>
-
-    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
-      <h6>
-        Weights:<span class="text-primary">
+      <div class="row mb-2">
+        <div class="d-flex justify-content-between col-5">
+          <h6>Weights</h6>
+          <h6>&#10132;</h6>
+        </div>
+        <h6 class="col-7 text-break text-primary">
           {{
             materialDistributionDetails.material_delivery.weights
               ? materialDistributionDetails.material_delivery.weights
               : "-"
-          }}</span
-        >
-      </h6>
-    </div>
-    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
-      <h6>
-        Quantity as bundle:
-        <span class="text-primary col-3">{{
-          materialDistributionDetails.material_delivery.qty_as_bundles
-        }}</span>
-      </h6>
-    </div>
-    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
-      <h6>
-        Remarks:<span class="text-primary">
+          }}
+        </h6>
+      </div>
+
+      <div class="row mb-2">
+        <div class="d-flex justify-content-between col-5">
+          <h6>Remarks</h6>
+          <h6>&#10132;</h6>
+        </div>
+        <h6 class="col-7 text-break text-primary">
           {{
             materialDistributionDetails.material_delivery.remarks
               ? materialDistributionDetails.material_delivery.remarks
               : "-"
-          }}</span
-        >
-      </h6>
-    </div>
-    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
-      <h6>
-        Loose Copies:<span class="text-primary">
-          {{
-            materialDistributionDetails.material_delivery.received_loose_copies
-          }}</span
-        >
-      </h6>
+          }}
+        </h6>
+      </div>
     </div>
   </div>
+
   <hr />
   <h3 class="mb-3 mt-5">Voucher Image</h3>
   <div
@@ -205,7 +252,7 @@
   </h5>
   <hr class="mt-5" />
   <h3 class="mb-3 mt-3">Material Images</h3>
-  <div class="d-flex justify-content-between">
+  <div class="d-flex gap-5">
     <div
       *ngFor="
         let imageUrl of materialDistributionDetails.material_delivery

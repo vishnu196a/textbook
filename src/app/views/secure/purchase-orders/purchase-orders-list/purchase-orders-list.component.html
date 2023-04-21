@@ -12,7 +12,7 @@
   </button>
 </div>
 <div class="table-responsive">
-  <table class="table table-hover text-center">
+  <table class="table table-hover">
     <thead class="bg-secondary">
       <tr>
         <th scope="col">S No</th>
@@ -35,7 +35,7 @@
         <th scope="col">Order Year</th>
 
         <th scope="col">Target Date</th>
-        <th scope="col">Actions</th>
+        <th scope="col" class="text-center">Actions</th>
       </tr>
     </thead>
     <tbody *ngIf="!isLoading && poList.length">
@@ -48,9 +48,9 @@
         <td>{{ po.order_year }}</td>
         <td>{{ po.target_date | date : "dd/MM/yyyy" }}</td>
         <td>
-          <div class="d-flex gap-3 justify-content-center">
+          <div class="gap-3 d-flex">
             <button
-              class="btn-view opacity-75 rounded-circle px-2 py-1 text-white fw-bolder curser-pointer view-button"
+              class="btn-view opacity-75 rounded-circle px-2 py-1 text-white fw-bolder cursor-pointer view-button mx-auto"
               title="View"
               (click)="onView(po.id)"
             >
