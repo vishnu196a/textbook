@@ -32,6 +32,19 @@
   border: none;
 }
 
+.download-button {
+  height: 42px;
+}
+
+.input {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.input-button {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
 select {
   font-size: 16px;
   padding: 4px;

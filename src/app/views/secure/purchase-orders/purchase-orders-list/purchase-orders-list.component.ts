@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PurchaseOrdersService } from '../purchase-orders.service';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorResponse } from 'src/app/shared/interceptors/error.interceptor';
-import { PurchaseOrder } from '../purchase-orders.model';
+import { DownloadPo, PurchaseOrder } from '../purchase-orders.model';
 import { Pagination } from 'src/app/shared/models/shared.model';
 import { Store } from '@ngrx/store';
 import { selectPOState } from '../store/po.selector';
@@ -29,6 +29,7 @@ export class PurchaseOrdersListComponent implements OnInit {
   selectedPOStatus!: string;
   onSearchKeyWordChange = new Subject<string>();
   serialNo!: number;
+  downloadPO!: DownloadPo;
   constructor(
     private poService: PurchaseOrdersService,
     private toastrService: ToastrService,
@@ -88,5 +89,21 @@ export class PurchaseOrdersListComponent implements OnInit {
   onFilterPOStatus() {
     this.store.dispatch(actionSetPoStatus({ poStatus: this.selectedPOStatus }));
     this.getAllPO(1, this.searchKeyWord, this.selectedPOStatus);
+  }
+
+  onDownloadPoDetails() {
+    this.isLoading = true;
+    this.poService.downloadPoDetails().subscribe(
+      (res) => {
+        const link = document.createElement('a');
+        link.href = res.url;
+        link.click();
+        window.URL.revokeObjectURL(link.href);
+      },
+      (error: ErrorResponse) => {
+        this.isLoading = false;
+        this.toastrService.error(error.errors[0]);
+      }
+    );
   }
 }
