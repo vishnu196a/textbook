@@ -15,7 +15,7 @@ export interface PurchaseOrder {
   Material: Material[];
 }
 
-export interface DownloadPo {
+export interface DownloadPO {
   url: string;
 }
 

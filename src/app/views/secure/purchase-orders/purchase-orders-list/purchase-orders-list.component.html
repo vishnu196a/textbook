@@ -22,6 +22,7 @@
       color="info"
       type="button"
       (click)="onDownloadPoDetails()"
+      [disabled]="isPODownloading"
     >
       Download Report
       <i class="ms-1 fa fa-download"></i>

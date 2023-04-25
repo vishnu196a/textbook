@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
-  DownloadPo,
+  DownloadPO,
   MaterialDistributionDetails,
   POMaterialDistribution,
   PurchaseOrder,
@@ -42,8 +42,8 @@ export class PurchaseOrdersService {
     );
   }
 
-  downloadPoDetails(): Observable<DownloadPo> {
-    return this.http.get<DownloadPo>(
+  downloadPoDetails(): Observable<DownloadPO> {
+    return this.http.get<DownloadPO>(
       `${this.apiUrl}/v1/purchase_orders/downloads`
     );
   }
