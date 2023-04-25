@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
+  DownloadPO,
   MaterialDistributionDetails,
   POMaterialDistribution,
   PurchaseOrder,
@@ -38,6 +39,12 @@ export class PurchaseOrdersService {
   getPODetials(id: number): Observable<PurchaseOrder> {
     return this.http.get<PurchaseOrder>(
       `${this.apiUrl}/v1/admins/purchase_orders/${id}`
+    );
+  }
+
+  downloadPoDetails(): Observable<DownloadPO> {
+    return this.http.get<DownloadPO>(
+      `${this.apiUrl}/v1/purchase_orders/downloads`
     );
   }
 

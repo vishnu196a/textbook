@@ -15,6 +15,10 @@ export interface PurchaseOrder {
   Material: Material[];
 }
 
+export interface DownloadPO {
+  url: string;
+}
+
 export interface PurchaseOrders {
   purchase_orders: PurchaseOrder[];
   pagination: Pagination;
