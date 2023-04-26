@@ -36,6 +36,9 @@ import {
   SharedModule,
   TabsModule,
   UtilitiesModule,
+  NavbarModule,
+  CollapseModule,
+  CollapseDirective,
 } from '@coreui/angular';
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { EffectsModule } from '@ngrx/effects';
@@ -78,12 +81,15 @@ const APP_CONTAINERS = [
     BadgeModule,
     ListGroupModule,
     CardModule,
+    NavbarModule,
+    CollapseModule,
     EffectsModule.forRoot([FileEffects]),
     ToastrModule.forRoot(),
   ],
   providers: [
     IconSetService,
     BsModalService,
+    CollapseDirective,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
