@@ -1,65 +1,77 @@
-<ng-container>
-  <c-container fluid>
-    <c-header-brand class="d-none d-sm-block" routerLink="/"
-      >Text Book Corporation</c-header-brand
+<nav class="navbar navbar-expand-md navbar-light bg-light w-100">
+  <div class="container-fluid">
+    <a
+      class="navbar-brand"
+      href="javascript:void(0)"
+      routerLink="/purchase_orders"
+      >Text Book Corporation</a
     >
-    <c-header-brand class="d-sm-none" routerLink="/">TBC</c-header-brand>
-    <ul class="header-nav me-auto ms-5">
-      <li class="nav-item active">
-        <a
-          class="nav-link nav-route-item"
-          routerLink="/purchase_orders"
-          routerLinkActive="active"
-          >Purchase Orders</a
-        >
-      </li>
-      <li class="nav-item active ms-4">
-        <a
-          class="nav-link nav-route-item"
-          routerLink="/users"
-          routerLinkActive="active"
-          >Users</a
-        >
-      </li>
-      <li class="nav-item ms-4">
-        <a
-          class="nav-link nav-route-item"
-          routerLink="/branches"
-          routerLinkActive="active"
-          >Branches</a
-        >
-      </li>
-    </ul>
-    <c-header-nav>
-      <ng-container *ngTemplateOutlet="userDropdown"></ng-container>
-    </c-header-nav>
-  </c-container>
-</ng-container>
-
-<ng-template #userDropdown>
-  <c-dropdown alignment="end" variant="nav-item">
-    <button cButton color="" [caret]="false" cDropdownToggle class="py-0">
-      <ngx-avatars
-        [gravatarId]="userDetails?.email"
-        [name]="userDetails?.name"
-      ></ngx-avatars>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mynavbar"
+    >
+      <span class="navbar-toggler-icon"></span>
     </button>
-    <ul cDropdownMenu class="pt-0 pr-5 w-auto">
-      <li>
-        <h6 cDropdownHeader class="bg-light fw-semibold py-2">Account</h6>
-      </li>
-      <li>
-        <a cDropdownItem routerLink="/change_password" class="drop-down-item">
-          <svg cIcon class="me-2" name="cilLockLocked"></svg>
-          Change Password
+    <div class="collapse navbar-collapse" id="mynavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="javascript:void(0)"
+            routerLink="/purchase_orders"
+            >Purchase Order</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="javascript:void(0)" routerLink="/users"
+            >Users</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="javascript:void(0)" routerLink="/branches"
+            >Branches</a
+          >
+        </li>
+        <div class="d-md-none">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="javascript:void(0)"
+              routerLink="/change_password"
+              >Change Password</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0)" (click)="onSignOut()"
+              >Sign Out</a
+            >
+          </li>
+        </div>
+      </ul>
+      <div class="dropdown dropstart">
+        <a
+          id="profile-picture"
+          href="#"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          {{ userDetails?.name | slice : 0 : 1 }}
         </a>
-      </li>
-      <li>
-        <a cDropdownItem (click)="onSignOut()" class="drop-down-item">
-          <svg cIcon class="me-2" name="cilLockLocked"></svg>
-          Sign out
-        </a>
-      </li>
-    </ul>
-  </c-dropdown>
-</ng-template>
+
+        <ul
+          class="dropdown-menu dropdown-menu-light"
+          aria-labelledby="dropdownMenuButton"
+        >
+          <li>
+            <a class="dropdown-item active" routerLink="/change_password"
+              >Change Password</a
+            >
+          </li>
+          <li><a class="dropdown-item" (click)="onSignOut()">Sign Out</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -5,3 +5,23 @@
 .nav-route-item {
   font-weight: 500;
 }
+
+@media (max-width: 768px) {
+  .dropstart {
+    display: none;
+  }
+}
+
+#profile-picture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ccc;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+}
