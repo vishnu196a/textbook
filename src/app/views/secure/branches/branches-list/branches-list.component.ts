@@ -15,7 +15,6 @@ import { BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { ModelComponent } from 'src/app/shared/components/model/model.component';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducer';
-import { selectFileState } from '../../file/store/file.selector';
 import { selectBranchState } from '../store/branch-selector';
 import { actionSetBranchesPagination } from '../store/branch-action';
 
@@ -30,7 +29,6 @@ export class BranchesListComponent implements OnInit, OnDestroy {
   branchListSortColumns = BranchListSortColumns;
   subscriptions = new Subscription();
   sortedColumn: BranchListSortColumn | undefined;
-  private subscription: Subscription;
   isLoading = false;
   serialNo!: number;
 
@@ -41,15 +39,10 @@ export class BranchesListComponent implements OnInit, OnDestroy {
     private toasterService: ToastrService,
     private modalService: BsModalService
   ) {
-    const subscription = store
-      .select(selectFileState)
-      .subscribe((fileState) => {
-        this.pagination = fileState.pagination;
-      });
-    this.subscription = subscription;
-    this.store.select(selectBranchState).subscribe((res) => {
+    const observer = this.store.select(selectBranchState).subscribe((res) => {
       this.pagination = res.pagination;
     });
+    this.subscriptions.add(observer);
   }
 
   ngOnInit(): void {
@@ -57,7 +50,7 @@ export class BranchesListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   loadBranches(page: number): void {
@@ -92,7 +85,7 @@ export class BranchesListComponent implements OnInit, OnDestroy {
     const modal = this.modalService.show(ModelComponent, initialState);
     modal.content?.confirm.subscribe({
       next: () => {
-        this.branchService.deleteUser(branch.id).subscribe({
+        const observer = this.branchService.deleteUser(branch.id).subscribe({
           next: () => {
             this.onPageChange(1);
             this.toasterService.success('Branch deleted successfully');
@@ -101,6 +94,7 @@ export class BranchesListComponent implements OnInit, OnDestroy {
             this.toasterService.error('Oops! Something went wrong');
           },
         });
+        this.subscriptions.add(observer);
       },
     });
   }

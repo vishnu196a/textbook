@@ -42,9 +42,11 @@ export class EditBranchComponent implements OnInit, OnDestroy {
     this.initializeForm();
     this.branchId = this.route.snapshot.params['id'];
     this.getUserAndInitializeForm();
-    const observer = this.branchService.getDistrictNames().subscribe((res) => {
-      this.districtNamesList = res;
-    });
+    const observer = this.branchService
+      .getDistrictNames()
+      .subscribe((response) => {
+        this.districtNamesList = response;
+      });
     this.subscriptions.add(observer);
   }
 

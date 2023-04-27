@@ -8,7 +8,6 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
-import { NamesAndIds } from 'src/app/shared/models/shared.model';
 import { UserService } from '../users.service';
 import { FormStateService } from 'src/app/shared/services/form-state.service';
 import { REGEX_PATTERNS } from 'src/app/shared/constants/constants';
@@ -27,7 +26,6 @@ export class EditUserComponent implements OnInit, OnDestroy {
   initialLoading = true;
   private userId!: number;
   private subscriptions = new Subscription();
-  organizationList: NamesAndIds[] = [];
 
   constructor(
     private formBuilder: FormBuilder,

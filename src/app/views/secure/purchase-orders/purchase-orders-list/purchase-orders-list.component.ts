@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PurchaseOrdersService } from '../purchase-orders.service';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorResponse } from 'src/app/shared/interceptors/error.interceptor';
@@ -13,7 +13,7 @@ import {
   actionSetPoStatus,
 } from '../store/po.action';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
@@ -21,7 +21,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
   templateUrl: './purchase-orders-list.component.html',
   styleUrls: ['./purchase-orders-list.component.scss'],
 })
-export class PurchaseOrdersListComponent implements OnInit {
+export class PurchaseOrdersListComponent implements OnInit, OnDestroy {
   poList: PurchaseOrder[] = [];
   pagination!: Pagination;
   isLoading = false;
@@ -30,17 +30,20 @@ export class PurchaseOrdersListComponent implements OnInit {
   onSearchKeyWordChange = new Subject<string>();
   serialNo!: number;
   isPODownloading = false;
+  private subscriptions = new Subscription();
+
   constructor(
     private poService: PurchaseOrdersService,
     private toastrService: ToastrService,
     private store: Store<AppState>,
     private router: Router
   ) {
-    this.store.select(selectPOState).subscribe((res) => {
-      this.pagination = res.pagination;
-      this.searchKeyWord = res.searchTerm;
-      this.selectedPOStatus = res.poStatus;
+    const observer = this.store.select(selectPOState).subscribe((response) => {
+      this.pagination = response.pagination;
+      this.searchKeyWord = response.searchTerm;
+      this.selectedPOStatus = response.poStatus;
     });
+    this.subscriptions.add(observer);
 
     this.onSearchKeyWordChange
       .pipe(debounceTime(1000), distinctUntilChanged())
@@ -60,22 +63,29 @@ export class PurchaseOrdersListComponent implements OnInit {
     );
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
+
   getAllPO(page: number, searchTerm?: string, poStatus?: string): void {
     this.isLoading = true;
-    this.poService.getAllPO(page, searchTerm, poStatus).subscribe(
-      (res) => {
-        this.isLoading = false;
-        this.poList = res.purchase_orders;
-        this.store.dispatch(
-          actionSetPoPagination({ pagination: res.pagination })
-        );
-        this.serialNo = this.pagination.start_at;
-      },
-      (error: ErrorResponse) => {
-        this.isLoading = false;
-        this.toastrService.error(error.errors[0]);
-      }
-    );
+    const observer = this.poService
+      .getAllPO(page, searchTerm, poStatus)
+      .subscribe(
+        (response) => {
+          this.isLoading = false;
+          this.poList = response.purchase_orders;
+          this.store.dispatch(
+            actionSetPoPagination({ pagination: response.pagination })
+          );
+          this.serialNo = this.pagination.start_at;
+        },
+        (error: ErrorResponse) => {
+          this.isLoading = false;
+          this.toastrService.error(error.errors[0]);
+        }
+      );
+    this.subscriptions.add(observer);
   }
 
   onPageChange(page: number): void {
@@ -93,7 +103,7 @@ export class PurchaseOrdersListComponent implements OnInit {
 
   onDownloadPoDetails(): void {
     this.isPODownloading = true;
-    this.poService.downloadPoDetails().subscribe(
+    const observer = this.poService.downloadPoDetails().subscribe(
       (response: DownloadPO) => {
         const link = document.createElement('a');
         link.href = response.url;
@@ -107,5 +117,6 @@ export class PurchaseOrdersListComponent implements OnInit {
         this.isPODownloading = false;
       }
     );
+    this.subscriptions.add(observer);
   }
 }

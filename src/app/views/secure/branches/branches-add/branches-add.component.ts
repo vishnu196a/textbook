@@ -79,7 +79,7 @@ export class AddBranchComponent implements OnInit, OnDestroy {
   }
 
   getDistrictNames(): void {
-    this.branchService.getDistrictNames().subscribe(
+    const observer = this.branchService.getDistrictNames().subscribe(
       (response) => {
         this.branchesList = response;
       },
@@ -87,6 +87,7 @@ export class AddBranchComponent implements OnInit, OnDestroy {
         this.toasterService.error(error.errors[0]);
       }
     );
+    this.subscriptions.add(observer);
   }
 
   onFormSubmit(): void {
