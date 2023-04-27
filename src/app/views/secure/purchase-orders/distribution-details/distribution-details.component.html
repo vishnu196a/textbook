@@ -121,7 +121,17 @@
     <div class="col-12 col-xl-7">
       <div class="row mb-2">
         <div class="d-flex justify-content-between col-5">
-          <h6>Delivery Voucher Date</h6>
+          <h6>Delivery Challan No</h6>
+          <h6>&#10132;</h6>
+        </div>
+        <h6 class="col-7 text-break text-primary">
+          {{ materialDistributionDetails.material_delivery.dv_no }}
+        </h6>
+      </div>
+
+      <div class="row mb-2">
+        <div class="d-flex justify-content-between col-5">
+          <h6>Delivery Challan Date</h6>
           <h6>&#10132;</h6>
         </div>
         <h6 class="col-7 text-break text-primary">
@@ -134,7 +144,7 @@
 
       <div class="row mb-2">
         <div class="d-flex justify-content-between col-5">
-          <h6>Delivery Voucher Quantity</h6>
+          <h6>Delivery Challan Quantity</h6>
           <h6>&#10132;</h6>
         </div>
         <h6 class="col-7 text-break text-primary">
@@ -148,7 +158,7 @@
 
       <div class="row mb-2">
         <div class="d-flex justify-content-between col-5">
-          <h6>Delivery Voucher Shortage Quantity</h6>
+          <h6>Delivery Challan Shortage Quantity</h6>
           <h6>&#10132;</h6>
         </div>
         <h6 class="col-7 text-break text-primary">
@@ -215,7 +225,7 @@
   </div>
 
   <hr />
-  <h3 class="mb-3 mt-5">Voucher Image</h3>
+  <h3 class="mb-3 mt-5">Challan Image</h3>
   <div
     class="voucher-img-cont"
     *ngIf="materialDistributionDetails.material_delivery.voucher_image_url"

@@ -71,7 +71,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
   }
 
   getBranchNames(): void {
-    this.userService.getBranchNames().subscribe(
+    const observer = this.userService.getBranchNames().subscribe(
       (response) => {
         this.branchesList = response;
       },
@@ -79,6 +79,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
         this.toasterService.error(error.errors[0]);
       }
     );
+    this.subscriptions.add(observer);
   }
 
   onFormSubmit(): void {

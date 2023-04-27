@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PurchaseOrdersService } from '../purchase-orders.service';
 import { Material, PurchaseOrder } from '../purchase-orders.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ErrorResponse } from 'src/app/shared/interceptors/error.interceptor';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-po-view',
   templateUrl: './po-view.component.html',
   styleUrls: ['./po-view.component.scss'],
 })
-export class POViewComponent implements OnInit {
+export class POViewComponent implements OnInit, OnDestroy {
   purchaseOrder!: PurchaseOrder;
   materialList: Material[] = [];
   poId!: number;
   isLoading = false;
+  private subscriptions = new Subscription();
+
   constructor(
     private poService: PurchaseOrdersService,
     private activatedRoute: ActivatedRoute,
@@ -28,19 +31,24 @@ export class POViewComponent implements OnInit {
     this.getPODetails();
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
+
   getPODetails(): void {
     this.isLoading = true;
-    this.poService.getPODetials(this.poId).subscribe(
-      (res: PurchaseOrder) => {
+    const observer = this.poService.getPODetials(this.poId).subscribe(
+      (response: PurchaseOrder) => {
         this.isLoading = false;
-        this.purchaseOrder = res;
-        this.materialList = res.Material;
+        this.purchaseOrder = response;
+        this.materialList = response.Material;
       },
       (error: ErrorResponse) => {
         this.isLoading = false;
         this.toastrService.error(error.errors[0]);
       }
     );
+    this.subscriptions.add(observer);
   }
 
   onBack(): void {

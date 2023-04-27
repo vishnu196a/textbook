@@ -1,21 +1,23 @@
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PurchaseOrdersService } from '../purchase-orders.service';
 import { ErrorResponse } from 'src/app/shared/interceptors/error.interceptor';
 import { ToastrService } from 'ngx-toastr';
 import { POMaterialDistribution } from '../purchase-orders.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-po-material-view',
   templateUrl: './po-material-view.component.html',
   styleUrls: ['./po-material-view.component.scss'],
 })
-export class POMaterialViewComponent implements OnInit {
+export class POMaterialViewComponent implements OnInit, OnDestroy {
   private poId: number;
   private materialId: number;
   isLoading = false;
   materialDistributionList!: POMaterialDistribution;
+  private subscriptions = new Subscription();
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -33,6 +35,10 @@ export class POMaterialViewComponent implements OnInit {
     this.getMaterialDistribution();
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
+
   onBackToPOView(): void {
     this.location.back();
   }
@@ -42,8 +48,8 @@ export class POMaterialViewComponent implements OnInit {
     const observer = this.poService
       .getMaterialDistributionList(this.poId, this.materialId)
       .subscribe(
-        (res: POMaterialDistribution) => {
-          this.materialDistributionList = res;
+        (response: POMaterialDistribution) => {
+          this.materialDistributionList = response;
           this.isLoading = false;
         },
         (error: ErrorResponse) => {
@@ -51,6 +57,7 @@ export class POMaterialViewComponent implements OnInit {
           this.isLoading = false;
         }
       );
+    this.subscriptions.add(observer);
   }
 
   onViewMaterialDistributionDetails(distributionId: number) {

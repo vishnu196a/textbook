@@ -36,14 +36,15 @@ import {
   SharedModule,
   TabsModule,
   UtilitiesModule,
+  NavbarModule,
+  CollapseModule,
+  CollapseDirective,
 } from '@coreui/angular';
 import { IconModule, IconSetService } from '@coreui/icons-angular';
-import { EffectsModule } from '@ngrx/effects';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { TokenInterceptor } from './shared/interceptors/token.interceptor';
-import { FileEffects } from './views/secure/file/store/file.effects';
 import { AvatarModule } from 'ngx-avatars';
 
 const APP_CONTAINERS = [
@@ -78,12 +79,14 @@ const APP_CONTAINERS = [
     BadgeModule,
     ListGroupModule,
     CardModule,
-    EffectsModule.forRoot([FileEffects]),
+    NavbarModule,
+    CollapseModule,
     ToastrModule.forRoot(),
   ],
   providers: [
     IconSetService,
     BsModalService,
+    CollapseDirective,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
