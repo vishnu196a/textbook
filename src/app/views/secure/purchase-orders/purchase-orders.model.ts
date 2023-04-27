@@ -91,6 +91,7 @@ export interface MaterialDistributionDetails {
     dv_qty: number;
     dv_shortage_copies: number;
     dv_date: string;
+    dv_no: string;
     brv_id: number;
     material_distribution_id: number;
     voucher_image_url: string;

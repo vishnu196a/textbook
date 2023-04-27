@@ -28,7 +28,12 @@
         [disabled]="isPODownloading"
       >
         Download Report
-        <i class="ms-1 fa fa-download"></i>
+        <i
+          class="ms-1"
+          [ngClass]="
+            isPODownloading ? 'fa fa-spinner fa-spin' : 'fa fa-download'
+          "
+        ></i>
       </button>
     </div>
   </div>
