@@ -1,5 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import {
+  actionSetPOListCurrentPage,
   actionSetPoListSearchTerm,
   actionSetPoPagination,
   actionSetPoStatus,
@@ -36,5 +37,9 @@ export const poReducer = createReducer(
   on(actionSetPoStatus, (state, props) => ({
     ...state,
     poStatus: props.poStatus,
+  })),
+  on(actionSetPOListCurrentPage, (state, props) => ({
+    ...state,
+    pagination: { ...state.pagination, current_page: props.current_page },
   }))
 );

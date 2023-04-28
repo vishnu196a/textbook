@@ -8,10 +8,15 @@ export const actionSetPoPagination = createAction(
 
 export const actionSetPoListSearchTerm = createAction(
   '[PO] Set PO List SearchTerm',
-  props<{searchTerm: string}>()
-)
+  props<{ searchTerm: string }>()
+);
 
 export const actionSetPoStatus = createAction(
   '[PO] Set PO List Search Status',
-  props<{poStatus: string}>()
-)
+  props<{ poStatus: string }>()
+);
+
+export const actionSetPOListCurrentPage = createAction(
+  '[PO] Set PO List current Page',
+  props<{ current_page: number }>()
+);
