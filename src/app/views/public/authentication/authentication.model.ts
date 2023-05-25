@@ -2,6 +2,7 @@ export interface AuthenticationState {
   name: string;
   email: string;
   token: string;
+  role: string;
 }
 
 export interface UserResponse {

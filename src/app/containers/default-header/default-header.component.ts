@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { AppState } from 'src/app/app.reducer';
+import { SharedService } from 'src/app/shared/services/shared.service';
 import { UserDetails } from 'src/app/views/public/authentication/authentication.model';
 import { AuthenticationService } from 'src/app/views/public/authentication/authentication.service';
 import { removeLoggedInUser } from 'src/app/views/public/authentication/store/authentication.action';
@@ -21,14 +22,17 @@ export class DefaultHeaderComponent
 {
   private subscriptions: Subscription | undefined;
   userDetails: UserDetails | undefined;
+  userRole:string = '';
 
   constructor(
     private authenticationService: AuthenticationService,
     private store: Store<AppState>,
     private toasterService: ToastrService,
-    private router: Router
+    private router: Router,
+    private sharedService: SharedService 
   ) {
     super();
+    this.userRole = this.sharedService.getUserRole()
   }
 
   ngOnInit(): void {

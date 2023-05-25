@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { REGEX_PATTERNS } from 'src/app/shared/constants/constants';
+import { REGEX_PATTERNS, ROLE } from 'src/app/shared/constants/constants';
 import { ErrorResponse } from 'src/app/shared/interceptors/error.interceptor';
 import { UserResponse } from '../authentication.model';
 import { AuthenticationService } from '../authentication.service';
@@ -29,7 +29,7 @@ export class LoginComponent implements OnDestroy {
     formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
     private toasterService: ToastrService,
-    private router: Router
+    private router: Router,
   ) {
     this.loginForm = formBuilder.group({
       email: [
@@ -51,13 +51,18 @@ export class LoginComponent implements OnDestroy {
   login(): void {
     if (this.loginForm.valid) {
       this.isLoading = true;
-      const userCredentials = this.loginForm.value;
+      const userCredentials = this.loginForm.value;      
       const observer = this.authenticationService
         .login(userCredentials)
-        .subscribe(
+        .subscribe(          
           (user: HttpResponse<UserResponse>) => {
             this.isLoading = false;
-            this.router.navigateByUrl('purchase_orders');
+            if (user.body?.role === ROLE.Admin) {
+              this.router.navigateByUrl('/purchase_orders');
+            }
+            if (user.body?.role === ROLE.Vendor) {
+              this.router.navigateByUrl('/purchase_orders')
+            }
             this.toasterService.success('Login Successful');
           },
           (error: ErrorResponse) => {
@@ -67,7 +72,7 @@ export class LoginComponent implements OnDestroy {
         );
       this.subscriptions.add(observer);
     }
-  }
+  }  
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();

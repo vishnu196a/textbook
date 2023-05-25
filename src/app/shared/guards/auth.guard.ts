@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
+  ActivatedRoute,
   ActivatedRouteSnapshot,
   CanActivate,
   Router,
@@ -9,14 +10,20 @@ import {
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from 'src/app/app.reducer';
-import { selectToken } from 'src/app/views/public/authentication/store/authentication.selector';
+import { selectUserDetails } from 'src/app/views/public/authentication/store/authentication.selector';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
   token = '';
-  constructor(private readonly store: Store<AppState>, private router: Router) {
-    this.store.select(selectToken).subscribe((value) => {
-      this.token = value;
+  role = '';
+
+  constructor(
+    private readonly store: Store<AppState>,
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
+    this.store.select(selectUserDetails).subscribe((value) => {
+      this.token = value.token;
+      this.role = value.role;
     });
   }
 
@@ -29,9 +36,12 @@ export class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
     if (this.token) {
-      return true;
-    } else {
+      if (route.data['roles'].includes(this.role)) {
+        return true;
+      }
+    } 
+
       return this.router.navigate(['/login']);
-    }
+    
   }
 }

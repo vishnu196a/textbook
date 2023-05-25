@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './containers';
 import { AuthGuard } from './shared/guards/auth.guard';
+import { ROLE } from './shared/constants/constants';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
             (module) => module.PurchaseOrdersModule
           ),
         canActivate: [AuthGuard],
+        data: {roles:[ROLE.Admin, ROLE.Vendor]}
       },
       {
         path: '',
@@ -35,6 +37,7 @@ const routes: Routes = [
             (module) => module.UsersModule
           ),
         canActivate: [AuthGuard],
+        data: {roles:[ROLE.Admin]}
       },
       {
         path: '',
@@ -43,6 +46,16 @@ const routes: Routes = [
             (module) => module.BranchesModule
           ),
         canActivate: [AuthGuard],
+        data: {roles:[ROLE.Admin]}
+      },
+      {
+        path: '',
+        loadChildren: () =>
+          import('./views/secure/vendors/vendors.module').then(
+            (module) => module.VendorModule
+          ),
+        canActivate: [AuthGuard],
+        data: {roles:[ROLE.Admin]}
       },
     ],
   },

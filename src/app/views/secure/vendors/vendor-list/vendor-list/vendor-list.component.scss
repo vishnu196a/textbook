@@ -1,0 +1,25 @@
+.input {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+  .input-button {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+  }
+
+  .btn-view {
+    background: #89f3b3;
+    transition: all 0.2s ease-in-out;
+    border: none;
+    .bi-eye-fill {
+      color: #078439;
+    }
+  }
+  
+  .view-button:hover {
+    background-color: #078439;
+    cursor: pointer;
+  }
+  .view-button:hover i {
+    color: white;
+  }

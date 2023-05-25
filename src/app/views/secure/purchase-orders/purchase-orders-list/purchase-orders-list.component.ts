@@ -1,21 +1,23 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { PurchaseOrdersService } from '../purchase-orders.service';
-import { ToastrService } from 'ngx-toastr';
-import { ErrorResponse } from 'src/app/shared/interceptors/error.interceptor';
-import { DownloadPO, PurchaseOrder } from '../purchase-orders.model';
-import { Pagination } from 'src/app/shared/models/shared.model';
 import { Store } from '@ngrx/store';
-import { selectPOState } from '../store/po.selector';
-import { AppState } from 'src/app/app.reducer';
-import {
-  actionSetPoListSearchTerm,
-  actionSetPoPagination,
-  actionSetPoStatus,
-} from '../store/po.action';
 import { Router } from '@angular/router';
+import { AppState } from 'src/app/app.reducer';
+import { Pagination } from 'src/app/shared/models/shared.model';
+import { ToastrService } from 'ngx-toastr';
+import { SharedService } from 'src/app/shared/services/shared.service';
+import { selectPOState } from '../store/po.selector';
+import { ErrorResponse } from 'src/app/shared/interceptors/error.interceptor';
+import { PurchaseOrdersService } from '../purchase-orders.service';
+
 import { Subject, Subscription } from 'rxjs';
+import { DownloadPO, PurchaseOrder } from '../purchase-orders.model';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
+import {
+  actionSetPoStatus,
+  actionSetPoPagination,
+  actionSetPoListSearchTerm,
+} from '../store/po.action';
 @Component({
   selector: 'app-purchase-orders-list',
   templateUrl: './purchase-orders-list.component.html',
@@ -30,18 +32,21 @@ export class PurchaseOrdersListComponent implements OnInit, OnDestroy {
   onSearchKeyWordChange = new Subject<string>();
   serialNo!: number;
   isPODownloading = false;
+  userRole: string = ''
   private subscriptions = new Subscription();
 
   constructor(
-    private poService: PurchaseOrdersService,
-    private toastrService: ToastrService,
+    private router: Router,
     private store: Store<AppState>,
-    private router: Router
+    private toastrService: ToastrService,
+    private sharedService: SharedService,
+    private poService: PurchaseOrdersService,
   ) {
     const observer = this.store.select(selectPOState).subscribe((response) => {
       this.pagination = response.pagination;
       this.searchKeyWord = response.searchTerm;
       this.selectedPOStatus = response.poStatus;
+      this.userRole = this.sharedService.getUserRole()
     });
     this.subscriptions.add(observer);
 

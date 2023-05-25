@@ -1,0 +1,79 @@
+<div class="d-flex justify-content-between mb-4">
+    <h3>Vendors</h3>
+  </div>
+  <div class="col-12 col-sm-6 col-md-5 col-lg-4 d-flex mb-3">
+    <input
+      type="search"
+      class="form-control input"
+      placeholder="Search"
+      [(ngModel)]="searchKeyWord"
+      (ngModelChange)="this.onSearchKeyWordChange.next($event)"
+      onkeypress="return event.charCode !== 32 || this.value.trim().length !== 0"
+    />
+    <button class="btn btn-secondary input-button" type="button">
+      <i class="fa fa-search"></i>
+    </button>
+  </div>
+
+  <div class="table-responsive" *ngIf="!isLoading && vendors?.length">
+    <table class="table table-hover">
+      <thead class="bg-secondary">
+        <tr>
+          <th scope="col" class="curser-pointer">
+            S.No
+            <i class="text-info bi"></i>
+          </th>
+          <th scope="col" class="curser-pointer">
+            Name
+            <i class="text-info bi"></i>
+          </th>
+          <th scope="col" class="curser-pointer">
+            Type
+            <i class="text-info bi"></i>
+          </th>
+          <th scope="col" class="curser-pointer">
+            Address
+            <i class="text-info bi"></i>
+          </th>
+          <th scope="col" class="text-center" >
+            Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-white" *ngFor="let vendor of vendors; let i = index">
+          <td>{{ serialNo + i }}</td>
+          <td>{{ vendor.name}}</td>
+          <td>{{ vendor.type }}</td>
+          <td>{{ vendor.address }}</td>
+          <td>
+            <div class="gap-3 d-flex">
+              <button
+                class="btn-view opacity-75 rounded-circle px-2 py-1 text-white fw-bolder cursor-pointer view-button mx-auto"
+                title="View"
+                (click)="onView()"
+              >
+                <i class="bi bi-eye-fill"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="d-flex justify-content-center mt-5">
+    <div class="spinner-border" role="status" *ngIf="isLoading"></div>
+    <h5 class="text-center mt-5" *ngIf="!isLoading && !vendors?.length">
+      No list found
+    </h5>
+  </div>
+  
+  <div class="d-flex justify-content-around" *ngIf="vendors?.length">
+    <app-pagination
+      class="mx-auto my-3"
+      [pagination]="pagination"
+      (pageChange)="onPageChange($event)"
+    >
+    </app-pagination>
+  </div>

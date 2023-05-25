@@ -12,5 +12,6 @@ export const selectToken = createSelector(
 
 export const selectUserDetails = createSelector(
   selectAuthenticationState,
-  (state: AuthenticationState) => ({ email: state.email, name: state.name })
+  (state: AuthenticationState) => ({ email: state.email, name: state.name, role: state.role, token:state.token })
 );
+

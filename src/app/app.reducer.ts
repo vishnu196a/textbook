@@ -7,12 +7,15 @@ import { UserState } from './views/secure/users/users.model';
 import { userReducer } from './views/secure/users/store/users.reducer';
 import { POState } from './views/secure/purchase-orders/purchase-orders.model';
 import { poReducer } from './views/secure/purchase-orders/store/po.reducer';
+import { VendorState } from './views/secure/vendors/vendors.model';
+import { vendorReducer } from './views/secure/vendors/store/vendor-reducer';
 
 export interface AppState {
   authenticationState: AuthenticationState;
   branchState: BranchState;
   userState: UserState;
   poState: POState;
+  vendorState: VendorState
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
@@ -20,4 +23,5 @@ export const appReducers: ActionReducerMap<AppState> = {
   branchState: branchReducer,
   userState: userReducer,
   poState: poReducer,
+  vendorState: vendorReducer,
 };

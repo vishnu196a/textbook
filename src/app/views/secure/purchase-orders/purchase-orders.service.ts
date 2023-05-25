@@ -31,14 +31,14 @@ export class PurchaseOrdersService {
       params = params.append('status', poStatus);
     }
     return this.http.get<PurchaseOrders>(
-      `${this.apiUrl}/v1/admins/purchase_orders`,
+      `${this.apiUrl}/v1/purchase_orders`,
       { params }
     );
   }
 
   getPODetials(id: number): Observable<PurchaseOrder> {
     return this.http.get<PurchaseOrder>(
-      `${this.apiUrl}/v1/admins/purchase_orders/${id}`
+      `${this.apiUrl}/v1/purchase_orders/${id}`
     );
   }
 

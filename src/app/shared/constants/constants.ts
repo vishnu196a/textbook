@@ -12,3 +12,8 @@ export const REGEX_PATTERNS = {
   decimal: '^\\d{1,2}(.\\d{1,2})?$',
   whiteSpace: /^(\s+\S+\s*)*(?!\s).*$/,
 };
+
+export const ROLE = {
+  Admin: 'Admin',
+  Vendor: 'Vendor',
+};
