@@ -6,17 +6,19 @@ export const initialState = {
   email: '',
   token: '',
   role: '',
+  vendorName: ''
 };
 
 export const authenticationReducer = createReducer(
   initialState,
-  on(setLoggedInUser, (initialState, { name, email, token, role }) => ({
+  on(setLoggedInUser, (initialState, { name, email, token, role, vendorName }) => ({
     ...initialState,
     ...{
       name,
       email,
       token,
-      role
+      role,
+      vendorName
     },
   })),
   on(removeLoggedInUser, () => initialState)

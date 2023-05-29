@@ -3,6 +3,7 @@ export interface AuthenticationState {
   email: string;
   token: string;
   role: string;
+  vendorName: string
 }
 
 export interface UserResponse {
@@ -12,6 +13,7 @@ export interface UserResponse {
   last_name: string;
   organization_id: number;
   organization_name: string;
+  vendor_name: string;
   email: string;
   created_at: string;
   updated_at: string;

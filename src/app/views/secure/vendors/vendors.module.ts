@@ -7,13 +7,17 @@ import { VendorService } from './vendors.service';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { VendorListComponent } from './vendor-list/vendor-list/vendor-list.component';
 import { VendorsRoutingModule } from './vendors.routing.model';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { VendorViewComponent } from './vendor-view/vendor-view.component';
+import { VendorDeliveryFormComponent } from './vendor-delivery-status-form/vendor-delivery-form/vendor-delivery-form.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [
    VendorListComponent,
-   VendorViewComponent
+    VendorViewComponent,
+    VendorDeliveryFormComponent
+   
   ],
   providers: [VendorService],
   imports: [
@@ -23,8 +27,8 @@ import { VendorViewComponent } from './vendor-view/vendor-view.component';
     SharedModule,
     ButtonModule,
     FormsModule,
-    ReactiveFormsModule,
-    NgSelectModule
+    NgSelectModule,
+    BsDatepickerModule
   ],
 })
 export class VendorModule {}

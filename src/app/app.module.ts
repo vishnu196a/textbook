@@ -46,6 +46,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { TokenInterceptor } from './shared/interceptors/token.interceptor';
 import { AvatarModule } from 'ngx-avatars';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -82,6 +83,7 @@ const APP_CONTAINERS = [
     NavbarModule,
     CollapseModule,
     ToastrModule.forRoot(),
+    BsDatepickerModule.forRoot()
   ],
   providers: [
     IconSetService,

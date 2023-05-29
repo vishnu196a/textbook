@@ -1,6 +1,9 @@
 import { Store } from '@ngrx/store';
-import { Router } from '@angular/router';
 import { AppState } from 'src/app/app.reducer';
+import {
+  actionSetPOListCurrentPage,
+} from '../store/po.action';
+import { Router } from '@angular/router';
 import { Pagination } from 'src/app/shared/models/shared.model';
 import { ToastrService } from 'ngx-toastr';
 import { SharedService } from 'src/app/shared/services/shared.service';
@@ -56,45 +59,40 @@ export class PurchaseOrdersListComponent implements OnInit, OnDestroy {
         this.store.dispatch(
           actionSetPoListSearchTerm({ searchTerm: searchValue })
         );
-        this.getAllPO(1, searchValue, this.selectedPOStatus);
+        this.onPageChange(1);
       });
   }
 
   ngOnInit(): void {
-    this.getAllPO(
-      this.pagination.current_page,
-      this.searchKeyWord,
-      this.selectedPOStatus
-    );
+    this.getAllPO();
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
 
-  getAllPO(page: number, searchTerm?: string, poStatus?: string): void {
+  getAllPO(): void {
     this.isLoading = true;
-    const observer = this.poService
-      .getAllPO(page, searchTerm, poStatus)
-      .subscribe(
-        (response) => {
-          this.isLoading = false;
-          this.poList = response.purchase_orders;
-          this.store.dispatch(
-            actionSetPoPagination({ pagination: response.pagination })
-          );
-          this.serialNo = this.pagination.start_at;
-        },
-        (error: ErrorResponse) => {
-          this.isLoading = false;
-          this.toastrService.error(error.errors[0]);
-        }
-      );
+    const observer = this.poService.getAllPO().subscribe(
+      (response) => {
+        this.isLoading = false;
+        this.poList = response.purchase_orders;
+        this.store.dispatch(
+          actionSetPoPagination({ pagination: response.pagination })
+        );
+        this.serialNo = this.pagination.start_at;
+      },
+      (error: ErrorResponse) => {
+        this.isLoading = false;
+        this.toastrService.error(error.errors[0]);
+      }
+    );
     this.subscriptions.add(observer);
   }
 
   onPageChange(page: number): void {
-    this.getAllPO(page, this.searchKeyWord, this.selectedPOStatus);
+    this.store.dispatch(actionSetPOListCurrentPage({ current_page: page }));
+    this.getAllPO();
   }
 
   onView(id: number) {
@@ -103,7 +101,7 @@ export class PurchaseOrdersListComponent implements OnInit, OnDestroy {
 
   onFilterPOStatus() {
     this.store.dispatch(actionSetPoStatus({ poStatus: this.selectedPOStatus }));
-    this.getAllPO(1, this.searchKeyWord, this.selectedPOStatus);
+    this.onPageChange(1);
   }
 
   onDownloadPoDetails(): void {

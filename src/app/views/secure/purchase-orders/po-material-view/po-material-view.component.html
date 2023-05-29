@@ -166,7 +166,7 @@
 
   <div
     class="table-responsive"
-    *ngIf="!isLoading && materialDistributionList.materialDistribution.length"
+    *ngIf="!isLoading && materialDistributionList.materialDistribution.length && userRole === 'Admin'"
   >
     <table class="table table-hover">
       <thead class="bg-secondary">
@@ -212,6 +212,55 @@
       </tbody>
     </table>
   </div>
+
+  <div
+  class="table-responsive"
+  *ngIf="!isLoading && materialDistributionList.materialDistribution.length && userRole === 'Vendor'"
+>
+  <table class="table table-hover">
+    <thead class="bg-secondary">
+      <tr>
+        <th scope="col">
+          Nirmal Name
+          <i class="text-info bi"></i>
+        </th>
+        <th scope="col">
+          Net Copies
+          <i class="text-info bi"></i>
+        </th>
+        <th scope="col">
+          Delivery status
+          <i class="text-info bi"></i>
+        </th>
+        <th scope="col">DL Type<i class="text-info bi"></i></th>
+        <th scope="col" class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        class="bg-white"
+        *ngFor="let material of materialDistributionList.materialDistribution"
+      >
+        <td>{{ material.branch.name }}</td>
+        <td>{{ material.net_copies }}</td>
+        <td>{{ material.delivery_status }}</td>
+        <td>{{ material.branch.dl_type }}</td>
+        <td>
+          <div class="d-flex gap-3">
+            <button
+              class="btn-view opacity-75 rounded-circle px-2 py-1 text-white fw-bolder mx-auto"
+              title="View"
+              (click)="onViewMaterialDeliveryStatus(material.id, material.po_id)"
+              [disabled]="material.delivery_status === 'None'"
+            >
+              <i class="bi bi-eye-fill"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 </div>
 
 <div class="d-flex justify-content-center mt-5">

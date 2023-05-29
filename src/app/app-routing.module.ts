@@ -55,7 +55,7 @@ const routes: Routes = [
             (module) => module.VendorModule
           ),
         canActivate: [AuthGuard],
-        data: {roles:[ROLE.Admin]}
+        data: {roles:[ROLE.Admin, ROLE.Vendor]}
       },
     ],
   },

@@ -35,7 +35,8 @@ export class AuthenticationService {
               name: httpResponse.body.first_name,
               email: httpResponse.body.email,
               token: token,
-              role: httpResponse.body.role
+              role: httpResponse.body.role,
+              vendorName: httpResponse.body.vendor_name
             };
             this.store.dispatch(setLoggedInUser(userDetails));
           }

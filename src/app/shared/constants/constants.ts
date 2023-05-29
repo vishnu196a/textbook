@@ -11,6 +11,7 @@ export const REGEX_PATTERNS = {
   mobile: '[6789][0-9]{9}',
   decimal: '^\\d{1,2}(.\\d{1,2})?$',
   whiteSpace: /^(\s+\S+\s*)*(?!\s).*$/,
+  number: /^[0-9]*$/
 };
 
 export const ROLE = {

@@ -1,0 +1,209 @@
+<div>
+  <form
+    [formGroup]="addDeliveryStatusForm"
+    class="mt-3"
+    autocomplete="off"
+  >
+    <div class="card mb-3">
+      <div class="card-header">
+<div>
+  <h3 class="mb-3 mt-4">Vendor: {{userDetails?.vendorName}}</h3>
+  <div class="row mt-4" *ngIf="materialDistributionList.material?.id">
+    <div class="col-12 col-md-8 col-lg-5">
+      <div class="row mb-2">
+        <div class="d-flex justify-content-between col-4">
+          <h6>Title</h6>
+          <h6>&#10132;</h6>
+        </div>
+        <h6 class="col-8 text-break text-primary">
+          {{
+            materialDistributionList.material.title
+              ? materialDistributionList.material.title
+              : "-"
+          }}
+        </h6>
+      </div>
+
+      <div class="row mb-2">
+        <div class="d-flex justify-content-between col-4">
+          <h6>PO Number</h6>
+          <h6>&#10132;</h6>
+        </div>
+        <h6 class="col-8 text-break text-primary">
+          {{
+            materialDistributionList.purchaseOrder.po_no
+              ? materialDistributionList.purchaseOrder.po_no
+              : "-"
+          }}
+        </h6>
+      </div>
+
+      <div class="row mb-2">
+        <div class="d-flex justify-content-between col-4">
+          <h6>Medium</h6>
+          <h6>&#10132;</h6>
+        </div>
+        <h6 class="col-8 text-break text-primary">
+          {{
+            materialDistributionList.material.medium
+              ? materialDistributionList.material.medium
+              : "-"
+          }}
+        </h6>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-8 col-lg-5">
+      <div class="row mb-2">
+        <div class="d-flex justify-content-between col-4">
+          <h6>Standard</h6>
+          <h6>&#10132;</h6>
+        </div>
+        <h6 class="col-8 text-break text-primary">
+          {{
+            materialDistributionList.material.standard
+              ? materialDistributionList.material.standard
+              : "-"
+          }}
+        </h6>
+      </div>
+
+      <div class="row mb-2">
+        <div class="d-flex justify-content-between col-4">
+          <h6>Date</h6>
+          <h6>&#10132;</h6>
+        </div>
+        <h6 class="col-8 text-break text-primary">
+          {{
+            materialDistributionList.purchaseOrder.po_date
+              | date : "dd/MM/YYYY"
+          }}
+        </h6>
+      </div>
+    </div>
+  </div>
+</div>
+              <h3 class="m-0 mt-4 mb-3">Delivery Status Recipt</h3>
+       
+        <div class="card-body">
+          <div class="mb-4">
+          <div class="alert alert-warning" *ngIf="hasValidationError">
+            <p>Please fix the following</p>
+            <ul>
+              <li *ngFor="let validationError of validationErrors">
+                {{ validationError }}
+              </li>
+            </ul>
+          </div>
+          <div class="row">
+            <div class="form-group col-5 mb-2">
+              <h6>Status of delivery</h6>
+              <div class="d-flex gap-4">
+                <input type="radio" id="html" name="fav_language" value="HTML">
+                <label for="html">Partial</label><br>
+                <input type="radio" id="css" name="fav_language" value="CSS">
+                <label for="css">Full</label><br>
+              </div>
+            </div>
+
+            <div class="form-group col-5 mb-2">
+              <label for="delChallanNum">
+                Del. challan number <span class="text-danger">*</span></label
+              >
+              <input
+                type="text"
+                id="delChallanNum"
+                formControlName="delChallanNum"
+                class="form-control mt-2"
+                maxlength="100"
+                placeholder="Delivery Challan Number"
+              />
+              <div *ngIf="formControls['delChallanNum'].touched &&
+              formControls['delChallanNum'].invalid">
+              <small
+              class="text-danger"
+              *ngIf="formControls['delChallanNum'].errors?.['required']"
+              >Delivery challan number is required</small
+            >
+              </div>
+            </div>
+            <div class="form-group col-5 mb-2">
+                <mat-form-field>
+                  <mat-label>Date</mat-label>
+                  <input matInput [matDatepicker]="picker">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="row">
+              <div class="form-group col-3 mb-2">
+                <label for="copies/bundle">
+                  Copies/Bundle<span class="text-danger">*</span></label
+                  >
+                  <input
+                  type="text"
+                  id="copiesBundle"
+                  formControlName="copiesBundle"
+                  class="form-control mt-2 input-box-style"
+                  maxlength="100"
+                  placeholder="Copies/Bundle"
+                  onkeypress="return /^[0-9]*$/i.test(event.key)"
+                  />
+                  <div *ngIf="formControls['copiesBundle'].touched &&
+                  formControls['copiesBundle'].invalid">
+                  <small
+                  class="text-danger"
+                  *ngIf="formControls['copiesBundle'].errors?.['required']"
+                  >Copies per bundle is required</small
+                >
+                  </div>
+                </div>
+                  <!-- <div class="col-1 mt-4">
+                    <span style='font-size:10px;'>&#10006;</span>
+                  </div> -->
+                <div class="form-group col-3 mb-2">
+                  <label for="copies/bundle">
+                    Bundle<span class="text-danger">*</span></label
+                    >
+                    <input
+                    type="text"
+                    id="bundle"
+                    formControlName="bundle"
+                    class="form-control mt-2 input-box-style"
+                    maxlength="100"
+                    placeholder="Bundles"
+                    onkeypress="return /^[0-9]*$/i.test(event.key)"
+                    />
+                    <div *ngIf="formControls['bundle'].touched &&
+                    formControls['bundle'].invalid">
+                    <small
+                    class="text-danger"
+                    *ngIf="formControls['bundle'].errors?.['required']"
+                    >Bundle is required</small
+                  >
+                    </div>
+                  </div>
+                  <!-- <span style='font-size:10px;'>&#9552;</span> -->
+                  <div class="form-group col-3 mb-2">
+                    <label for="qtyAsBundle">
+                      Qty as bundle<span class="text-danger">*</span></label
+                      >
+                      <input
+                      type="text"
+                      id="qtyAsBundle"
+                      formControlName="qtyAsBundle"
+                      class="form-control mt-2 input-box-style"
+                      maxlength="100"
+                      placeholder="Qty as bundle"
+                      [(ngModel)]="qtyAsBundle"
+                      />
+                    </div>
+              </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </form>
+  </div>
+  

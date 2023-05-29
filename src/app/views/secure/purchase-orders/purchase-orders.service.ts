@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import {
   DownloadPO,
   MaterialDistributionDetails,
@@ -9,27 +9,28 @@ import {
   PurchaseOrders,
 } from './purchase-orders.model';
 import { environment } from 'src/environments/environment';
+import { AppState } from 'src/app/app.reducer';
+import { Store, select } from '@ngrx/store';
+import { selectPOState } from './store/po.selector';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PurchaseOrdersService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private store: Store<AppState>) {}
   readonly apiUrl = environment.apiUrl;
 
-  getAllPO(
-    page: number,
-    searchTerm?: string,
-    poStatus?: string
-  ): Observable<PurchaseOrders> {
+  getAllPO(): Observable<PurchaseOrders> {
     let params = new HttpParams();
-    params = params.append('page', page);
-    if (searchTerm) {
-      params = params.append('q', searchTerm);
-    }
-    if (poStatus !== 'All' && poStatus) {
-      params = params.append('status', poStatus);
-    }
+    this.store.pipe(select(selectPOState), take(1)).subscribe((POState) => {
+      params = params.appendAll({
+        page: POState.pagination.current_page.toString(),
+        q: POState.searchTerm ? POState.searchTerm : '',
+      });
+      if (POState.poStatus !== 'All') {
+        params = params.append('status', POState.poStatus);
+      }
+    });
     return this.http.get<PurchaseOrders>(
       `${this.apiUrl}/v1/purchase_orders`,
       { params }

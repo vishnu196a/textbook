@@ -6,6 +6,7 @@ import { ErrorResponse } from 'src/app/shared/interceptors/error.interceptor';
 import { ToastrService } from 'ngx-toastr';
 import { POMaterialDistribution } from '../purchase-orders.model';
 import { Subscription } from 'rxjs';
+import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
   selector: 'app-po-material-view',
@@ -18,17 +19,21 @@ export class POMaterialViewComponent implements OnInit, OnDestroy {
   isLoading = false;
   materialDistributionList!: POMaterialDistribution;
   private subscriptions = new Subscription();
+  userRole: string = ''
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private location: Location,
     private poService: PurchaseOrdersService,
     private toastrService: ToastrService,
-    private router: Router
+    private router: Router,
+    private sharedService: SharedService
   ) {
     const routeParams = this.activatedRoute.snapshot.params;
     this.poId = +routeParams['po_id'];
     this.materialId = +routeParams['material_id'];
+
+    this.userRole = this.sharedService.getUserRole()
   }
 
   ngOnInit(): void {
@@ -67,5 +72,9 @@ export class POMaterialViewComponent implements OnInit, OnDestroy {
       this.materialId,
       distributionId,
     ]);
+  }
+
+  onViewMaterialDeliveryStatus(materialId: number, poId: number) {
+    this.router.navigateByUrl(`/vendors/delivery_status/${materialId}/materials/${poId}/status`)
   }
 }
