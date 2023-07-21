@@ -28,6 +28,12 @@ jobs:
         npm install
         npm install -g @angular/cli
         npm run build
+        
+    - name: list files
+      run: |
+        ls 
+        pwd
+      
 
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v3
