@@ -1,13 +1,10 @@
 {
   "name": "text-book-corporation",
-  "homepage":"https://Vishnu196.github.io/textbook",
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "predeploy":"npm run build",
-    "deploy":"gh-pages -d build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "check": "npx prettier --check . && ng lint",
