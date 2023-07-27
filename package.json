@@ -1,9 +1,7 @@
 {
   "name": "text-book-corporation",
   "version": "1.0.0",
-  "homepage": "https://vishnu196a.github.io/textbook",
   "scripts": {
-    "deploy": "gh-pages -d build",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
